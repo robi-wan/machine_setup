@@ -42,6 +42,7 @@ end
 class SetupConfiguration::Suite
   attr_accessor :categories
   attr_accessor :settings
+  attr_accessor :name
 
   def initialize
     @categories= Hash.new { |hash, key| hash[key] = [] }
@@ -67,25 +68,46 @@ class SetupConfiguration::Suite
     @settings.instance_eval(&setting_params) if setting_params
   end
 
-
-  #todo find_param_by_key
-  #todo find_param_by_number
+  # Gets all known parameters.
+  def parameters()
+    @categories.values.flatten
+  end
 
   #
   # Finds a Parameter with the given key.
   # If there is no such parameter the method returns nil.
   #
   def find_param(key)
-    @categories.values.flatten.select(){|p| p.key.eql?(key)}.first
+    find_param_by_key(key)
+  end
+
+  #
+  # Finds a Parameter with the given key.
+  # If there is no such parameter the method returns nil.
+  #
+  def find_param_by_key(key)
+    self.parameters().select(){|p| p.key.eql?(key)}.first
+  end
+
+  #
+  # Finds a Parameter with the given number.
+  # If there is no such parameter the method returns nil.
+  #
+  def find_param_by_number(number)
+    self.parameters().select(){|p| p.number.eql?(number)}.first
   end
 
   #
   # Validates the uniqueness of parameter keys and numbers.
   #
   def validate_params()
+
+    #todo number 0 is forbidden - reserved
+    #todo (0..1299).contains(parameter_number)
+
     keys=[]
     numbers=[]
-    @categories.values.flatten.each() do |p|
+    self.parameters().each() do |p|
       if keys.include? p.key
         # todo error handling
         throw RuntimeError.new("parameter key '#{p.key}' defined more than once")
@@ -116,7 +138,6 @@ end
 #
 #  def category(category, &category_params)
 #    puts "executes category in Suite: #{category}"
-#    # todo eval category_params in this class and add creates params to category
 #    setup_configuration_parameters_new = SetupConfiguration::Parameters.new()
 #    setup_configuration_parameters_new.instance_eval(&category_params)
 #    pp setup_configuration_parameters_new
@@ -182,7 +203,7 @@ class SetupConfiguration::ParameterFactory
 
   def param(parameter, number, &parameter_def)
     puts "executed param in Parameters: #{parameter}"
-    # eval given block in Parameter context and return new parameter
+    # evaluate given block in Parameter context and return new parameter
     p = SetupConfiguration::Parameter.new(parameter)
     p.number=(number)
     p.instance_eval(&parameter_def) if parameter_def
@@ -193,8 +214,8 @@ end
 
 class SetupConfiguration::Parameter
 
-  attr_accessor :number
   attr_accessor :key
+  attr_accessor :number
   attr_reader :depends_on
   attr_reader :for_machine_type
 

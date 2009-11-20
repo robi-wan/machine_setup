@@ -1,6 +1,6 @@
 #require File.dirname(__FILE__) + "/../test_helper"
 
-SetupConfiguration do
+SetupConfiguration :underleaver do
 
   category :common do
     param :underleaver_config, 1

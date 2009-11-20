@@ -1,0 +1,100 @@
+[<%= lang_name %>]
+//Parametertexte
+<% parameter_range.each do |number| %>PARAM<%= number%>=<%= name(number)%><%= "\r\n" %><% end %>
+//Texte Tabelle/Registerkarte
+TAB0=General
+TAB1=Drives Underleaver
+
+//Überschriften Spalten
+COL0=Parameter
+COL1=Value
+
+//MenüTexte
+MENU0=&File
+MENU1=O&pen
+MENU2=Open 2. Setup
+MENU3=S&ave
+MENU4=Save &as
+MENU5=&Print
+MENU6=Print &Setup
+MENU7=Save Backup File SETUPS.DAT
+MENU8=Load Backup File SETUPS.DAT
+MENU9=&Exit
+MENU10=Da&ta
+MENU11=Se&nd
+MENU12=&Receive
+MENU13=&Clean
+MENU14=Set &hide values to zero
+MENU15=&Interface
+MENU16=COM&1
+MENU17=COM&2
+MENU18=COM&3
+MENU19=COM&4
+MENU20=C&lose
+MENU21=&View
+MENU22=&ToolBar
+MENU23=Window compare files
+MENU24=L&anguage
+MENU25=Language settings...
+MENU26=&?
+MENU27=&Help topics
+MENU28=Abo&ut Setup...
+
+//Systemtexte(Beschriftungen, Überschriften, usw.)
+SYSTEM0=Setup program V6.0.01
+SYSTEM1=File name
+SYSTEM2=File date
+SYSTEM3=Status
+SYSTEM4=Set parameters
+SYSTEM5=Parameter name
+SYSTEM6=File value
+SYSTEM7=Last Setup Value
+SYSTEM8=New value
+SYSTEM9=OK
+SYSTEM10=Cancel
+SYSTEM11=Send
+SYSTEM12=Transmit all parameters
+SYSTEM13=Cancel
+SYSTEM14=Receive
+SYSTEM15=Receive all parameters
+SYSTEM16=Cancel
+SYSTEM17=Change language...
+SYSTEM18=Please select a language.
+SYSTEM19=Ok
+SYSTEM20=Cancel
+SYSTEM21=Info
+SYSTEM22=Setup program V5.0.25
+SYSTEM23=Progdat: Apr.08.04 Inidat: Aug.20.05
+SYSTEM24=(c) Weber GmbH
+SYSTEM25=Ready
+SYSTEM26=Closed
+SYSTEM27=Reception
+SYSTEM28=Send
+SYSTEM29=MPS3 files
+SYSTEM30=All files
+SYSTEM31=Description
+SYSTEM32=Program parameters
+SYSTEM33=Maximum value
+SYSTEM34=Minimum value
+SYSTEM35=Page
+SYSTEM36=Save changes?
+
+//Fehlertexte
+ERROR0=Unknown error
+ERROR1=Parameter value is outside of the limit values
+ERROR2=Parameter data cannot be loaded.
+ERROR3=Cancel! Error while assigning the menu texts.
+ERROR4=Error while receiving data from the MPS3.
+ERROR5=Error! MPS3 replied to data query with incorrect parameter.
+ERROR6=Unable to open interface.
+ERROR7=Unable to open specified language.
+ERROR8=Error while sending data. Error: Data header.
+ERROR9=Error while sending data. Error: Data body.
+ERROR10=Error while sending data.
+ERROR11=Error while receiving data. Error: No Ack received
+ERROR12=Error while receiving data. Error: Data header.
+ERROR13=Error while receiving data. Error: Data body.
+ERROR14=Error while receiving data.
+ERROR15=Interface is not open.
+ERROR16=No description present.
+ERROR17=No text present.

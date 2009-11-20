@@ -1,0 +1,141 @@
+#en:
+#  distance_photo_sensor:
+#    name: "Distance photo sensor"
+#    comment: "no description"
+
+en:
+  underleaver_config:
+    name:  ""
+    comment:  ""
+
+  distance_photo_sensor:
+    name:  ""
+    comment:  ""
+
+  distance_blade_to_sheet_drive:
+    name:  ""
+    comment:  ""
+
+  distance_sheet_drive_to_sheet_exit:
+    name:  ""
+    comment:  ""
+
+  time_for_cutting_unit:
+    name:  ""
+    comment:  ""
+
+  paper_jam_detection_active:
+    name:  ""
+    comment:  ""
+
+  paper_jam_detection_signal_length:
+    name:  ""
+    comment:  ""
+
+  paper_jam_detection_check_time:
+    name:  ""
+    comment:  ""
+
+  ext_enabling_following_unit:
+    name:  ""
+    comment:  ""
+
+  ext_enabling_following_unit_method:
+    name:  ""
+    comment:  ""
+
+  ext_enabling_following_unit_delay:
+    name:  ""
+    comment:  ""
+
+  ext_enabling_previous_unit:
+    name:  ""
+    comment:  ""
+
+  paper_roll_config:
+    name:  ""
+    comment:  ""
+
+  paper_roll_distance_revolution:
+    name:  ""
+    comment:  ""
+
+  paper_roll_gear_in:
+    name:  ""
+    comment:  ""
+
+  paper_roll_gear_out:
+    name:  ""
+    comment:  ""
+
+  blade_config:
+    name:  ""
+    comment:  ""
+
+  blade_distance_revolution:
+    name:  ""
+    comment:  ""
+
+  blade_gear_in:
+    name:  ""
+    comment:  ""
+
+  blade_gear_out:
+    name:  ""
+    comment:  ""
+
+  paper_feed_config:
+    name:  ""
+    comment:  ""
+
+  paper_feed_distance_revolution:
+    name:  ""
+    comment:  ""
+
+  paper_feed_gear_in:
+    name:  ""
+    comment:  ""
+
+  paper_feed_gear_out:
+    name:  ""
+    comment:  ""
+
+  transport_config:
+    name:  ""
+    comment:  ""
+
+  transport_distance_revolution:
+    name:  ""
+    comment:  ""
+
+  transport_gear_in:
+    name:  ""
+    comment:  ""
+
+  transport_gear_out:
+    name:  ""
+    comment:  ""
+
+  transport_belt_length:
+    name:  ""
+    comment:  ""
+
+  infeed_config:
+    name:  ""
+    comment:  ""
+
+  infeed_distance_revolution:
+    name:  ""
+    comment:  ""
+
+  infeed_gear_in:
+    name:  ""
+    comment:  ""
+
+  infeed_gear_out:
+    name:  ""
+    comment:  ""
+
+  infeed_belt_length:
+    name:  ""
+    comment:  ""

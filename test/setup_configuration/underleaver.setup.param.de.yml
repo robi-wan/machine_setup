@@ -1,0 +1,166 @@
+#de:
+#de: underleaver_config: name: "Underleaver virtuell=1 / real=0" comment: "Einerstelle: ..."
+#de:
+#  underleaver_config:
+#    name: "Underleaver virtuell=1 / real=0"
+#    comment: "Einerstelle:\n
+#
+#x0: Steuerung mit realen Achsen und Hauben
+#x1: Steuerung simuliert alle nicht angewählten Achsen und Hauben
+#
+#Zehnerstelle:
+#0x: CanBus einschalten
+#1x: CanBus ausschalten
+#
+#Hunderterstelle:
+#1xx: Steuerung simuliert alle Antriebe"
+#
+#  distance_photo_sensor:
+#    name: "Weg Lichtschranke bis Blattaustritt"
+#    comment: "keine Beschreibung"
+
+de:
+  underleaver_config:
+    name:  "Underleaver virtuell=1 / real=0"
+    comment:  &MACHINE_CONFIG "Einerstelle:\n
+x0: Steuerung mit realen Achsen und Schutzhauben\n
+x1: Steuerung simuliert alle nicht angewählten Achsen und Schutzhauben\n
+\n
+Zehnerstelle:\n
+0x: CanBus einschalten\n
+1x: CanBus ausschalten\n
+\n
+Hunderterstelle:\n
+1xx: Steuerung simuliert alle Antriebe"
+
+  distance_photo_sensor:
+    name:  "Weg Lichtschranke bis Blattaustritt"
+    comment:  *MACHINE_CONFIG
+
+  distance_blade_to_sheet_drive:
+    name:  "Weg Schneide bis Blattantrieb"
+    comment: ""
+
+  distance_sheet_drive_to_sheet_exit:
+    name:  "Weg Blattantrieb bis Blattaustritt"
+    comment:  ""
+
+  time_for_cutting_unit:
+    name:  "Zeit in der die Schneideeinrichtung oben sein muss [ms]"
+    comment:  ""
+
+  paper_jam_detection_active:
+    name:  "Papierstauüberwachung"
+    comment:  ""
+
+  paper_jam_detection_signal_length:
+    name:  "Signaldauer für Papierstau"
+    comment:  ""
+
+  paper_jam_detection_check_time:
+    name:  "Papierstauüberprüfungszeit nach 'letzem' Produkt"
+    comment:  ""
+
+  ext_enabling_following_unit:
+    name:  "Externe Freigabe nachgelagerter Einheit (NE)"
+    comment:  ""
+
+  ext_enabling_following_unit_method:
+    name:  "Konfiguration der Freigabeart NE"
+    comment:  ""
+
+  ext_enabling_following_unit_delay:
+    name:  "Konfiguration der Verzögerung NE"
+    comment:  ""
+
+  ext_enabling_previous_unit:
+    name:  "Externe Freigabe an vorgelagerte Einheit (VE)"
+    comment:  ""
+
+  paper_roll_config:
+    name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
+    comment:  ""
+
+  paper_roll_distance_revolution:
+    name:  "Bahnantrieb Weg/Umdrehung [mm]"
+    comment:  ""
+
+  paper_roll_gear_in:
+    name:  "Bahnantrieb Getriebefaktor Zähler"
+    comment:  ""
+
+  paper_roll_gear_out:
+    name:  "Bahnantrieb Getriebefaktor Nenner"
+    comment:  ""
+
+  blade_config:
+    name:  "Messerwelle abgewählt=0/Servo=1/FU=2"
+    comment:  ""
+
+  blade_distance_revolution:
+    name:  "Messerwelle Durchmesser [mm]"
+    comment:  ""
+
+  blade_gear_in:
+    name:  "Messerwelle Getriebefaktor Zähler"
+    comment:  ""
+
+  blade_gear_out:
+    name:  "Messerwelle Getriebefaktor Nenner"
+    comment:  ""
+
+  paper_feed_config:
+    name:  "Blattantrieb abgewählt=0/Servo=1/FU=2"
+    comment:  ""
+
+  paper_feed_distance_revolution:
+    name:  "Blattantrieb Weg/Umdrehung [mm]"
+    comment:  ""
+
+  paper_feed_gear_in:
+    name:  "Blattantrieb Getriebefaktor Zähler"
+    comment:  ""
+
+  paper_feed_gear_out:
+    name:  "Blattantrieb Getriebefaktor Nenner"
+    comment:  ""
+
+  transport_config:
+    name:  "Portionsauflageband abgewählt=0/Servo=1/FU=2"
+    comment:  ""
+
+  transport_distance_revolution:
+    name:  "Portionsauflageband Weg/Umdrehung [mm]"
+    comment:  ""
+
+  transport_gear_in:
+    name:  "Portionsauflageband Getriebefaktor Zähler"
+    comment:  ""
+
+  transport_gear_out:
+    name:  "Portionsauflageband Getriebefaktor Nenner"
+    comment:  ""
+
+  transport_belt_length:
+    name:  "Portionsauflageband Bandlänge"
+    comment:  ""
+
+  infeed_config:
+    name:  "Einlegeband abgewählt=0/Servo=1/FU=2"
+    comment:  ""
+
+  infeed_distance_revolution:
+    name:  "Einlegeband Weg/Umdrehung [mm]"
+    comment:  ""
+
+  infeed_gear_in:
+    name:  "Einlegeband Getriebefaktor Zähler"
+    comment:  ""
+
+  infeed_gear_out:
+    name:  "Einlegeband Getriebefaktor Nenner"
+    comment:  ""
+
+  infeed_belt_length:
+    name:  "Einlegeband Bandlänge"
+    comment:  ""
