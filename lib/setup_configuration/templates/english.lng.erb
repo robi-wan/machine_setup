@@ -2,8 +2,7 @@
 //Parametertexte
 <% parameter_range.each do |number| %>PARAM<%= number%>=<%= name(number)%><%= "\r\n" %><% end %>
 //Texte Tabelle/Registerkarte
-TAB0=General
-TAB1=Drives Underleaver
+<% categories.each_with_index do |category, index| %>TAB<%= index%>=<%= cat_name(category)%><%= "\r\n" %><% end %>
 
 //Überschriften Spalten
 COL0=Parameter

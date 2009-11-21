@@ -20,6 +20,13 @@
 #    comment: "keine Beschreibung"
 
 de:
+
+  common:
+    name: "Allgemein"
+
+  drives:
+    name: "Antriebe Underleaver"
+
   underleaver_config:
     name:  "Underleaver virtuell=1 / real=0"
     comment:  &MACHINE_CONFIG "Einerstelle:\n

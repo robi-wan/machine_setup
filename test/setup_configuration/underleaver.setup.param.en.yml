@@ -4,6 +4,13 @@
 #    comment: "no description"
 
 en:
+
+  common:
+    name: "Common"
+
+  drives:
+    name: "Drives Underleaver"
+
   underleaver_config:
     name:  ""
     comment:  ""

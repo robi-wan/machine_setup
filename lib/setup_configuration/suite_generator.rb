@@ -30,10 +30,18 @@ module SetupConfiguration::Generator
       @output=output
     end
 
-    def lang_name()
+    def lang_name
       SetupConfiguration::Translation.language_name(lang)
     end
 
+    def categories
+      SetupConfiguration::SuiteGenerator.instance.suite.categories.keys()
+    end
+
+    def cat_name(key)
+      name, desc=SetupConfiguration::Translation::Translator.new().translate(key, @lang)
+      name
+    end
 #    def name(number)
 #      #todo use suite as singleton!
 #      p=SetupConfiguration::SuiteGenerator.instance.suite.find_param_by_number(number)
@@ -74,8 +82,7 @@ module SetupConfiguration::Generator
 
     def name(number)
       p_name= translate(number) { |name, desc| name }
-      p_name= p_name.empty? ? "placeholder for mps3.exe" : p_name
-      p_name.gsub(/\[/, '(').gsub(/\]/, ')')
+      p_name.empty? ? "placeholder for mps3.exe" : p_name
     end
 
     def description(number)
@@ -178,7 +185,6 @@ class SetupConfiguration::SuiteGenerator
       puts "todo: generate mps3.ini output!"
       puts "todo: set output folder!"
       puts "todo: suite shall be singleton output!"
-      puts "todo: deutsch.lng == INI-Datei : keine eckigen Klammern[]!"
       puts "todo: deutsch.lng == hinter jedem Parameter muss irgendetwas stehen!"
 
       description_bindings().each() do |bind|
