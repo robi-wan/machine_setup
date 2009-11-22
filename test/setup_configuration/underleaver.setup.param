@@ -75,18 +75,18 @@ SetupConfiguration :underleaver do
   #transport drive
   category :drives do
 
-    param :transport_config, 330
+    param :transport_drive_config, 330
     param :transport_distance_revolution, 331 do
-      depends_on :transport_config
+      depends_on :transport_drive_config
     end
     param :transport_gear_in, 332 do
-      depends_on :transport_config
+      depends_on :transport_drive_config
     end
     param :transport_gear_out, 333 do
-      depends_on :transport_config
+      depends_on :transport_drive_config
     end
     param :transport_belt_length, 334 do
-      depends_on :transport_config
+      depends_on :transport_drive_config
     end
   end
 

@@ -1,48 +1,28 @@
-#de:
-#de: underleaver_config: name: "Underleaver virtuell=1 / real=0" comment: "Einerstelle: ..."
-#de:
-#  underleaver_config:
-#    name: "Underleaver virtuell=1 / real=0"
-#    comment: "Einerstelle:\n
-#
-#x0: Steuerung mit realen Achsen und Hauben
-#x1: Steuerung simuliert alle nicht angewählten Achsen und Hauben
-#
-#Zehnerstelle:
-#0x: CanBus einschalten
-#1x: CanBus ausschalten
-#
-#Hunderterstelle:
-#1xx: Steuerung simuliert alle Antriebe"
-#
-#  distance_photo_sensor:
-#    name: "Weg Lichtschranke bis Blattaustritt"
-#    comment: "keine Beschreibung"
-
 de:
-
+  #Tabs aka categories
   common:
     name: "Allgemein"
 
   drives:
     name: "Antriebe Underleaver"
 
+  #parameter
   underleaver_config:
     name:  "Underleaver virtuell=1 / real=0"
-    comment:  &MACHINE_CONFIG "Einerstelle:\n
-x0: Steuerung mit realen Achsen und Schutzhauben\n
-x1: Steuerung simuliert alle nicht angewählten Achsen und Schutzhauben\n
-\n
-Zehnerstelle:\n
-0x: CanBus einschalten\n
-1x: CanBus ausschalten\n
-\n
-Hunderterstelle:\n
-1xx: Steuerung simuliert alle Antriebe"
+    comment:  "Einerstelle:\n
+              x0: Steuerung mit realen Achsen und Schutzhauben\n
+              x1: Steuerung simuliert alle nicht angewählten Achsen und Schutzhauben\n
+              \n
+              Zehnerstelle:\n
+              0x: CanBus einschalten\n
+              1x: CanBus ausschalten\n
+              \n
+              Hunderterstelle:\n
+              1xx: Steuerung simuliert alle Antriebe"
 
   distance_photo_sensor:
     name:  "Weg Lichtschranke bis Blattaustritt"
-    comment:  *MACHINE_CONFIG
+    comment:  ""
 
   distance_blade_to_sheet_drive:
     name:  "Weg Schneide bis Blattantrieb"
@@ -58,35 +38,89 @@ Hunderterstelle:\n
 
   paper_jam_detection_active:
     name:  "Papierstauüberwachung"
-    comment:  ""
+    comment:  "Ermöglicht die Abschaltung der Papierstauüberwachung\n
+              \n
+              0=Abwahl\n
+              1=Anwahl\n
+              \n
+              (Standard: 1)"
 
   paper_jam_detection_signal_length:
     name:  "Signaldauer für Papierstau"
-    comment:  ""
+    comment:  "Zeitdauer, ab der ein durchgängiges Signal vom Papierstausensor als Papierstau interpretiert wird.\n
+                Die Angabe erfolgt in Millisekunden, d.h. 5000 entspricht 5 Sekunden.\n
+                Bei Angabe von 0 wird die Zeitdauer programmintern festgelegt."
 
   paper_jam_detection_check_time:
     name:  "Papierstauüberprüfungszeit nach 'letzem' Produkt"
-    comment:  ""
+    comment:  "Die Überprüfung, ob ein Papierstau vorliegt, erfolgt bei Beginn der Förderung des nächsten Blattes.
+              Kommt nach dem aktuellen Produkt eine Weile kein Produkt mehr, so ermöglicht dieser Parameter die Einstellung
+              der Zeitdauer, nach deren Ablauf eine Papierstauüberprüfung vorgenommen wird.\n
+              Steht der Wert auf 3000, wird 3 Sekunden nach der letzten Portion auf Papierstau überprüft.\n
+              \n
+              Die Angabe erfolgt in Millisekunden, d.h. 3000 entspricht 3 Sekunden.\n
+              \n
+              Die Angabe wird 1:1 im Programm verwendet."
 
   ext_enabling_following_unit:
     name:  "Externe Freigabe nachgelagerter Einheit (NE)"
-    comment:  ""
+    comment:  "An/Abwahl der externen Freigabe der nachgelagerten Einheit.\n
+              \n
+              0: Der Underleaver arbeitet als 'Standalone'-Maschine oder besitzt innerhalb einer Linie keine nachgelagerte Einheit.\n
+              \n
+              1: Der Underleaver besitzt eine nachgelagerte Einheit und soll auf dessen Freigaben reagieren."
 
   ext_enabling_following_unit_method:
     name:  "Konfiguration der Freigabeart NE"
-    comment:  ""
+    comment:  "Konfiguration der externen Freigabe von der nachgelagerte Einheit.\n
+              \n
+              0: Impuls - Freigabe wird durch einen Impuls umgeschalten (an->aus oder aus->an)\n
+              1: negatives Dauersignal - Freigabe bei 0V\n
+              2: positives Dauersignal - Freigabe bei 12V"
 
   ext_enabling_following_unit_delay:
     name:  "Konfiguration der Verzögerung NE"
-    comment:  ""
+    comment:  "Konfiguration der Verzögerung nach Freigabesignal. [in ms]\n
+              \n
+              X: Der Wert X bestimmt die Zeit, die der Underleaver wartet nachdem das Freigabesignal empfangen wurde. Erst nach Ablauf dieser Zeit fördert der Underleaver weiter."
 
   ext_enabling_previous_unit:
     name:  "Externe Freigabe an vorgelagerte Einheit (VE)"
-    comment:  ""
+    comment:  "Konfiguration der externen Freigabe an die vorgelagerte Einheit.\n
+              \n
+              0: Impuls - Freigabe wird durch einen Impuls umgeschalten (an->aus oder aus->an)\n
+              1: negatives Dauersignal - Freigabe bei 0V\n
+              2: positives Dauersignal - Freigabe bei 12V"
 
   paper_roll_config:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
-    comment:  ""
+    comment: &COMMON_DRIVE_CONFIG "Einerstelle: An/Abwahl\n
+            \n
+            XXX0: Achse im System nicht vorhanden ,wird vom System  simuliert.\n
+            XXX1: Achse ist im Antriebssystem als Servoantrieb vorhanden.\n
+            XXX2: Achse ist im Antriebssystem als Frequenzumrichterantrieb vorhanden.\n
+            \n
+            Zehner- und Hunderterstelle: Motortyp\n
+            \n
+            X00X = NORD_MOTOR_037\n
+            X01X = NORD_MOTOR_075\n
+            X02X = LENZE_063C32\n
+            X03X = LENZE_047C22\n
+            X04X = LENZE_063C22\n
+            X05X = INTERROLL_TM111_037_2_081\n
+            X06X = INTERROLL_TM082_012_2_056\n
+            X07X = LENZE_063C22_GEBER\n
+            X08X = LENZE_063C22_POSI\n
+            X17X = INTERROLL_111_2P_037_133V\n
+            X18X = INTERROLL_111_2P_037_133V_GEBER\n
+            X19X = INTERROLL_111_2P_037_133V_POSI\n
+            X20X = INTERROLL_111_2P_037_133V_GEBER_AUF_C400\n
+            X21X = HARMONIC_DRIVE_FHA_11C_D200_GEBER\n
+            \n
+            Tausenderstelle:\n
+            \n
+            0XXX = ohne PTC\n
+            1XXX = mit PTC"
 
   paper_roll_distance_revolution:
     name:  "Bahnantrieb Weg/Umdrehung [mm]"
@@ -94,15 +128,15 @@ Hunderterstelle:\n
 
   paper_roll_gear_in:
     name:  "Bahnantrieb Getriebefaktor Zähler"
-    comment:  ""
+    comment: &COMMON_GEAR_IN "Anzahl der Getriebezähne antriebseitig"
 
   paper_roll_gear_out:
     name:  "Bahnantrieb Getriebefaktor Nenner"
-    comment:  ""
+    comment:  &COMMON_GEAR_OUT "Anzahl der Getriebezähne abtriebseitig"
 
   blade_config:
     name:  "Messerwelle abgewählt=0/Servo=1/FU=2"
-    comment:  ""
+    comment: *COMMON_DRIVE_CONFIG
 
   blade_distance_revolution:
     name:  "Messerwelle Durchmesser [mm]"
@@ -110,15 +144,15 @@ Hunderterstelle:\n
 
   blade_gear_in:
     name:  "Messerwelle Getriebefaktor Zähler"
-    comment:  ""
+    comment:  *COMMON_GEAR_IN
 
   blade_gear_out:
     name:  "Messerwelle Getriebefaktor Nenner"
-    comment:  ""
+    comment:  *COMMON_GEAR_OUT
 
   paper_feed_config:
     name:  "Blattantrieb abgewählt=0/Servo=1/FU=2"
-    comment:  ""
+    comment:  *COMMON_DRIVE_CONFIG
 
   paper_feed_distance_revolution:
     name:  "Blattantrieb Weg/Umdrehung [mm]"
@@ -126,15 +160,15 @@ Hunderterstelle:\n
 
   paper_feed_gear_in:
     name:  "Blattantrieb Getriebefaktor Zähler"
-    comment:  ""
+    comment:  *COMMON_GEAR_IN
 
   paper_feed_gear_out:
     name:  "Blattantrieb Getriebefaktor Nenner"
-    comment:  ""
+    comment:  *COMMON_GEAR_OUT
 
-  transport_config:
+  transport_drive_config:
     name:  "Portionsauflageband abgewählt=0/Servo=1/FU=2"
-    comment:  ""
+    comment:  *COMMON_DRIVE_CONFIG
 
   transport_distance_revolution:
     name:  "Portionsauflageband Weg/Umdrehung [mm]"
@@ -142,19 +176,19 @@ Hunderterstelle:\n
 
   transport_gear_in:
     name:  "Portionsauflageband Getriebefaktor Zähler"
-    comment:  ""
+    comment:  *COMMON_GEAR_IN
 
   transport_gear_out:
     name:  "Portionsauflageband Getriebefaktor Nenner"
-    comment:  ""
+    comment:  *COMMON_GEAR_OUT
 
   transport_belt_length:
     name:  "Portionsauflageband Bandlänge"
-    comment:  ""
+    comment:  "Gesamte Bandlänge des Portionsauflagebandes.\nAngabe erfolgt in Millimeter."
 
   infeed_config:
     name:  "Einlegeband abgewählt=0/Servo=1/FU=2"
-    comment:  ""
+    comment:  *COMMON_DRIVE_CONFIG
 
   infeed_distance_revolution:
     name:  "Einlegeband Weg/Umdrehung [mm]"
@@ -162,12 +196,12 @@ Hunderterstelle:\n
 
   infeed_gear_in:
     name:  "Einlegeband Getriebefaktor Zähler"
-    comment:  ""
+    comment:  *COMMON_GEAR_IN
 
   infeed_gear_out:
     name:  "Einlegeband Getriebefaktor Nenner"
-    comment:  ""
+    comment:  *COMMON_GEAR_OUT
 
   infeed_belt_length:
     name:  "Einlegeband Bandlänge"
-    comment:  ""
+    comment:  "Gesamte Bandlänge des Einlegebandes.\nAngabe erfolgt in Millimeter."

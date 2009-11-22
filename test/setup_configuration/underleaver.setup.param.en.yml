@@ -1,148 +1,218 @@
-#en:
-#  distance_photo_sensor:
-#    name: "Distance photo sensor"
-#    comment: "no description"
-
 en:
 
+  #Tabs aka categories
   common:
     name: "Common"
 
   drives:
     name: "Drives Underleaver"
 
+  #parameter
   underleaver_config:
-    name:  ""
-    comment:  ""
+    name:  "Underleaver virtual=1 / real=0"
+    comment:  "Unit큦 Place:\n
+              x0: Controller with real drives and covers\n
+              x1: Controller simulates all selected drives and covers\n
+              \n
+              Ten큦 Place:\n
+              0x: CanBus on\n
+              1x: CanBus off\n
+              \n
+              Hundred큦 Place:\n
+              1xx: The controller simulates all drives."
 
   distance_photo_sensor:
-    name:  ""
-    comment:  ""
+    name:  "Distance of photo sensor"
+    comment:  "Configuration of photo sensor.\n
+              \n
+                X: Describes the distance [mm] from photo sensor to the paper exit."
 
   distance_blade_to_sheet_drive:
-    name:  ""
-    comment:  ""
+    name:  "Distance of blade"
+    comment:  "Configuration of Blade\n
+               \n
+              X: Describes the distance [mm] from blade to the paper feed drive."
 
   distance_sheet_drive_to_sheet_exit:
-    name:  ""
-    comment:  ""
+    name:  "Distance of sheet drive"
+    comment:  "Configuration of foil drive\n
+              \n
+              X: Describes the distance [mm] from the paper feed drive to paper exit."
 
   time_for_cutting_unit:
-    name:  ""
-    comment:  ""
+    name:  "Time of cutting unit"
+    comment:  "Configuration of cutting unit.\n
+              \n
+               X: Describes the time [ms] to lift up the cutting unit."
 
   paper_jam_detection_active:
-    name:  ""
-    comment:  ""
+    name:  "Paper jam monitoring"
+    comment:  "Configuration of paper jam sensor\n
+              \n
+              0: Deselect the paper jam monitoring.\n
+              1: Select the paper jam monitoring."
 
   paper_jam_detection_signal_length:
-    name:  ""
-    comment:  ""
+    name:  "Paper jam signal duration"
+    comment:  "Configuration of paper jam sensor\n
+              \n
+              X: Describes the signal duration [ms] that defines a paper jam.\n
+              0: The signal duration will be defined by an internal value.\n
+              \n
+              Value is given in milliseconds."
 
   paper_jam_detection_check_time:
-    name:  ""
-    comment:  ""
+    name:  "Paper jam check time after 'last' product"
+    comment:  "Configuration of paper jam sensor\n
+              \n
+              Paper jam checks for the current product are executed at the beginning of the next product.\n
+              But when there is no product following the current product this parameter allows you to define a timer.\n
+              Started after finishing the current product after the expiration of this time the paper jam checks are executed.\n
+              A value of 3000 means that 3 seconds after the last product a paper jam check is executed.\n
+              \n
+              The value is given in milliseconds."
 
   ext_enabling_following_unit:
-    name:  ""
-    comment:  ""
+    name:  "External behavior to downstream unit"
+    comment:  "Configuration of external behavior (downstream)\n
+              \n
+              Select/Deselect the enable signal from the downstream unit.\n
+              \n
+              0: The underleaver works standalone or has no downstream unit.\n
+              1: The underleaver has a downstream unit and react to enable signal."
 
   ext_enabling_following_unit_method:
-    name:  ""
-    comment:  ""
+    name:  "Configuration of enable signal"
+    comment:  "Configuration of external behavior (downstream)\n
+              \n
+              0: Impulse - Switch the enabling signal at any impulse (on->off oder off->on)\n
+              1: Negative continuously signal - enables by 0V\n
+              2: Positiv continuously signal - enables by 12V"
 
   ext_enabling_following_unit_delay:
-    name:  ""
-    comment:  ""
+    name:  "Configuration of enable delay"
+    comment:  "Configuration of external behavior (downstream)\n
+              \n
+              X: Describes the time [ms] to wait for reacting to the enabling signal. Not till then the underleaver continuous conveyance."
 
   ext_enabling_previous_unit:
-    name:  ""
-    comment:  ""
+    name:  "External behavior to upstream unit"
+    comment:  "Configuration of external behavior (upstream)\n
+              \n
+              0: Impulse - Switch the enabling signal at any impulse (on->off oder off->on)\n
+              1: Negative continuously signal - enables by 0V\n
+              2: Positiv continuously signal - enables by 12V"
 
   paper_roll_config:
-    name:  ""
-    comment:  ""
+    name:  "Paper roll drive - Select/Deselect"
+    comment: &COMMON_DRIVE_CONFIG "Unit큦 Place: 'Select/Deselect drive'\n
+              \n
+              XXX0: Drive doesn't exist.\n
+              XXX1: Drive exists as a servo.\n
+              XXX2: Drive exists as a frequency converter.\n
+              \n
+              Ten큦 and Hundred큦 Place: 'Typ of Drive'\n
+              \n
+              X00X = NORD_MOTOR_037\n
+              X01X = NORD_MOTOR_075\n
+              X02X = LENZE_063C32\n
+              X03X = LENZE_047C22\n
+              X04X = LENZE_063C22\n
+              X05X = INTERROLL_TM111_037_2_081\n
+              X06X = INTERROLL_TM082_012_2_056\n
+              X07X = LENZE_063C22_GEBER\n
+              X08X = LENZE_063C22_POSI\n
+              X17X = INTERROLL_111_2P_037_133V\n
+              X18X = INTERROLL_111_2P_037_133V_GEBER\n
+              X19X = INTERROLL_111_2P_037_133V_POSI\n
+              X20X = INTERROLL_111_2P_037_133V_GEBER_AUF_C400\n
+              X21X = HARMONIC_DRIVE_FHA_11C_D200_GEBER\n
+              \n
+              Thousend큦 Place:\n
+              \n
+              0XXX = without PTC\n
+              1XXX = with PTC"
 
   paper_roll_distance_revolution:
-    name:  ""
-    comment:  ""
+    name:  "Paper roll drive - Distance per revolution [mm]"
+    comment: &COMMON_DISTANCE_REVOLUTION "X= Distance X per revolution [in mm]"
 
   paper_roll_gear_in:
-    name:  ""
-    comment:  ""
+    name:  "Paper roll drive - Gear IN"
+    comment: &COMMON_GEAR_IN "Number of teeth motor sided."
 
   paper_roll_gear_out:
-    name:  ""
-    comment:  ""
+    name:  "Paper roll drive - Gear OUT"
+    comment: &COMMON_GEAR_OUT "Number of teeth - drive shaft sided."
 
   blade_config:
-    name:  ""
-    comment:  ""
+    name:  "Blade drive - Select/Deselect"
+    comment: *COMMON_DRIVE_CONFIG
 
   blade_distance_revolution:
-    name:  ""
-    comment:  ""
+    name:  "Blade drive - DURCHMESSER!! [mm]"
+    comment:  *COMMON_DISTANCE_REVOLUTION
 
   blade_gear_in:
-    name:  ""
-    comment:  ""
+    name:  "Blade drive - Gear IN"
+    comment:  *COMMON_GEAR_IN
 
   blade_gear_out:
-    name:  ""
-    comment:  ""
+    name:  "Blade drive - Gear OUT"
+    comment:  *COMMON_GEAR_OUT
 
   paper_feed_config:
-    name:  ""
-    comment:  ""
+    name:  "Paper feed drive - Select/Deselect"
+    comment:  *COMMON_DRIVE_CONFIG
 
   paper_feed_distance_revolution:
-    name:  ""
-    comment:  ""
+    name:  "Paper feed drive - Distance per revolution [mm]"
+    comment:  *COMMON_DISTANCE_REVOLUTION
 
   paper_feed_gear_in:
-    name:  ""
-    comment:  ""
+    name:  "Paper feed drive - Gear IN"
+    comment:  *COMMON_GEAR_IN
 
   paper_feed_gear_out:
-    name:  ""
-    comment:  ""
+    name:  "Paper feed drive - Gear OUT"
+    comment:  *COMMON_GEAR_OUT
 
-  transport_config:
-    name:  ""
-    comment:  ""
+  transport_drive_config:
+    name:  "Transport drive - Select/Deselect"
+    comment:  *COMMON_DRIVE_CONFIG
 
   transport_distance_revolution:
-    name:  ""
-    comment:  ""
+    name:  "Transport drive - Distance per revolution [mm]"
+    comment:  *COMMON_DISTANCE_REVOLUTION
 
   transport_gear_in:
-    name:  ""
-    comment:  ""
+    name:  "Transport drive - Gear IN"
+    comment:  *COMMON_GEAR_IN
 
   transport_gear_out:
-    name:  ""
-    comment:  ""
+    name:  "Transport drive - Gear OUT"
+    comment:  *COMMON_GEAR_OUT
 
   transport_belt_length:
-    name:  ""
-    comment:  ""
+    name:  "Transport drive - Length of belt [mm]"
+    comment:  "Specify the length of the transport conveyor [in mm]"
 
   infeed_config:
-    name:  ""
-    comment:  ""
+    name:  "Infeed drive - Select/Deselect"
+    comment:  *COMMON_DRIVE_CONFIG
 
   infeed_distance_revolution:
-    name:  ""
-    comment:  ""
+    name:  "Infeed drive - Distance per revolution [mm]"
+    comment:  *COMMON_DISTANCE_REVOLUTION
 
   infeed_gear_in:
-    name:  ""
-    comment:  ""
+    name:  "Infeed drive - Gear IN"
+    comment:  *COMMON_GEAR_IN
 
   infeed_gear_out:
-    name:  ""
-    comment:  ""
+    name:  "Infeed drive - Gear OUT"
+    comment:  *COMMON_GEAR_OUT
 
   infeed_belt_length:
-    name:  ""
-    comment:  ""
+    name:  "Infeed drive - Length of belt [mm]"
+    comment:  "Specify the length of the Infeed conveyor [in mm]"
