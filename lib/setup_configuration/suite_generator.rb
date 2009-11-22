@@ -19,10 +19,24 @@ module SetupConfiguration::Generator
     Range.new(description_ranges().first().first(), description_ranges().last().last())
   end
 
-  class ParameterTemplateBinding
+  class TemplateBinding
+
+  attr_accessor :output
+
+  def categories
+    SetupConfiguration::SuiteGenerator.instance.suite.categories.keys()
+  end
+
+    # Support templating of member data.
+    def get_binding
+      binding
+    end
+
+  end
+
+  class ParameterTemplateBinding < TemplateBinding
     attr_accessor :lang
     attr_accessor :parameter_range
-    attr_accessor :output
 
     def initialize(lang, range, output)
       @lang=lang
@@ -32,10 +46,6 @@ module SetupConfiguration::Generator
 
     def lang_name
       SetupConfiguration::Translation.language_name(lang)
-    end
-
-    def categories
-      SetupConfiguration::SuiteGenerator.instance.suite.categories.keys()
     end
 
     def cat_name(key)
@@ -107,13 +117,57 @@ module SetupConfiguration::Generator
       end
     end
 
+    :private
+
     def escape(message)
       message.gsub(/\n\s?/, '§§')
     end
 
-    # Support templating of member data.
-    def get_binding
-      binding
+  end
+
+  class MPSTemplateBinding < TemplateBinding
+
+    attr_accessor :suite
+
+    def languages
+      SetupConfiguration::Translation.language_names.values
+    end
+
+    def settings
+      self.suite.settings
+    end
+
+    def param_infos(category_key)
+      parameters=suite.categories[category_key]
+      depends, machine_type, number=[],[],[]
+      parameters.each() do |param|
+        machine_type << param.machine_type
+        number << param.number
+        depends << depends_on(param.dependency)
+      end
+      [prepare(depends), prepare(machine_type), prepare(number) ]
+    end
+
+    :private
+
+    def prepare(array)
+      array.join(',')
+    end
+
+    def depends_on(key)
+
+      if :none.eql?(key) then
+       -1
+      else
+        param=suite.find_param(key)
+        if param
+          param.number
+        else
+          puts "ERROR: parameter with key '#{key}' not found."
+          # depends on no other parameter
+          -1
+        end
+      end
     end
 
   end
@@ -169,6 +223,22 @@ module SetupConfiguration::Generator
     end
   end
 
+  def mps_template()
+    template=File.join(File.dirname(__FILE__), "templates", "mps3.ini.erb")
+    if File.file?(template)
+      File.read(template)
+    else
+      puts "WARNING: Template file #{template} expected but not found"
+    end
+  end
+
+  def mps_binding()
+    mps=MPSTemplateBinding.new
+    mps.output="mps3.ini"
+    mps
+  end
+
+
 end
 
 
@@ -211,6 +281,20 @@ class SetupConfiguration::SuiteGenerator
           puts "WARNING: No template found. Generation of #{bind.output} aborted."
         end
       end
+
+      bind=mps_binding()
+      bind.suite=self.suite
+      mps_template=mps_template()
+      if mps_template then
+        rhtml = ERB.new( mps_template, nil, "<>")
+
+        File.open(File.join(output_path, bind.output), "w") do |f|
+          f << rhtml.result(bind.get_binding)
+        end
+      else
+        puts "WARNING: No template found. Generation of #{bind.output} aborted."
+      end
+
 
     end
   end

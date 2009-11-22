@@ -1,0 +1,38 @@
+[EINSTELLUNG]
+TABSTART=2
+DRUCK=0
+DATKONVERT=0
+
+[SPRACHE]
+AKTUELL=0<% languages.each_with_index do | language_name, index| %>
+SPRACHE<%= index %>=<%= language_name.upcase %><% end %>
+
+[MINMAXWERTE]
+BEGIN_MIN=<%= settings.minimum.first %>
+END_MIN=<%= settings.minimum.last %>
+BEGIN_MAX=<%= settings.maximum.first %>
+END_MAX=<%= settings.maximum.last %>
+BEGIN_WAAG_MIN=<%= settings.balance_minimum.first %>
+END_WAAG_MIN=<%= settings.balance_minimum.last %>
+BEGIN_WAAG_MAX=<%= settings.balance_maximum.first %>
+END_WAAG_MAX=<%= settings.balance_maximum.last %>
+
+[MASCHINENTYP]
+BEGIN_TYP0=0
+BEGIN_TYP1=1000
+BEGIN_TYP2=2000
+BEGIN_TYP3=3000
+BEGIN_TYP4=4000
+
+;(0..16)
+;generate param names as comment
+[PARAMANZEIGE]<%  categories.each_with_index do |category, index| %><%    dependencies, machine_types, parameters =  param_infos(category)%>
+2CF<%= index%>a=<%= dependencies %>
+1CF<%= index%>a=<%= machine_types %>
+TAB<%= index%>a=<%= parameters %>
+2CF<%= index%>b=
+1CF<%= index%>b=
+TAB<%= index%>b=
+2CF<%= index%>c=
+1CF<%= index%>c=
+TAB<%= index%>c=<% end %>

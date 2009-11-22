@@ -216,23 +216,23 @@ class SetupConfiguration::Parameter
 
   attr_accessor :key
   attr_accessor :number
-  attr_reader :depends_on
-  attr_reader :for_machine_type
+  attr_reader :dependency
+  attr_reader :machine_type
 
   def initialize(name)
     # depends upon no other parameter
-    @depends_on=:none
+    @dependency=:none
     # valid on all machines
-    @for_machine_type=0
+    @machine_type=0
     @key= name
   end
 
   def depends_on(dependency)
-    @depends_on=dependency
+    @dependency=dependency
   end
 
   def for_machine_type(machine_type)
-    @for_machine_type=machine_type
+    @machine_type=machine_type
   end
 
 end
