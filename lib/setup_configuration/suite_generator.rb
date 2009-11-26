@@ -9,16 +9,6 @@ module SetupConfiguration::Generator
     @output_path=out
   end
 
-  # todo move to SetupConfiguration
-  def description_ranges()
-    [(0..199), (200..599), (600..1299)]
-  end
-
-  # todo move to SetupConfiguration
-  def parameter_range()
-    Range.new(description_ranges().first().first(), description_ranges().last().last())
-  end
-
   class TemplateBinding
 
     attr_accessor :suite
@@ -146,26 +136,17 @@ module SetupConfiguration::Generator
 #          [:en, "english", (600..1299), "english3.lng"],
   def description_bindings()
     SetupConfiguration::Translation.languages().collect() do |lang|
-      description_ranges().collect() do |range|
+      SetupConfiguration.description_ranges().collect() do |range|
         # constructs the output file names
-        out= "#{SetupConfiguration::Translation.language_name(lang)}#{description_ranges().index(range)+1}.lng"
+        out= "#{SetupConfiguration::Translation.language_name(lang)}#{SetupConfiguration.description_ranges().index(range)+1}.lng"
         ParameterTemplateBinding.new(lang, range, out)
       end
     end.flatten()
   end
 
-#  DESCRIPTION_TEMPLATE=%q{
-#    [<%= lang_name.upcase %>]
-#    <%# Zeilenumbrüche werden mit '§§' dargestellt -> escapen! %>
-#    <% parameter_range.each do |number| %>
-#    HILFEPARAM<%= number %>=<%= description(number) %>
-#    <% end %>
-#  }.gsub(/^\s*/, '')
-
   def description_template
     %q{
     [<%= lang_name.upcase %>]
-    <%# Zeilenumbrüche werden mit '§§' dargestellt -> escapen! %>
     <% parameter_range.each do |number| %>
     HILFEPARAM<%= number %>=<%= description(number) %>
     <% end %>
@@ -176,7 +157,7 @@ module SetupConfiguration::Generator
     SetupConfiguration::Translation.languages().collect() do |lang|
       # constructs the output file names
       out= "#{SetupConfiguration::Translation.language_name(lang)}.lng"
-      ParameterTemplateBinding.new(lang, parameter_range(), out)
+      ParameterTemplateBinding.new(lang, SetupConfiguration.parameter_range(), out)
     end
   end
 
@@ -221,12 +202,6 @@ class SetupConfiguration::SuiteGenerator
 
   def self.do_not_run
     self.do_not_run=true
-  end
-
-  def self.suite_eval(name, &block)
-    self.suite.name=name
-    self.suite.instance_eval(&block)
-    self.suite.validate_params()
   end
 
   def generate

@@ -1,5 +1,13 @@
 module SetupConfiguration
-  ;
+
+  def self.description_ranges()
+    [(0..199), (200..599), (600..1299)]
+  end
+
+  def self.parameter_range()
+    Range.new(description_ranges().first().first(), description_ranges().last().last())
+  end
+
 end
 
 # todo add config options for mps3.ini - Details:
@@ -90,17 +98,23 @@ class SetupConfiguration::Suite
 
     keys=[]
     numbers=[]
+    #valid parameter numbers start at 1
+    valid_param_numbers=Range.new(SetupConfiguration.parameter_range().first()+1, SetupConfiguration.parameter_range().last)
+
     self.parameters().each() do |p|
+
+      throw RuntimeError.new("ERROR: parameter number '#{p.number}' not supported. Number must be in range #{valid_param_numbers}") unless valid_param_numbers.member? p.number
+
       if keys.include? p.key
         # todo error handling
-        throw RuntimeError.new("parameter key '#{p.key}' defined more than once")
+        throw RuntimeError.new("ERROR: parameter key '#{p.key}' defined more than once")
       else
         keys << p.key
       end
 
       if numbers.include? p.number
         # todo error handling
-        throw RuntimeError.new("parameter number '#{p.number}' defined more than once")
+        throw RuntimeError.new("ERROR: parameter number '#{p.number}' defined more than once")
       else
         numbers << p.number
       end
