@@ -1,0 +1,118 @@
+#require File.dirname(__FILE__) + "/../test_helper"
+
+SetupConfiguration :underleaver do
+
+  category :common do
+    param :underleaver_config, 1
+    param :distance_photo_sensor, 2
+    param :distance_blade_to_sheet_drive, 3
+    param :distance_sheet_drive_to_sheet_exit, 4
+    param :time_for_cutting_unit, 5
+
+    param :paper_jam_detection_active, 6
+    param :paper_jam_detection_signal_length, 7 do
+      depends_on :paper_jam_detection_active
+    end
+    param :paper_jam_detection_check_time, 8 do
+      depends_on :paper_jam_detection_active
+    end
+
+    param :ext_enabling_following_unit, 10
+    param :ext_enabling_following_unit_method, 11 do
+      depends_on :ext_enabling_following_unit
+    end
+    param :ext_enabling_following_unit_delay, 12 do
+      depends_on :ext_enabling_following_unit
+    end
+
+    param :ext_enabling_previous_unit, 13
+  end
+
+  # paper roll drive
+  category :drives do
+    param :paper_roll_drive_config, 300
+    param :paper_roll_drive_distance_revolution, 301 do
+      depends_on :paper_roll_drive_config
+    end
+    param :paper_roll_drive_gear_in, 302 do
+      depends_on :paper_roll_drive_config
+    end
+    param :paper_roll_drive_gear_out, 303 do
+      depends_on :paper_roll_drive_config
+    end
+  end
+
+  # blade drive
+  category :drives do
+
+    param :blade_drive_config, 310
+    param :blade_drive_diameter, 311 do
+      depends_on :blade_drive_config
+    end
+    param :blade_drive_gear_in, 312 do
+      depends_on :blade_drive_config
+    end
+    param :blade_drive_gear_out, 313 do
+      depends_on :blade_drive_config
+    end
+  end
+
+  #paper feed drive
+  category :drives do
+
+    param :paper_feed_drive_config, 320
+    param :paper_feed_drive_distance_revolution, 321 do
+      depends_on :paper_feed_drive_config
+    end
+    param :paper_feed_drive_gear_in, 322 do
+      depends_on :paper_feed_drive_config
+    end
+    param :paper_feed_drive_gear_out, 323 do
+      depends_on :paper_feed_drive_config
+    end
+  end
+
+  #transport drive
+  category :drives do
+
+    param :transport_drive_config, 330
+    param :transport_drive_distance_revolution, 331 do
+      depends_on :transport_drive_config
+    end
+    param :transport_drive_gear_in, 332 do
+      depends_on :transport_drive_config
+    end
+    param :transport_drive_gear_out, 333 do
+      depends_on :transport_drive_config
+    end
+    param :transport_drive_belt_length, 334 do
+      depends_on :transport_drive_config
+    end
+  end
+
+  #infeed drive
+  category :drives do
+
+    param :infeed_drive_config, 350
+    param :infeed_drive_distance_revolution, 351 do
+      depends_on :infeed_drive_config
+    end
+    param :infeed_drive_gear_in, 352 do
+      depends_on :infeed_drive_config
+    end
+    param :infeed_drive_gear_out, 353 do
+      depends_on :infeed_drive_config
+    end
+    param :infeed_drive_belt_length, 354 do
+      depends_on :infeed_drive_config
+    end
+  end
+
+  setting do
+    min (0..0)
+    max (0..0)
+    balance_min (3000..3029)
+    balance_max (3030..3059)
+  end
+
+end

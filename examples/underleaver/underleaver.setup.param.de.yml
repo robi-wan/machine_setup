@@ -92,7 +92,7 @@ de:
               1: negatives Dauersignal - Freigabe bei 0V\n
               2: positives Dauersignal - Freigabe bei 12V"
 
-  paper_roll_config:
+  paper_roll_drive_config:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
     comment: &COMMON_DRIVE_CONFIG "Einerstelle: An/Abwahl\n
             \n
@@ -122,47 +122,47 @@ de:
             0XXX = ohne PTC\n
             1XXX = mit PTC"
 
-  paper_roll_distance_revolution:
+  paper_roll_drive_distance_revolution:
     name:  "Bahnantrieb Weg/Umdrehung [mm]"
     comment:  ""
 
-  paper_roll_gear_in:
+  paper_roll_drive_gear_in:
     name:  "Bahnantrieb Getriebefaktor Zähler"
     comment: &COMMON_GEAR_IN "Anzahl der Getriebezähne antriebseitig"
 
-  paper_roll_gear_out:
+  paper_roll_drive_gear_out:
     name:  "Bahnantrieb Getriebefaktor Nenner"
     comment:  &COMMON_GEAR_OUT "Anzahl der Getriebezähne abtriebseitig"
 
-  blade_config:
+  blade_drive_config:
     name:  "Messerwelle abgewählt=0/Servo=1/FU=2"
     comment: *COMMON_DRIVE_CONFIG
 
-  blade_distance_revolution:
+  blade_drive_diameter:
     name:  "Messerwelle Durchmesser [mm]"
     comment:  ""
 
-  blade_gear_in:
+  blade_drive_gear_in:
     name:  "Messerwelle Getriebefaktor Zähler"
     comment:  *COMMON_GEAR_IN
 
-  blade_gear_out:
+  blade_drive_gear_out:
     name:  "Messerwelle Getriebefaktor Nenner"
     comment:  *COMMON_GEAR_OUT
 
-  paper_feed_config:
+  paper_feed_drive_config:
     name:  "Blattantrieb abgewählt=0/Servo=1/FU=2"
     comment:  *COMMON_DRIVE_CONFIG
 
-  paper_feed_distance_revolution:
+  paper_feed_drive_distance_revolution:
     name:  "Blattantrieb Weg/Umdrehung [mm]"
     comment:  ""
 
-  paper_feed_gear_in:
+  paper_feed_drive_gear_in:
     name:  "Blattantrieb Getriebefaktor Zähler"
     comment:  *COMMON_GEAR_IN
 
-  paper_feed_gear_out:
+  paper_feed_drive_gear_out:
     name:  "Blattantrieb Getriebefaktor Nenner"
     comment:  *COMMON_GEAR_OUT
 
@@ -170,38 +170,38 @@ de:
     name:  "Portionsauflageband abgewählt=0/Servo=1/FU=2"
     comment:  *COMMON_DRIVE_CONFIG
 
-  transport_distance_revolution:
+  transport_drive_distance_revolution:
     name:  "Portionsauflageband Weg/Umdrehung [mm]"
     comment:  ""
 
-  transport_gear_in:
+  transport_drive_gear_in:
     name:  "Portionsauflageband Getriebefaktor Zähler"
     comment:  *COMMON_GEAR_IN
 
-  transport_gear_out:
+  transport_drive_gear_out:
     name:  "Portionsauflageband Getriebefaktor Nenner"
     comment:  *COMMON_GEAR_OUT
 
-  transport_belt_length:
+  transport_drive_belt_length:
     name:  "Portionsauflageband Bandlänge"
     comment:  "Gesamte Bandlänge des Portionsauflagebandes.\nAngabe erfolgt in Millimeter."
 
-  infeed_config:
+  infeed_drive_config:
     name:  "Einlegeband abgewählt=0/Servo=1/FU=2"
     comment:  *COMMON_DRIVE_CONFIG
 
-  infeed_distance_revolution:
+  infeed_drive_distance_revolution:
     name:  "Einlegeband Weg/Umdrehung [mm]"
     comment:  ""
 
-  infeed_gear_in:
+  infeed_drive_gear_in:
     name:  "Einlegeband Getriebefaktor Zähler"
     comment:  *COMMON_GEAR_IN
 
-  infeed_gear_out:
+  infeed_drive_gear_out:
     name:  "Einlegeband Getriebefaktor Nenner"
     comment:  *COMMON_GEAR_OUT
 
-  infeed_belt_length:
+  infeed_drive_belt_length:
     name:  "Einlegeband Bandlänge"
     comment:  "Gesamte Bandlänge des Einlegebandes.\nAngabe erfolgt in Millimeter."

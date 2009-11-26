@@ -103,7 +103,7 @@ en:
               1: Negative continuously signal - enables by 0V\n
               2: Positiv continuously signal - enables by 12V"
 
-  paper_roll_config:
+  paper_roll_drive_config:
     name:  "Paper roll drive - Select/Deselect"
     comment: &COMMON_DRIVE_CONFIG "Unit´s Place: 'Select/Deselect drive'\n
               \n
@@ -133,47 +133,47 @@ en:
               0XXX = without PTC\n
               1XXX = with PTC"
 
-  paper_roll_distance_revolution:
+  paper_roll_drive_distance_revolution:
     name:  "Paper roll drive - Distance per revolution [mm]"
     comment: &COMMON_DISTANCE_REVOLUTION "X= Distance X per revolution [in mm]"
 
-  paper_roll_gear_in:
+  paper_roll_drive_gear_in:
     name:  "Paper roll drive - Gear IN"
     comment: &COMMON_GEAR_IN "Number of teeth motor sided."
 
-  paper_roll_gear_out:
+  paper_roll_drive_gear_out:
     name:  "Paper roll drive - Gear OUT"
     comment: &COMMON_GEAR_OUT "Number of teeth - drive shaft sided."
 
-  blade_config:
+  blade_drive_config:
     name:  "Blade drive - Select/Deselect"
     comment: *COMMON_DRIVE_CONFIG
 
-  blade_distance_revolution:
-    name:  "Blade drive - DURCHMESSER!! [mm]"
-    comment:  *COMMON_DISTANCE_REVOLUTION
+  blade_drive_diameter:
+    name:  "Blade drive - Diameter [mm]"
+    comment:  "X= Diameter X of blade drive [in mm]"
 
-  blade_gear_in:
+  blade_drive_gear_in:
     name:  "Blade drive - Gear IN"
     comment:  *COMMON_GEAR_IN
 
-  blade_gear_out:
+  blade_drive_gear_out:
     name:  "Blade drive - Gear OUT"
     comment:  *COMMON_GEAR_OUT
 
-  paper_feed_config:
+  paper_feed_drive_config:
     name:  "Paper feed drive - Select/Deselect"
     comment:  *COMMON_DRIVE_CONFIG
 
-  paper_feed_distance_revolution:
+  paper_feed_drive_distance_revolution:
     name:  "Paper feed drive - Distance per revolution [mm]"
     comment:  *COMMON_DISTANCE_REVOLUTION
 
-  paper_feed_gear_in:
+  paper_feed_drive_gear_in:
     name:  "Paper feed drive - Gear IN"
     comment:  *COMMON_GEAR_IN
 
-  paper_feed_gear_out:
+  paper_feed_drive_gear_out:
     name:  "Paper feed drive - Gear OUT"
     comment:  *COMMON_GEAR_OUT
 
@@ -181,38 +181,38 @@ en:
     name:  "Transport drive - Select/Deselect"
     comment:  *COMMON_DRIVE_CONFIG
 
-  transport_distance_revolution:
+  transport_drive_distance_revolution:
     name:  "Transport drive - Distance per revolution [mm]"
     comment:  *COMMON_DISTANCE_REVOLUTION
 
-  transport_gear_in:
+  transport_drive_gear_in:
     name:  "Transport drive - Gear IN"
     comment:  *COMMON_GEAR_IN
 
-  transport_gear_out:
+  transport_drive_gear_out:
     name:  "Transport drive - Gear OUT"
     comment:  *COMMON_GEAR_OUT
 
-  transport_belt_length:
+  transport_drive_belt_length:
     name:  "Transport drive - Length of belt [mm]"
     comment:  "Specify the length of the transport conveyor [in mm]"
 
-  infeed_config:
+  infeed_drive_config:
     name:  "Infeed drive - Select/Deselect"
     comment:  *COMMON_DRIVE_CONFIG
 
-  infeed_distance_revolution:
+  infeed_drive_distance_revolution:
     name:  "Infeed drive - Distance per revolution [mm]"
     comment:  *COMMON_DISTANCE_REVOLUTION
 
-  infeed_gear_in:
+  infeed_drive_gear_in:
     name:  "Infeed drive - Gear IN"
     comment:  *COMMON_GEAR_IN
 
-  infeed_gear_out:
+  infeed_drive_gear_out:
     name:  "Infeed drive - Gear OUT"
     comment:  *COMMON_GEAR_OUT
 
-  infeed_belt_length:
+  infeed_drive_belt_length:
     name:  "Infeed drive - Length of belt [mm]"
     comment:  "Specify the length of the Infeed conveyor [in mm]"

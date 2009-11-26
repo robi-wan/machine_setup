@@ -2,11 +2,15 @@ module SetupConfiguration
 end
 
 def SetupConfiguration(name, &block)
-  SetupConfiguration::SuiteGenerator.suite_eval(name, &block)
+  suite=SetupConfiguration::Suite.instance
+  suite.name=name
+  suite.instance_eval(&block)
+  suite.validate_params()
 rescue
   raise
 end
 
+require 'pp'
 require 'singleton'
 require 'erb'
 require 'fileutils'

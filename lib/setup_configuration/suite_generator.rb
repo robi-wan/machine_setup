@@ -21,11 +21,12 @@ module SetupConfiguration::Generator
 
   class TemplateBinding
 
-  attr_accessor :output
+    attr_accessor :suite
+    attr_accessor :output
 
-  def categories
-    SetupConfiguration::SuiteGenerator.instance.suite.categories.keys()
-  end
+    def categories
+      suite.categories.keys()
+    end
 
     # Support templating of member data.
     def get_binding
@@ -52,43 +53,6 @@ module SetupConfiguration::Generator
       name, desc=SetupConfiguration::Translation::Translator.new().translate(key, @lang)
       name
     end
-#    def name(number)
-#      #todo use suite as singleton!
-#      p=SetupConfiguration::SuiteGenerator.instance.suite.find_param_by_number(number)
-#      if p
-#        key=p.name
-#        name,comment=SetupConfiguration::Translation::Translator.new().translate(key, @lang)
-#        name
-#      else
-#        ""
-#      end
-#
-#    end
-#
-#    def description(number)
-#      #todo use suite as singleton!
-#      p=SetupConfiguration::SuiteGenerator.instance.suite.find_param_by_number(number)
-#      if p
-#        key=p.key
-#        name,comment=SetupConfiguration::Translation::Translator.new().translate(key, @lang)
-#        escape(comment)
-#      else
-#        ""
-#      end
-#    end
-#
-#    def translate(number)
-#      #todo use suite as singleton!
-#      p=SetupConfiguration::SuiteGenerator.instance.suite.find_param_by_number(number)
-#      if p
-#        key=p.key
-#        name,comment=SetupConfiguration::Translation::Translator.new().translate(key, @lang)
-#        escape(comment)
-#      else
-#        ""
-#      end
-#    end
-
 
     def name(number)
       p_name= translate(number) { |name, desc| name }
@@ -103,7 +67,7 @@ module SetupConfiguration::Generator
 
     def translate(number, &extractor)
       #todo use suite as singleton!
-      p=SetupConfiguration::SuiteGenerator.instance.suite.find_param_by_number(number)
+      p=self.suite.find_param_by_number(number)
       if p
         key=p.key
         translation = SetupConfiguration::Translation::Translator.new().translate(key, @lang)
@@ -117,8 +81,11 @@ module SetupConfiguration::Generator
       end
     end
 
-    :private
+    private
 
+    #
+    # Zeilenumbrüche werden mit '§§' dargestellt
+    #
     def escape(message)
       message.gsub(/\n\s?/, '§§')
     end
@@ -127,7 +94,6 @@ module SetupConfiguration::Generator
 
   class MPSTemplateBinding < TemplateBinding
 
-    attr_accessor :suite
 
     def languages
       SetupConfiguration::Translation.language_names.values
@@ -139,7 +105,7 @@ module SetupConfiguration::Generator
 
     def param_infos(category_key)
       parameters=suite.categories[category_key]
-      depends, machine_type, number=[],[],[]
+      depends, machine_type, number=[], [], []
       parameters.each() do |param|
         machine_type << param.machine_type
         number << param.number
@@ -157,7 +123,7 @@ module SetupConfiguration::Generator
     def depends_on(key)
 
       if :none.eql?(key) then
-       -1
+        -1
       else
         param=suite.find_param(key)
         if param
@@ -243,50 +209,47 @@ end
 
 
 class SetupConfiguration::SuiteGenerator
-  include Singleton
   include SetupConfiguration::Generator
+
   attr_accessor :suite
   attr_accessor :do_not_run
 
   def initialize
     self.do_not_run = false
-    self.suite = SetupConfiguration::Suite.new
-    at_exit do
-      puts "todo: generate mps3.ini output!"
-      puts "todo: set output folder!"
-      puts "todo: suite shall be singleton output!"
-      puts "todo: deutsch.lng == hinter jedem Parameter muss irgendetwas stehen!"
+    self.suite = SetupConfiguration::Suite.instance
+  end
 
-      description_bindings().each() do |bind|
-        rhtml = ERB.new(description_template, nil, "<>")
+  def self.do_not_run
+    self.do_not_run=true
+  end
 
-        File.open(File.join(output_path, bind.output), "w") do |f|
-          f << rhtml.result(bind.get_binding)
-        end
-      end
+  def self.suite_eval(name, &block)
+    self.suite.name=name
+    self.suite.instance_eval(&block)
+    self.suite.validate_params()
+  end
 
-      # extras:
-      # -every PARAMETER key needs a value!
-      # -use Windows line terminators CRLF - \r\n
-      # - do not use [] - output is an INI-file
-      parameter_bindings().each() do |bind|
-        template = parameter_template(bind.lang_name())
-        if template then
-          rhtml = ERB.new( template, nil, "<>")
+  def generate
+    return "no output" if self.do_not_run
 
-          File.open(File.join(output_path, bind.output), "w") do |f|
-            f << rhtml.result(bind.get_binding)
-          end
-        else
-          puts "WARNING: No template found. Generation of #{bind.output} aborted."
-        end
-      end
-
-      bind=mps_binding()
+    description_bindings().each() do |bind|
       bind.suite=self.suite
-      mps_template=mps_template()
-      if mps_template then
-        rhtml = ERB.new( mps_template, nil, "<>")
+      rhtml = ERB.new(description_template, nil, "<>")
+
+      File.open(File.join(output_path, bind.output), "w") do |f|
+        f << rhtml.result(bind.get_binding)
+      end
+    end
+
+    # extras:
+    # -every PARAMETER key needs a value!
+    # -use Windows line terminators CRLF - \r\n
+    # - do not use [] - output is an INI-file
+    parameter_bindings().each() do |bind|
+      bind.suite=self.suite
+      template = parameter_template(bind.lang_name())
+      if template then
+        rhtml = ERB.new( template, nil, "<>")
 
         File.open(File.join(output_path, bind.output), "w") do |f|
           f << rhtml.result(bind.get_binding)
@@ -294,30 +257,19 @@ class SetupConfiguration::SuiteGenerator
       else
         puts "WARNING: No template found. Generation of #{bind.output} aborted."
       end
-
-
     end
-  end
 
-  def self.do_not_run
-    self.instance.do_not_run=true
-  end
+    bind=mps_binding()
+    bind.suite=self.suite
+    mps_template=mps_template()
+    if mps_template then
+      rhtml = ERB.new( mps_template, nil, "<>")
 
-  def self.suite_eval(name, &block)
-    self.instance.suite.name=name
-    self.instance.suite.instance_eval(&block)
-    self.instance.suite.validate_params()
-  end
-
-  def self.generate
-    return "no output" if self.instance.do_not_run
-
-    description_bindings().each() do |bind|
-      rhtml = ERB.new(DESCRIPTION_TEMPLATE, 0, "<>")
-
-      File.open(bind.output, "w") do |f|
+      File.open(File.join(output_path, bind.output), "w") do |f|
         f << rhtml.result(bind.get_binding)
       end
+    else
+      puts "WARNING: No template found. Generation of #{bind.output} aborted."
     end
 
   end

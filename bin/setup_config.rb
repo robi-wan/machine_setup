@@ -5,45 +5,38 @@ throw RuntimeError.new("parameter definition existiert nicht") unless File.file?
 
 require File.dirname(__FILE__) + '/../lib/setup_configuration'
 
+# load file with parameter dsl
 load param_def
 
-# todo need path of param_def - file for getting translation files...
+# todo remove test code
+#suite = SetupConfiguration::Suite.instance
+#puts suite
+#pp suite
+#puts suite.categories.size
+#
+#pp suite.find_param(:blade_drive_gear_in)
+#pp suite.find_param(:none)
+#puts suite.settings.balance_maximum.end
+#puts suite.settings.balance_maximum.first
+#puts suite.settings.balance_minimum.end
+#puts suite.settings.balance_minimum.first
+# todo remove test code
 
-suite=SetupConfiguration::SuiteGenerator.instance.suite
-translator=SetupConfiguration::Translation::Translator.new
+# get reference to suite instance which holds parameter configuration
+suite=SetupConfiguration::Suite.instance
 
 #set output path
-SetupConfiguration::SuiteGenerator.instance.output_path=File.dirname(param_def)
+generator = SetupConfiguration::SuiteGenerator.new()
+generator.output_path=File.dirname(param_def)
 
 # load files with translations
 SetupConfiguration::Translation.translation_files(suite.name).each() do |t|
   trans_file=File.join(File.dirname(param_def), t)
-  SetupConfiguration::Translation::Translator.i18n_load_path(trans_file) if File.file?(trans_file)
-end
-
-# gets translations for parameters
-SetupConfiguration::Translation.languages().each do |lang|
-
-  suite.parameters.each() do |p|
-  name, desc = translator.translate(p.key, lang)
-  puts "key: '#{p.key}'\nname: '#{name}'\ndescription: #{desc}\n"
+  if File.file?(trans_file)
+    SetupConfiguration::Translation::Translator.i18n_load_path(trans_file)
+  else
+    puts "WARNING: expected file with translations '#{trans_file}' not found."
   end
-
 end
 
-#include SetupConfiguration::Generator
-#description_bindings().each do |b|
-#  pp b
-#  puts b.lang_name()
-#  puts b.translate(1)
-#end
-
-#include SetupConfiguration::Generator
-#parameter_bindings().each do |b|
-#  pp b
-#  puts b.lang_name()
-#  puts b.name(1)
-#end
-
-
-SetupConfiguration::SuiteGenerator.generate()
+generator.generate()
