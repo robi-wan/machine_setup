@@ -10,24 +10,6 @@ module SetupConfiguration
 
 end
 
-# todo add config options for mps3.ini - Details:
-# [EINSTELLUNG]
-#TABSTART=2
-#DRUCK=0
-#DATKONVERT=0
-#
-#
-#[MASCHINENTYP]
-#BEGIN_TYP0=0
-#BEGIN_TYP1=1000
-#BEGIN_TYP2=2000
-#BEGIN_TYP3=2500
-#BEGIN_TYP4=3000
-#BEGIN_TYP5=4000
-#BEGIN_TYP6=5000
-#BEGIN_TYP7=6000
-
-
 class SetupConfiguration::Suite
   include Singleton
 
@@ -41,18 +23,22 @@ class SetupConfiguration::Suite
   end
 
   def category(category, &category_params)
-    puts "executes category in Suite: #{category}"
+    if category_params then
+#      puts "executes category in Suite: #{category}"
 
-    #this code calls instance_eval and delivers the context object
-    parameter_factory = SetupConfiguration::ParameterFactory.new()
-    parameter_factory.instance_eval(&category_params)
-    categories[category] << parameter_factory.params()
+      #this code calls instance_eval and delivers the context object
+      parameter_factory = SetupConfiguration::ParameterFactory.new()
+      parameter_factory.instance_eval(&category_params)
+      categories[category] << parameter_factory.params()
 
-    # this .instance_eval call returns the last value of the last executed code (an array from method param in Parameters)
-    #categories[category] << SetupConfiguration::Parameters.new().instance_eval(&category_params)
+      # this .instance_eval call returns the last value of the last executed code (an array from method param in Parameters)
+      #categories[category] << SetupConfiguration::Parameters.new().instance_eval(&category_params)
 
-    # flatten is needed: Parameters#param returns an array which is inserted in an array...
-    categories[category].flatten!
+      # flatten is needed: Parameters#param returns an array which is inserted in an array...
+      categories[category].flatten!
+    else
+      puts "WARNING: Empty category '#{category}' will be ignored. "
+    end
   end
 
   def setting(&setting_params)
@@ -93,9 +79,6 @@ class SetupConfiguration::Suite
   #
   def validate_params()
 
-    #todo number 0 is forbidden - reserved
-    #todo (0..1299).contains(parameter_number)
-
     keys=[]
     numbers=[]
     #valid parameter numbers start at 1
@@ -103,7 +86,7 @@ class SetupConfiguration::Suite
 
     self.parameters().each() do |p|
 
-      throw RuntimeError.new("ERROR: parameter number '#{p.number}' not supported. Number must be in range #{valid_param_numbers}") unless valid_param_numbers.member? p.number
+      throw RuntimeError.new("ERROR: parameter number '#{p.number}' not supported. Number must be in range #{valid_param_numbers}") unless valid_param_numbers.member?(p.number)
 
       if keys.include? p.key
         # todo error handling
@@ -164,7 +147,7 @@ class SetupConfiguration::ParameterFactory
   end
 
   def param(parameter, number, &parameter_def)
-    puts "executed param in Parameters: #{parameter}"
+#    puts "executed param in Parameters: #{parameter}"
     # evaluate given block in Parameter context and return new parameter
     p = SetupConfiguration::Parameter.new(parameter)
     p.number=(number)

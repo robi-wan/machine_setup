@@ -1,5 +1,3 @@
-#require File.dirname(__FILE__) + "/../test_helper"
-
 SetupConfiguration :underleaver do
 
   category :common do
@@ -28,8 +26,9 @@ SetupConfiguration :underleaver do
     param :ext_enabling_previous_unit, 13
   end
 
-  # paper roll drive
   category :drives do
+
+    # paper roll drive
     param :paper_roll_drive_config, 300
     param :paper_roll_drive_distance_revolution, 301 do
       depends_on :paper_roll_drive_config
@@ -40,11 +39,8 @@ SetupConfiguration :underleaver do
     param :paper_roll_drive_gear_out, 303 do
       depends_on :paper_roll_drive_config
     end
-  end
 
-  # blade drive
-  category :drives do
-
+    # blade drive
     param :blade_drive_config, 310
     param :blade_drive_diameter, 311 do
       depends_on :blade_drive_config
@@ -55,11 +51,8 @@ SetupConfiguration :underleaver do
     param :blade_drive_gear_out, 313 do
       depends_on :blade_drive_config
     end
-  end
 
-  #paper feed drive
-  category :drives do
-
+    #paper feed drive
     param :paper_feed_drive_config, 320
     param :paper_feed_drive_distance_revolution, 321 do
       depends_on :paper_feed_drive_config
@@ -70,11 +63,8 @@ SetupConfiguration :underleaver do
     param :paper_feed_drive_gear_out, 323 do
       depends_on :paper_feed_drive_config
     end
-  end
 
-  #transport drive
-  category :drives do
-
+    #transport drive
     param :transport_drive_config, 330
     param :transport_drive_distance_revolution, 331 do
       depends_on :transport_drive_config
@@ -88,11 +78,8 @@ SetupConfiguration :underleaver do
     param :transport_drive_belt_length, 334 do
       depends_on :transport_drive_config
     end
-  end
 
-  #infeed drive
-  category :drives do
-
+    #infeed drive
     param :infeed_drive_config, 350
     param :infeed_drive_distance_revolution, 351 do
       depends_on :infeed_drive_config
