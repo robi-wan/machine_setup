@@ -1,6 +1,29 @@
-= machine_setup
+= Machine_setup: Generating configuration files for a machine setup
 
-Generating configuration files for a machine setup.
+  Github:       http://github.com/robi-wan/machine_setup/
+
+== Intro
+  
+Machine_setup is a gem which helps generating a set of configuration files for a machine setup. 
+It takes a parameter description file and translation files with german and english translations and generates
+the appropriate configuration files.
+  
+== Installation
+  
+You can install the gem with
+  
+  gem install machine_setup
+
+This gem depends on 'i18n'.
+
+== Usage
+
+=== Parameter descriptions
+
+=== Translations
+
+=== Generating
+
 
 == Note on Patches/Pull Requests
 

@@ -103,6 +103,16 @@ en:
               1: Negative continuously signal - enables by 0V\n
               2: Positiv continuously signal - enables by 12V"
 
+  retraction_distance_during_reference:
+    name: "Sheet Retraction Distance before Reference move [mm]"
+    comment: |
+              This parameter configures the retraction distance of the sheet before reference move.
+              Therefore it is possible to avoid sheet snippets (and resulting paper jams).
+              The value is given in Millimeter.
+              Default value is 1.5-times the value of parameter 'Distance of blade'.
+              Smaller values will be ignored.
+
+
   paper_roll_drive_config:
     name:  "Paper roll drive - Select/Deselect"
     comment: &COMMON_DRIVE_CONFIG "Unit´s Place: 'Select/Deselect drive'\n

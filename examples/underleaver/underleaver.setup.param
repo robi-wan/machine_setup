@@ -24,6 +24,8 @@ SetupConfiguration :underleaver do
     end
 
     param :ext_enabling_previous_unit, 13
+    
+    param :retraction_distance_during_reference, 20
   end
 
   category :drives do

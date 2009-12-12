@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "machine_setup"
-    gem.executables = ["setup_config_gen.rb"]
+    gem.executables = ["setup_config_gen"]
     gem.summary = %Q{Generating configuration for machine setup parameters.}
     gem.description = %Q{Helps generating configuration files for machine setup parameters.}
     gem.email = "robi-wan@suyu.de"
@@ -48,7 +48,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "plc_version_deploy #{version}"
+  rdoc.title = "machine_setup #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
