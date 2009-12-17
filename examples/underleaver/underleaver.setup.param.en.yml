@@ -112,6 +112,20 @@ en:
               Default value is 1.5-times the value of parameter 'Distance of blade'.
               Smaller values will be ignored.
 
+  source_parameter_working_velocity:
+    name:     "Parametersource for conveyor velocity"
+    comment:  |
+              This parameter defines the programme parameter whose value will be used to determine the conveyor velocity.
+
+
+              0:   Line velocity
+ 
+              12:  Weighing velocity
+              14:  Line velocity
+
+
+              Nevertheless the velocity value  will be internally validated.
+
 
   paper_roll_drive_config:
     name:  "Paper roll drive - Select/Deselect"

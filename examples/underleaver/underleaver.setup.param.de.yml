@@ -109,6 +109,21 @@ de:
               Standardmäßig sollte der Wert das 1,5-fache des Parameters 'Weg Schneide bis Blattantrieb' betragen.
               Kleinere Werte werden ignoriert. 
 
+  source_parameter_working_velocity:
+    name:     "Parameterquelle für Bandgeschwindigkeit"
+    comment:  |
+              Dieser Parameter bestimmt den Programmparameter, dessen Wert für die Ermittlung der Bandgeschwindigkeit genutzt werden soll.
+
+
+              0:   Liniengeschwindigkeit
+               
+              12:  Wiegeschwindigkeit (Maschine steht z.B. hinter Waage)
+              14:  Liniengeschwindigkeit (Maschine steht z.B. hinter Wippe, Markierband oder Transportband)
+
+
+              Der Parameter mit der ausgewählten Nummer wird verwendet. 
+              Intern wird eine Überprüfung des Geschwindigkeitswertes vorgenommen.
+
   paper_roll_drive_config:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
     comment: &COMMON_DRIVE_CONFIG | 
