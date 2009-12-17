@@ -149,8 +149,7 @@ class SetupConfiguration::ParameterFactory
   def param(parameter, number, &parameter_def)
 #    puts "executed param in Parameters: #{parameter}"
     # evaluate given block in Parameter context and return new parameter
-    p = SetupConfiguration::Parameter.new(parameter)
-    p.number=(number)
+    p = SetupConfiguration::Parameter.new(parameter, number)
     p.instance_eval(&parameter_def) if parameter_def
     params << p
   end
@@ -164,12 +163,13 @@ class SetupConfiguration::Parameter
   attr_reader :dependency
   attr_reader :machine_type
 
-  def initialize(name)
+  def initialize(name, number)
     # depends upon no other parameter
     @dependency=:none
     # valid on all machines
     @machine_type=0
     @key= name
+    @number=number
   end
 
   def depends_on(dependency)
