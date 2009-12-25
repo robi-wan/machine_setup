@@ -124,7 +124,7 @@ de:
               Der Parameter mit der ausgewählten Nummer wird verwendet. 
               Intern wird eine Überprüfung des Geschwindigkeitswertes vorgenommen.
 
-  paper_roll_drive_config:
+  paper_roll_drive_selection:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
     comment: &COMMON_DRIVE_CONFIG | 
             Einerstelle: An/Abwahl
@@ -172,7 +172,7 @@ de:
     name:  "Bahnantrieb Getriebefaktor Nenner"
     comment:  &COMMON_GEAR_OUT "Anzahl der Getriebezähne abtriebseitig"
 
-  blade_drive_config:
+  blade_drive_selection:
     name:  "Messerwelle abgewählt=0/Servo=1/FU=2"
     comment: *COMMON_DRIVE_CONFIG
 
@@ -188,7 +188,7 @@ de:
     name:  "Messerwelle Getriebefaktor Nenner"
     comment:  *COMMON_GEAR_OUT
 
-  paper_feed_drive_config:
+  paper_feed_drive_selection:
     name:  "Blattantrieb abgewählt=0/Servo=1/FU=2"
     comment:  *COMMON_DRIVE_CONFIG
 
@@ -204,7 +204,7 @@ de:
     name:  "Blattantrieb Getriebefaktor Nenner"
     comment:  *COMMON_GEAR_OUT
 
-  transport_drive_config:
+  transport_drive_selection:
     name:  "Portionsauflageband abgewählt=0/Servo=1/FU=2"
     comment:  *COMMON_DRIVE_CONFIG
 
@@ -224,7 +224,7 @@ de:
     name:  "Portionsauflageband Bandlänge"
     comment:  "Gesamte Bandlänge des Portionsauflagebandes.\nAngabe erfolgt in Millimeter."
 
-  infeed_drive_config:
+  infeed_drive_selection:
     name:  "Einlegeband abgewählt=0/Servo=1/FU=2"
     comment:  *COMMON_DRIVE_CONFIG
 

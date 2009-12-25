@@ -16,6 +16,7 @@ class SetupConfiguration::Suite
   attr_accessor :categories
   attr_accessor :settings
   attr_accessor :name
+  attr_accessor :abbreviation
 
   def initialize
     self.categories= Hash.new { |hash, key| hash[key] = [] }

@@ -191,6 +191,77 @@ module SetupConfiguration::Generator
 end
 
 
+
+class SetupConfiguration::SetupCodeBinding < SetupConfiguration::Generator::TemplateBinding
+  
+  def initialize
+    super
+  end
+  
+  def parameters
+    suite.parameters
+  end
+  
+  #
+  # Offset for setup parameter numbers. This offset is added to a parameter number when evaluated in controller.
+  #
+  def parameter_offset
+    1300
+  end
+  
+  def key(symbol)
+    s=symbol.to_s
+    delimiter='_'
+    s.split(delimiter).collect(){|splitter| splitter.capitalize}.join(delimiter).ljust(longest_key_length)
+  end
+  
+  :private
+
+  def longest_key_length
+    # find the length of the longest word
+    unless @longest
+     longest = parameters.inject(0) do |memo,param|
+        memo >= param.key.to_s.length ? memo : param.key.to_s.length
+     end
+     @longest=longest + 5
+    end
+    @longest
+  end
+end
+
+class SetupConfiguration::SetupCodeGenerator
+  
+  def generate(suite, output_path)
+    setup_code=SetupConfiguration::SetupCodeBinding.new
+    setup_code.output="LOGCODE#{suite.name.to_s.upcase}SETUP.EXP"
+    setup_code.suite=suite
+    
+    if template then
+      rhtml = ERB.new( template, nil, "<>")
+
+      File.open(File.join(output_path, setup_code.output), "w") do |f|
+        f << rhtml.result(setup_code.get_binding)
+      end
+    else
+      puts "WARNING: No template found. Generation of #{setup_code.output} aborted."
+    end
+    
+    
+  end
+  
+  :private
+  def template
+    template=File.join(File.dirname(__FILE__), "templates", "logcodesetup.exp.erb")
+    if File.file?(template)
+      File.read(template)
+    else
+      puts "WARNING: Template file #{template} expected but not found"
+    end
+  end
+  
+end
+
+
 class SetupConfiguration::SuiteGenerator
   include SetupConfiguration::Generator
 
@@ -249,6 +320,8 @@ class SetupConfiguration::SuiteGenerator
       puts "WARNING: No template found. Generation of #{bind.output} aborted."
     end
 
+    SetupConfiguration::SetupCodeGenerator.new.generate(self.suite, output_path)
+    
   end
 end
 

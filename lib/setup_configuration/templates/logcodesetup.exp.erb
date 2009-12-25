@@ -1,0 +1,11 @@
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Display' *)
+TYPE LogCode<%= suite.name.to_s.capitalize %>Setup :
+(
+<% parameters.each do | parameter | %>
+    SUP_<%= suite.abbreviation.to_s.upcase %>_<%= key(parameter.key) %>:= <%= parameter.number + parameter_offset %><% unless parameters.last.eql?(parameter) then %><%= "," %><% end %><% end %>
+
+);
+END_TYPE
+
+(* @END_DECLARATION := '0' *)

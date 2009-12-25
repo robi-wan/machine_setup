@@ -1,9 +1,10 @@
 module SetupConfiguration
 end
 
-def SetupConfiguration(name, &block)
+def SetupConfiguration(name, abbreviation=name, &block)
   suite=SetupConfiguration::Suite.instance
   suite.name=name
+  suite.abbreviation=abbreviation
   suite.instance_eval(&block)
   suite.validate_params()
 rescue

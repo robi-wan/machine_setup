@@ -26,4 +26,5 @@ pkg
 /test/trans.rb
 /test/y.rb
 /examples/**/*.lng
+/examples/**/*.EXP
 /examples/**/mps3.ini

@@ -127,7 +127,7 @@ en:
               Nevertheless the velocity value  will be internally validated.
 
 
-  paper_roll_drive_config:
+  paper_roll_drive_selection:
     name:  "Paper roll drive - Select/Deselect"
     comment: &COMMON_DRIVE_CONFIG "Unit´s Place: 'Select/Deselect drive'\n
               \n
@@ -169,7 +169,7 @@ en:
     name:  "Paper roll drive - Gear OUT"
     comment: &COMMON_GEAR_OUT "Number of teeth - drive shaft sided."
 
-  blade_drive_config:
+  blade_drive_selection:
     name:  "Blade drive - Select/Deselect"
     comment: *COMMON_DRIVE_CONFIG
 
@@ -185,7 +185,7 @@ en:
     name:  "Blade drive - Gear OUT"
     comment:  *COMMON_GEAR_OUT
 
-  paper_feed_drive_config:
+  paper_feed_drive_selection:
     name:  "Paper feed drive - Select/Deselect"
     comment:  *COMMON_DRIVE_CONFIG
 
@@ -201,7 +201,7 @@ en:
     name:  "Paper feed drive - Gear OUT"
     comment:  *COMMON_GEAR_OUT
 
-  transport_drive_config:
+  transport_drive_selection:
     name:  "Transport drive - Select/Deselect"
     comment:  *COMMON_DRIVE_CONFIG
 
@@ -221,7 +221,7 @@ en:
     name:  "Transport drive - Length of belt [mm]"
     comment:  "Specify the length of the transport conveyor [in mm]"
 
-  infeed_drive_config:
+  infeed_drive_selection:
     name:  "Infeed drive - Select/Deselect"
     comment:  *COMMON_DRIVE_CONFIG
 
