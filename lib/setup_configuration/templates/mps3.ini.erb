@@ -27,12 +27,12 @@ BEGIN_TYP4=4000
 ;(0..16)
 ;generate param names as comment
 [PARAMANZEIGE]<%  categories.each_with_index do |category, index| %><%    dependencies, machine_types, parameters =  param_infos(category)%>
-2CF<%= index%>a=<%= dependencies %>
-1CF<%= index%>a=<%= machine_types %>
-TAB<%= index%>a=<%= parameters %>
-2CF<%= index%>b=
-1CF<%= index%>b=
-TAB<%= index%>b=
-2CF<%= index%>c=
-1CF<%= index%>c=
-TAB<%= index%>c=<% end %>
+2CF<%= index%>a=<%= dependencies[0] %>
+1CF<%= index%>a=<%= machine_types[0] %>
+TAB<%= index%>a=<%= parameters[0] %>
+2CF<%= index%>b=<%= dependencies[1] %>
+1CF<%= index%>b=<%= machine_types[1] %>
+TAB<%= index%>b=<%= parameters[1] %>
+2CF<%= index%>c=<%= dependencies[2] %>
+1CF<%= index%>c=<%= machine_types[2] %>
+TAB<%= index%>c=<%= parameters[2] %><% end %>

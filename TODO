@@ -1,13 +1,5 @@
-- rename drive params to make meaning more clear
-
 - generate import file for epas with parameter numbers
 
 - code cleanup
-
-- add support for min-max-parameters (programme parameters)
-
-- warning: parameter number 404 is reserved
-
-- maximum number of 50 parameters per tabN(a,b,c)
 
 - add: definition of machine types

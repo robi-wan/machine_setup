@@ -101,7 +101,9 @@ module SetupConfiguration::Generator
         number << param.number
         depends << depends_on(param.dependency)
       end
-      [prepare(depends), prepare(machine_type), prepare(number) ]
+      #TODO compute value for max_number_parameters_per_tab of value maximum_numbers_per_category
+      max_number_parameters_per_tab=50
+      [depends, machine_type, number].collect(){ |arr| (arr%(max_number_parameters_per_tab)) .collect(){|a| prepare(a)}}
     end
 
     :private

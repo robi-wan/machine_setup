@@ -79,6 +79,10 @@ class SetupConfiguration::Suite
   #
   def validate_params()
 
+    categories.each() do |key, value|
+      throw RuntimeError.new("ERROR: category '#{key}' contains more than 150 parameters. Reduce parameter count.") if value.size >150
+    end
+    
     keys=[]
     numbers=[]
     #valid parameter numbers start at 1
@@ -86,7 +90,8 @@ class SetupConfiguration::Suite
 
     self.parameters().each() do |p|
 
-      throw RuntimeError.new("ERROR: parameter number '#{p.number}' not supported. Number must be in range #{valid_param_numbers}") unless valid_param_numbers.member?(p.number)
+      puts "WARNING: parameter number 404 is reserved for machine type. you are using it for '#{p.key}'." if p.number.eql?(404)
+      throw RuntimeError.new("ERROR: parameter number '#{p.number}' not supported. Number must be in range #{valid_param_numbers}.") unless valid_param_numbers.member?(p.number)
 
       if keys.include? p.key
         # todo error handling
@@ -95,6 +100,7 @@ class SetupConfiguration::Suite
         keys << p.key
       end
 
+      
       if numbers.include? p.number
         # todo error handling
         throw RuntimeError.new("ERROR: parameter number '#{p.number}' defined more than once")
