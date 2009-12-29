@@ -1,5 +1,7 @@
-- generate import file for epas with parameter numbers
-
 - code cleanup
 
-- add: definition of machine types
+- add: definition of machine types (ala attr_accessor)
+
+- cleaner file / module / class - structure
+
+- check erb templates with mri ruby and jruby

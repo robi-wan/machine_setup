@@ -1,7 +1,7 @@
 module SetupConfiguration
 
   def self.description_ranges()
-    [(0..199), (200..599), (600..1299)]
+    [0..199, 200..599, 600..1299]
   end
 
   def self.parameter_range()
@@ -48,7 +48,7 @@ class SetupConfiguration::Suite
 
   # Gets all known parameters.
   def parameters()
-    categories.values.flatten
+    categories.values.flatten.sort
   end
 
   #
@@ -122,10 +122,11 @@ class SetupConfiguration::Setting
   attr_reader :balance_maximum
 
   def initialize
-    @minimum=(0..0)
-    @maximum=(0..0)
-    @balance_minimum=(0..0)
-    @balance_maximum=(0..0)
+    @minimum=0..0
+    @maximum=0..0
+    @balance_minimum=0..0
+    @balance_maximum=0..0
+    @machine_types=[]
   end
 
   def min(range)
@@ -143,6 +144,15 @@ class SetupConfiguration::Setting
   def balance_max(range)
     @balance_maximum=range
   end
+  
+  def machine_type(name, number, range)
+    @machine_types << SetupConfiguration::MachineType.new(name, number, range)
+  end
+  
+  def machine_types
+    @machine_types.sort {|a, b| a.sequence_number <=> b.sequence_number}
+  end
+  
 end
 
 class SetupConfiguration::ParameterFactory
@@ -164,6 +174,7 @@ class SetupConfiguration::ParameterFactory
 end
 
 class SetupConfiguration::Parameter
+  include Enumerable
 
   attr_accessor :key
   attr_accessor :number
@@ -187,4 +198,33 @@ class SetupConfiguration::Parameter
     @machine_type=machine_type
   end
 
+  def <=>(parameter)
+    self.number <=> parameter.number
+  end
+  
+end
+
+class SetupConfiguration::MachineType
+  include Enumerable
+  
+  attr_reader :name
+  attr_reader :range
+  attr_reader :sequence_number
+  attr_reader :binary_number
+  
+  def initialize(name, sequence_number, range)
+    @name=name
+    @range=range
+    @sequence_number=sequence_number
+    if @sequence_number <= 0
+      @binary_number=0
+    else
+      @binary_number=2**(@sequence_number-1)
+    end
+  end
+
+  def <=>(machine_type)
+    self.range.first <=> machine_type.range.first
+  end
+  
 end

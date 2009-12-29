@@ -99,10 +99,14 @@ SetupConfiguration :underleaver, :ul do
   end
 
   setting do
-    min (0..0)
-    max (0..0)
-    balance_min (3000..3029)
-    balance_max (3030..3059)
+    min 0..0
+    max 0..0
+    balance_min 3000..3029
+    balance_max 3030..3059
+    machine_type :all_machines, 0, 0..999
+    machine_type :underleaver_one, 1, 1000..1999
+    machine_type :underleaver_two, 2, 2000..2999
+    machine_type :underleaver_three, 3, 3000..3999
   end
 
 end

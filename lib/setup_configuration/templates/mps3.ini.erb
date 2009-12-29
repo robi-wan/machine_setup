@@ -17,16 +17,12 @@ END_WAAG_MIN=<%= settings.balance_minimum.last %>
 BEGIN_WAAG_MAX=<%= settings.balance_maximum.first %>
 END_WAAG_MAX=<%= settings.balance_maximum.last %>
 
-[MASCHINENTYP]
-BEGIN_TYP0=0
-BEGIN_TYP1=1000
-BEGIN_TYP2=2000
-BEGIN_TYP3=3000
-BEGIN_TYP4=4000
+[MASCHINENTYP]<% settings.machine_types.each do |machine_type| %>
+BEGIN_TYP<%= machine_type.sequence_number %>=<%= machine_type.range.first %><% end %>
 
 ;(0..16)
 ;generate param names as comment
-[PARAMANZEIGE]<%  categories.each_with_index do |category, index| %><%    dependencies, machine_types, parameters =  param_infos(category)%>
+[PARAMANZEIGE]<%  categories.each_with_index do |category, index| %><% dependencies, machine_types, parameters = param_infos(category) %>
 2CF<%= index%>a=<%= dependencies[0] %>
 1CF<%= index%>a=<%= machine_types[0] %>
 TAB<%= index%>a=<%= parameters[0] %>
