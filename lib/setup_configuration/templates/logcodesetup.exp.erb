@@ -2,6 +2,10 @@
 (* @PATH := '\/Display' *)
 TYPE LogCode<%= suite.name.to_s.capitalize %>Setup :
 (
+
+(* WARNING: This file is generated - do not edit it. 
+   Edit instead the machine setup parameter description. *)
+
 <% parameters.each do | parameter | %>
     SUP_<%= suite.abbreviation.to_s.upcase %>_<%= key(parameter.key) %>:= <%= parameter.number + parameter_offset %><% unless parameters.last.eql?(parameter) then %><%= "," %><% end %><% end %>
 
