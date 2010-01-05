@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module SetupConfiguration::Translation
 
   FILE_EXTENSION="setup.param".freeze

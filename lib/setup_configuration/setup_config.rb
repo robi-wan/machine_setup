@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module SetupConfiguration
 
   def self.description_ranges()
@@ -95,7 +97,6 @@ class SetupConfiguration::Suite
       throw RuntimeError.new("ERROR: parameter number '#{p.number}' not supported. Number must be in range #{valid_param_numbers}.") unless valid_param_numbers.member?(p.number)
 
       if keys.include? p.key
-        # todo error handling
         throw RuntimeError.new("ERROR: parameter key '#{p.key}' defined more than once")
       else
         keys << p.key
@@ -103,7 +104,6 @@ class SetupConfiguration::Suite
 
       
       if numbers.include? p.number
-        # todo error handling
         throw RuntimeError.new("ERROR: parameter number '#{p.number}' defined more than once")
       else
         numbers << p.number

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module SetupConfiguration::Generator
   @output_path=""
 
@@ -56,13 +58,12 @@ module SetupConfiguration::Generator
     end
 
     def translate(number, &extractor)
-      #todo use suite as singleton!
       p=self.suite.find_param_by_number(number)
       if p
         key=p.key
         translation = SetupConfiguration::Translation::Translator.new().translate(key, @lang)
         if extractor
-          extractor.call( translation)
+          extractor.call( *translation )
         else
           translation
         end

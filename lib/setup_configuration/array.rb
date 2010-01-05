@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Array
   # Splits _self_ in arrays with maximal size of _len_ and returns an array with this arrays.
   # :call-seq:
