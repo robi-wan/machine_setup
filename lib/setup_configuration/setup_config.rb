@@ -151,7 +151,7 @@ class SetupConfiguration::Setting
     # generates a method with given machine type name in a module
     # this module is included in Parameter class so machine type dependencies can be
     # given with machine type names (in DSL) instead of binary numbers
-    SetupConfiguration::ParameterMachineTypeBridge.create_method(name) do
+    SetupConfiguration::ParameterMachineTypeBridge.send(:define_method, name) do
       machine_type.binary_number
     end
   end
