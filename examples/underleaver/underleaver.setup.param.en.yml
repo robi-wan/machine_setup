@@ -126,6 +126,27 @@ en:
 
               Nevertheless the velocity value  will be internally validated.
 
+  roll_bracket_active:
+    name:   "Rollbracket active"
+    comment: |
+             Configuration of roll brake.
+             
+             
+             0: Deselect the roll brake.
+             
+             1: Select the roll brake.
+             
+             
+             Default: 1.
+
+  
+  factor_activation_point_roll_bracket:
+    name:   "Factor activation point rollbracket"
+    comment: |
+             Factor for activation point of roll brake.
+             
+             
+             If active, roll brake will be activated beneath lower loop position. This parameter allows to move this activation point towards the upper loop position. Movement is given in percent and relates to the distance between lower and upper loop position.
 
   paper_roll_drive_selection:
     name:  "Paper roll drive - Select/Deselect"

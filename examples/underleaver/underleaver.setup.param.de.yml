@@ -124,6 +124,29 @@ de:
               Der Parameter mit der ausgewählten Nummer wird verwendet. 
               Intern wird eine Überprüfung des Geschwindigkeitswertes vorgenommen.
 
+  roll_bracket_active:
+    name:   "Rollenbremse aktiv"
+    comment: |
+              An/Abwahl der Steuerung der Rollenbremse
+              
+              
+              0: Die Rollenbremse wird nicht verwendet.
+              
+              
+              1: Die Rollenbremse wird angesteuert und an einem bestimmten Aktivierungspunkt (abhängig von der Tänzerposition) geschaltet.
+              
+              
+              
+              Standard: 1
+  
+  factor_activation_point_roll_bracket:
+    name:   "Faktor Aktivierungspunkt Rollenbremse"
+    comment: |
+              Faktor für den Aktivierungspunkt der Rollenbremse.
+              
+              
+              Standardmäßig wird die Rollenbremse unterhalb des unteren Teachpunktes des Tänzers aktiviert. Sollte ein höherer Aktivierungspunkt notwendig sein, kann über diesen Parameter ein Prozentwert angegeben werden, um den der Aktivierungspunkt in Richtung des oberen Teachpunktes des Tänzers verschoben wird. Der Prozentwert bezieht sich auf den Abstand zwischen unteren und oberen Teachpunkt.              
+    
   paper_roll_drive_selection:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
     comment: &COMMON_DRIVE_CONFIG | 

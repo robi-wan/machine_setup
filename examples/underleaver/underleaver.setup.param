@@ -27,6 +27,11 @@ SetupConfiguration :underleaver, :ul do
     
     param :retraction_distance_during_reference, 20
     param :source_parameter_working_velocity, 21
+    
+    param :roll_bracket_active, 22
+    param :factor_activation_point_roll_bracket, 23 do
+      depends_on :roll_bracket_active
+    end
   end
 
   category :drives do
