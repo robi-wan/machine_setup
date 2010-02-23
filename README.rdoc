@@ -18,6 +18,11 @@ This gem depends on 'i18n'.
 
 == Usage
 
+Describe your setup configuration for a machine (including translations for supported languages) and set the main
+file as a parameter to 'setup_config_gen':
+    
+  setup_config_gen ../examples/underleaver/underleaver.setup.param
+
 === Parameter descriptions
 
 === Translations

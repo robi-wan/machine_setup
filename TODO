@@ -1,7 +1,9 @@
 - code cleanup
 
-- add: definition of machine types (ala attr_accessor)
-
 - cleaner file / module / class - structure
 
-- check erb templates with mri ruby and jruby
+- check erb templates with mri ruby and jruby (erb.rb)
+
+- check erubis
+
+- rubygems usage: http://gist.github.com/54177
