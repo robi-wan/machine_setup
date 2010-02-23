@@ -1,5 +1,16 @@
 SetupConfiguration :underleaver, :ul do
 
+  setting do
+    min 0..0
+    max 0..0
+    balance_min 3000..3029
+    balance_max 3030..3059
+    machine_type :all_machines, 0, 0..999
+    machine_type :underleaver_one, 1, 1000..1999
+    machine_type :underleaver_two, 2, 2000..2999
+    machine_type :underleaver_three, 3, 3000..3999
+  end
+
   category :common do
     param :underleaver_config, 1
     param :distance_photo_sensor, 2
@@ -25,7 +36,6 @@ SetupConfiguration :underleaver, :ul do
 
     param :ext_enabling_previous_unit, 13
     
-    param :retraction_distance_during_reference, 20
     param :source_parameter_working_velocity, 21
     
     param :roll_bracket_active, 22
@@ -101,17 +111,6 @@ SetupConfiguration :underleaver, :ul do
     param :infeed_drive_belt_length, 354 do
       depends_on :infeed_drive_selection
     end
-  end
-
-  setting do
-    min 0..0
-    max 0..0
-    balance_min 3000..3029
-    balance_max 3030..3059
-    machine_type :all_machines, 0, 0..999
-    machine_type :underleaver_one, 1, 1000..1999
-    machine_type :underleaver_two, 2, 2000..2999
-    machine_type :underleaver_three, 3, 3000..3999
   end
 
 end

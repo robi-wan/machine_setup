@@ -58,7 +58,7 @@ de:
                 Bei Angabe von 0 wird die Zeitdauer programmintern festgelegt."
 
   paper_jam_detection_check_time:
-    name:  "Papierstauüberprüfungszeit nach 'letzem' Produkt"
+    name:  "Papierstauüberprüfungszeit nach 'letztem' Produkt"
     comment:  "Die Überprüfung, ob ein Papierstau vorliegt, erfolgt bei Beginn der Förderung des nächsten Blattes.
               Kommt nach dem aktuellen Produkt eine Weile kein Produkt mehr, so ermöglicht dieser Parameter die Einstellung
               der Zeitdauer, nach deren Ablauf eine Papierstauüberprüfung vorgenommen wird.\n
@@ -69,7 +69,7 @@ de:
               Die Angabe wird 1:1 im Programm verwendet."
 
   ext_enabling_following_unit:
-    name:  "Externe Freigabe nachgelagerter Einheit (NE)"
+    name:  "Externe Freigabe von nachgelagerter Einheit (NE)"
     comment:  "An/Abwahl der externen Freigabe der nachgelagerten Einheit.\n
               \n
               0: Der Underleaver arbeitet als 'Standalone'-Maschine oder besitzt innerhalb einer Linie keine nachgelagerte Einheit.\n
@@ -97,17 +97,6 @@ de:
               0: Impuls - Freigabe wird durch einen Impuls umgeschalten (an->aus oder aus->an)\n
               1: negatives Dauersignal - Freigabe bei 0V\n
               2: positives Dauersignal - Freigabe bei 12V"
-
-  retraction_distance_during_reference:
-    name: "Folienrückzugsweg vor der Referenzfahrt [mm]"
-    comment:  |
-              Dieser Parameter bestimmt, um wieviel die Folie vor der Referenz zurückgefahren wird,
-              damit kein Schnipsel entstehen kann.
-              Bei entsprechend großem Wert kann dieser Parameter dazu führen, dass die Folie aus
-              der Schneideinheit fällt und für die Schleichfahrt wieder eingefädelt werden muss.
-              Die Angabe des Wertes erfolgt in Millimeter.
-              Standardmäßig sollte der Wert das 1,5-fache des Parameters 'Weg Schneide bis Blattantrieb' betragen.
-              Kleinere Werte werden ignoriert. 
 
   source_parameter_working_velocity:
     name:     "Parameterquelle für Bandgeschwindigkeit"
