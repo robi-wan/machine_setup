@@ -17,6 +17,10 @@ module SetupConfiguration::Translation
     language_names()[lang]
   end
 
+  def self.language_abbreviation(lang_name)
+    language_names.invert()[lang_name.downcase]
+  end
+
   def self.language_names()
     {:de => "deutsch", :en => "english"}
   end

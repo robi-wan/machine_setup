@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+begin
+  legacy_data_folder=ARGV[0]
+  machine_name=ARGV[1]
+  machine_abbreviation=ARGV[2]
+
+  raise RuntimeError.new("Missing argument: directory with legacy definition") if legacy_data_folder.nil?
+  raise RuntimeError.new("Wrong argument: directory '#{legacy_data_folder}' with legacy definition not found") unless File.directory?(legacy_data_folder)
+
+  raise RuntimeError.new("Missing argument: machine name") unless machine_name
+
+
+  $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+  require 'setup_configuration'
+
+  importer=SetupConfiguration::Legacy::Importer.new(legacy_data_folder, machine_name, machine_abbreviation)
+  importer.output
+
+  puts("#{File.basename(__FILE__)} completed.")
+rescue Exception => e
+  #puts("Error, program will exit => #{e}!")
+  puts(e.message)
+  #puts(e.backtrace().join("\n"))
+  exit(1)
+
+end

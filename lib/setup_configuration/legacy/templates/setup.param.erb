@@ -1,0 +1,32 @@
+SetupConfiguration :<%= @name.to_sym %>, :<%= @abbreviation.to_sym %> do
+
+  setting do
+    min <%= @settings.minimum %>
+    max <%= @settings.maximum %>
+    balance_min <%= @settings.balance_minimum %>
+    balance_max <%= @settings.balance_maximum %>
+    <% for type in @settings.machine_types %>
+    machine_type :<%= type.name.to_sym %>, <%= type.sequence_number %>, <%= type.range %>
+    <% end %>
+  end
+
+  <% for cat in @categories.sort %>
+  category :<%= cat.name %> do
+    <% for param in cat.parameter %>
+    param :<%= param.key %>, <%= param.number %><% if param.extended? %> do
+    <% if param.dep? %>
+      depends_on :<%= param.dependency %>
+    <% end %>
+    <% if param.type? %>
+      for_machine_type <%= compute_machine_types(param.machine_type) %>
+    <% end %>
+    end
+    <% else %>
+    
+    <% end %>
+    <% end %>
+  end
+  
+  <% end %>
+
+end

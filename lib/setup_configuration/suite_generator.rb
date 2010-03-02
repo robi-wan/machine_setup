@@ -35,14 +35,16 @@ module SetupConfiguration::Generator
       @lang=lang
       @parameter_range=range
       @output=output
+      @translator = SetupConfiguration::Translation::Translator.new()
     end
 
     def lang_name
       SetupConfiguration::Translation.language_name(lang)
     end
 
+
     def cat_name(key)
-      name, desc=SetupConfiguration::Translation::Translator.new().translate(key, @lang)
+      name, desc=@translator.translate(key, @lang)
       name
     end
 
@@ -61,7 +63,7 @@ module SetupConfiguration::Generator
       p=self.suite.find_param_by_number(number)
       if p
         key=p.key
-        translation = SetupConfiguration::Translation::Translator.new().translate(key, @lang)
+        translation = @translator.translate(key, @lang)
         if extractor
           extractor.call( *translation )
         else
@@ -85,7 +87,6 @@ module SetupConfiguration::Generator
 
   class MPSTemplateBinding < TemplateBinding
 
-
     def languages
       SetupConfiguration::Translation.language_names.values
     end
@@ -104,7 +105,7 @@ module SetupConfiguration::Generator
       end
       #TODO compute value for max_number_parameters_per_tab of value maximum_numbers_per_category
       max_number_parameters_per_tab=50
-      [depends, machine_type, number].collect(){ |arr| (arr%(max_number_parameters_per_tab)) .collect(){|a| prepare(a)}}
+      [depends, machine_type, number].collect(){ |arr| (arr%(max_number_parameters_per_tab)).collect(){|a| prepare(a)}}
     end
 
     :private
@@ -194,37 +195,37 @@ end
 
 
 class SetupConfiguration::SetupCodeBinding < SetupConfiguration::Generator::TemplateBinding
-  
+
   def initialize
     super
   end
-  
+
   def parameters
     suite.parameters
   end
-  
+
   #
   # Offset for setup parameter numbers. This offset is added to a parameter number when evaluated in controller.
   #
   def parameter_offset
     1300
   end
-  
+
   def key(symbol)
     s=symbol.to_s
     delimiter='_'
     s.split(delimiter).collect(){|splitter| splitter.capitalize}.join(delimiter).ljust(longest_key_length)
   end
-  
+
   :private
 
   def longest_key_length
     # find the length of the longest word
     unless @longest
-     longest = parameters.inject(0) do |memo,param|
+      longest = parameters.inject(0) do |memo, param|
         memo >= param.key.to_s.length ? memo : param.key.to_s.length
-     end
-     @longest=longest + 5
+      end
+      @longest=longest + 5
     end
     @longest
   end
@@ -236,9 +237,9 @@ class SetupConfiguration::SetupCodeGenerator
     setup_code=SetupConfiguration::SetupCodeBinding.new
     setup_code.output="LOGCODE#{suite.name.to_s.upcase}SETUP.EXP"
     setup_code.suite=suite
-    
+
     if template then
-      rhtml = ERB.new( template, nil, "<>")
+      rhtml = Erubis::Eruby.new( template )
 
       File.open(File.join(output_path, setup_code.output), "w") do |f|
         f << rhtml.result(setup_code.get_binding)
@@ -246,11 +247,12 @@ class SetupConfiguration::SetupCodeGenerator
     else
       puts "WARNING: No template found. Generation of #{setup_code.output} aborted."
     end
-    
-    
+
+
   end
-  
+
   :private
+
   def template
     template=File.join(File.dirname(__FILE__), "templates", "logcodesetup.exp.erb")
     if File.file?(template)
@@ -259,7 +261,7 @@ class SetupConfiguration::SetupCodeGenerator
       puts "WARNING: Template file #{template} expected but not found"
     end
   end
-  
+
 end
 
 
@@ -283,7 +285,7 @@ class SetupConfiguration::SuiteGenerator
 
     description_bindings().each() do |bind|
       bind.suite=self.suite
-      rhtml = ERB.new(description_template, nil, "<>")
+      rhtml = Erubis::Eruby.new(description_template)
 
       File.open(File.join(output_path, bind.output), "w") do |f|
         f << rhtml.result(bind.get_binding)
@@ -298,7 +300,7 @@ class SetupConfiguration::SuiteGenerator
       bind.suite=self.suite
       template = parameter_template(bind.lang_name())
       if template then
-        rhtml = ERB.new( template, nil, "<>")
+        rhtml = Erubis::Eruby.new(template)
 
         File.open(File.join(output_path, bind.output), "w") do |f|
           f << rhtml.result(bind.get_binding)
@@ -312,7 +314,7 @@ class SetupConfiguration::SuiteGenerator
     bind.suite=self.suite
     mps_template=mps_template()
     if mps_template then
-      rhtml = ERB.new( mps_template, nil, "<>")
+      rhtml = Erubis::Eruby.new(mps_template)
 
       File.open(File.join(output_path, bind.output), "w") do |f|
         f << rhtml.result(bind.get_binding)
@@ -322,7 +324,6 @@ class SetupConfiguration::SuiteGenerator
     end
 
     SetupConfiguration::SetupCodeGenerator.new.generate(self.suite, output_path)
-    
   end
 end
 

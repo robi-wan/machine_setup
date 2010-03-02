@@ -4,8 +4,10 @@ DRUCK=0
 DATKONVERT=0
 
 [SPRACHE]
-AKTUELL=0<% languages.each_with_index do | language_name, index| %>
-SPRACHE<%= index %>=<%= language_name.upcase %><% end %>
+AKTUELL=0
+<% languages.each_with_index do | language_name, index| %>
+SPRACHE<%= index %>=<%= language_name.upcase %>
+<% end %>
 
 [MINMAXWERTE]
 BEGIN_MIN=<%= settings.minimum.first %>
@@ -17,12 +19,16 @@ END_WAAG_MIN=<%= settings.balance_minimum.last %>
 BEGIN_WAAG_MAX=<%= settings.balance_maximum.first %>
 END_WAAG_MAX=<%= settings.balance_maximum.last %>
 
-[MASCHINENTYP]<% settings.machine_types.each do |machine_type| %>
-BEGIN_TYP<%= machine_type.sequence_number %>=<%= machine_type.range.first %><% end %>
+[MASCHINENTYP]
+<% settings.machine_types.each do |machine_type| %>
+BEGIN_TYP<%= machine_type.sequence_number %>=<%= machine_type.range.first %>
+<% end %>
 
 ;(0..16)
 ;generate param names as comment
-[PARAMANZEIGE]<%  categories.each_with_index do |category, index| %><% dependencies, machine_types, parameters = param_infos(category) %>
+[PARAMANZEIGE]
+<%  categories.each_with_index do |category, index| %>
+    <% dependencies, machine_types, parameters = param_infos(category) %>
 2CF<%= index%>a=<%= dependencies[0] %>
 1CF<%= index%>a=<%= machine_types[0] %>
 TAB<%= index%>a=<%= parameters[0] %>
@@ -31,4 +37,5 @@ TAB<%= index%>a=<%= parameters[0] %>
 TAB<%= index%>b=<%= parameters[1] %>
 2CF<%= index%>c=<%= dependencies[2] %>
 1CF<%= index%>c=<%= machine_types[2] %>
-TAB<%= index%>c=<%= parameters[2] %><% end %>
+TAB<%= index%>c=<%= parameters[2] %>
+<% end %>

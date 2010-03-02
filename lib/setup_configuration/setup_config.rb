@@ -50,7 +50,8 @@ class SetupConfiguration::Suite
 
   # Gets all known parameters.
   def parameters()
-    categories.values.flatten.sort
+    # cache parameters so sorting is necessary only once - this saves a lot of time...
+    @parameters ||= categories.values.flatten.sort
   end
 
   #
@@ -88,8 +89,8 @@ class SetupConfiguration::Suite
     
     keys=[]
     numbers=[]
-    #valid parameter numbers start at 1
-    valid_param_numbers=Range.new(SetupConfiguration.parameter_range().first()+1, SetupConfiguration.parameter_range().last)
+    # slicer contains parameter with number 0... therefore valid parameter numbers starts at 0
+    valid_param_numbers=SetupConfiguration.parameter_range()
 
     self.parameters().each() do |p|
 

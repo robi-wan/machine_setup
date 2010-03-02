@@ -15,7 +15,7 @@ end
 
 require 'pp'
 require 'singleton'
-require 'erb'
+require 'erubis'
 require 'fileutils'
 require 'i18n'
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/array')
@@ -23,3 +23,5 @@ require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/paramete
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/setup_config')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/suite_generator')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/translation')
+
+require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/legacy/legacy')

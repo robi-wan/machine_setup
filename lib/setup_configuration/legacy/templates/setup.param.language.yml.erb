@@ -1,0 +1,13 @@
+<%= lang_abbr %>:
+
+  <% for cat in categories %>
+  <%= cat.name %>:
+    name:       "<%= category_name(cat.number) %>"
+
+    <% for param in cat.parameter %>
+  <%= param.key %>:
+    name:       "<%= parameter_name(param.number) %>"
+    comment:    "<%= parameter_description(param.number) %>"
+
+    <% end %>
+  <% end %>
