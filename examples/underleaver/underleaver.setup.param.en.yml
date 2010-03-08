@@ -22,10 +22,16 @@ en:
               1xx: The controller simulates all drives."
 
   distance_photo_sensor:
-    name:  "Distance of photo sensor"
+    name:  "Distance of photo sensor to paper exit"
     comment:  "Configuration of photo sensor.\n
               \n
                 X: Describes the distance [mm] from photo sensor to the paper exit."
+
+  distance_photo_sensor_from_start:
+    name:   "Distance of photo sensor from start"
+    comment:  "Configuration of photo sensor.\n
+              \n
+                X: Describes the distance [mm] to photo sensor from start of transport conveyor."
 
   distance_blade_to_sheet_drive:
     name:  "Distance of blade"

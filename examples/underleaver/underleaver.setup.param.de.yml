@@ -25,7 +25,11 @@ de:
 
   distance_photo_sensor:
     name:  "Weg Lichtschranke bis Blattaustritt"
-    comment:  "Abstand der Lichtschranke vom Blattaustritt."
+    comment:  "Abstand der Lichtschranke vom Blattaustritt. [mm]"
+
+  distance_photo_sensor_from_start:
+    name:   "Weg Bandbeginn bis Lichtschranke"
+    comment:  "Abstand der Lichtschranke vom Bandbeginn. [mm]"
 
   distance_blade_to_sheet_drive:
     name: "Weg Schneide bis Blattantrieb"
