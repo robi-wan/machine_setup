@@ -145,6 +145,21 @@ en:
              
              If active, roll brake will be activated beneath lower loop position. This parameter allows to move this activation point towards the upper loop position. Movement is given in percent and relates to the distance between lower and upper loop position.
 
+  decrease_simulated_portions:
+    name:   "Factor for reduction of simulated portions"
+    comment: |
+            This parameter configures a factor which can decrease simulated portions.
+            This factor is used for calculation the distance between two simulated portions.
+            This factor differently influences the count of simulated portions because
+            the calculation of simulated portions depends on sheet length and conveyor velocity.
+
+
+            With a value of 0 the maximum number of portions will be simulated.
+            The given value will be interpreted as decimal with one decimal place:
+            value 25 will be interpreted as 2.5.
+            Increasing this parameter by 10 can (depending on sheet length and conveyor velocity)
+            reduce the number of simulated portions between 10 and 20 percent.
+
   paper_roll_drive_selection:
     name:  "Paper roll drive - Select/Deselect"
     comment: &COMMON_DRIVE_CONFIG "Unit´s Place: 'Select/Deselect drive'\n

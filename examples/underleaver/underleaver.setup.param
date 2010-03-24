@@ -43,6 +43,8 @@ SetupConfiguration :underleaver, :ul do
     param :factor_activation_point_roll_bracket, 23 do
       depends_on :roll_bracket_active
     end
+
+    param :decrease_simulated_portions, 24
   end
 
   category :drives do

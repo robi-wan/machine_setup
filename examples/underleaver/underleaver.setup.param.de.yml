@@ -139,7 +139,23 @@ de:
               
               
               Standardmäßig wird die Rollenbremse unterhalb des unteren Teachpunktes des Tänzers aktiviert. Sollte ein höherer Aktivierungspunkt notwendig sein, kann über diesen Parameter ein Prozentwert angegeben werden, um den der Aktivierungspunkt in Richtung des oberen Teachpunktes des Tänzers verschoben wird. Der Prozentwert bezieht sich auf den Abstand zwischen unteren und oberen Teachpunkt.              
-    
+
+
+  decrease_simulated_portions:
+    name:   "Faktor für Verringerung der simulierten Portionen"
+    comment: |
+            Faktor, der die Anzahl der simulierten Portionen in der Betriebsart Simulation verringert.
+            Dieser Faktor wird verwendet bei der Berechnung des Abstandes zwischen zwei Portionen.
+            Da die Berechnung der simulierten Portionen von der eingestellten Blattlänge und der Bandgeschwindigkeit abhängt,
+            wirkt sich der Faktor unterschiedlich aus.
+
+
+            Mit einem Wert von 0 wird die maximale Anzahl von Portionen simuliert.
+            Der eingegebene Wert wird als Zahl mit einer Nachkommastelle vom Programm verarbeitet:
+            aus der Eingabe 25 wird programmintern 2,5.
+            Eine Erhöhung des Wertes um 10 kann (in Abhängigkeit von Blattlänge und Bandgeschwindigkeit)
+            zu einer Reduktion der simulierten Portionen zwischen 10 und 20 Prozent führen.
+
   paper_roll_drive_selection:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
     comment: &COMMON_DRIVE_CONFIG | 
