@@ -5,7 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "machine_setup"
-    gem.executables = ["setup_config_gen"]
+    gem.executables = %W{setup_config_gen setup_init_dsl setup_analyze_dat}
+    gem.default_executable = gem.executables.first 
     gem.summary = %Q{Generating configuration for machine setup parameters.}
     gem.description = %Q{Helps generating configuration files for machine setup parameters.}
     gem.email = "robi-wan@suyu.de"
