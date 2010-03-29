@@ -45,6 +45,7 @@ SetupConfiguration :underleaver, :ul do
     end
 
     param :decrease_simulated_portions, 24
+    param :length_correction_first_sheet_after_insert_sheet, 25
   end
 
   category :drives do

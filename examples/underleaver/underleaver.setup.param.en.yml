@@ -160,6 +160,15 @@ en:
             Increasing this parameter by 10 can (depending on sheet length and conveyor velocity)
             reduce the number of simulated portions between 10 and 20 percent.
 
+  length_correction_first_sheet_after_insert_sheet:
+    name: "Length correction for first sheet after 'Insert Paper' [mm]"
+    comment:  |
+          Correction for length of first sheet after insert paper.
+          A constant length difference of first sheet after insert paper can be compensated with this value.
+          Subsequent 'insert paper' operations will use this correction value for sheet positioning.
+
+          Value is given in millimeter.
+
   paper_roll_drive_selection:
     name:  "Paper roll drive - Select/Deselect"
     comment: &COMMON_DRIVE_CONFIG "Unit´s Place: 'Select/Deselect drive'\n

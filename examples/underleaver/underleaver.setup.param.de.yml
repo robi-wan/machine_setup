@@ -156,6 +156,17 @@ de:
             Eine Erhöhung des Wertes um 10 kann (in Abhängigkeit von Blattlänge und Bandgeschwindigkeit)
             zu einer Reduktion der simulierten Portionen zwischen 10 und 20 Prozent führen.
 
+  length_correction_first_sheet_after_insert_sheet:
+    name: "Längenkorrektur für erstes Blatt nach 'Papier einlegen' [mm]"
+    comment:  |
+          Korrekturwert für die Länge des ersten Blattes nach dem Papier einlegen.
+          Wenn die Länge des ersten Blattes nach dem Papier einlegen um einen
+          konstanten Wert abweichen sollte, kann über diesen Parameter die fehlende Länge
+          eingegeben werden - anschließend wird dieser Korrekturwert beim Positionieren
+          der Folie nach dem Papier einlegen verwendet.
+
+          Der Wert wird in Millimeter angegeben.
+
   paper_roll_drive_selection:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
     comment: &COMMON_DRIVE_CONFIG | 
