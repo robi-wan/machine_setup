@@ -46,6 +46,7 @@ SetupConfiguration :underleaver, :ul do
 
     param :decrease_simulated_portions, 24
     param :length_correction_first_sheet_after_insert_sheet, 25
+    param :dancer_pressure_algorithm, 26
   end
 
   category :drives do

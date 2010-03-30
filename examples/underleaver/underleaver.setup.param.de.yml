@@ -167,6 +167,22 @@ de:
 
           Der Wert wird in Millimeter angegeben.
 
+  dancer_pressure_algorithm:
+    name: "Algorithmus für die Druckberechnung des Tänzers"
+    comment: |
+          Mit diesem Parameter läßt sich der Algorithmus für die Druckberechnung des Tänzers festlegen.
+          Mit dem berechneten Druck wird der Tänzer nach unten bewegt.
+          Folgende Werte werden unterstützt:
+
+
+          0: Lineare Gleichung
+          1: Quadratische Gleichung
+          2: Polynom 5. Grades
+
+
+          Außer dem Algorithmus haben die Werte für den oberen und unteren Teachpunkt des Tänzers sowie der
+          maximale Druck des Druckreglers Einfluß auf die Tänzerbewegung.
+
   paper_roll_drive_selection:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
     comment: &COMMON_DRIVE_CONFIG | 

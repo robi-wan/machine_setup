@@ -169,6 +169,22 @@ en:
 
           Value is given in millimeter.
 
+  dancer_pressure_algorithm:
+    name: "Algorithm for pressure calculation of dancer"
+    comment: |
+          This parameter configures the algorithm used for pressure calculation of dancer.
+          The dancer will be moved down with the calculated pressure.
+          These values are possible:
+
+
+          0: Linear equation
+          1: Quadratic equation
+          2: Polynomial of 5th degree
+
+          
+          Besides the used algorithm the values for lower and upper loop position and maximum pressure of
+          pressure regulator influence dancer motion.
+
   paper_roll_drive_selection:
     name:  "Paper roll drive - Select/Deselect"
     comment: &COMMON_DRIVE_CONFIG "Unit´s Place: 'Select/Deselect drive'\n
