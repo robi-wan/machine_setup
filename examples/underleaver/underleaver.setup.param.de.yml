@@ -183,6 +183,17 @@ de:
           Außer dem Algorithmus haben die Werte für den oberen und unteren Teachpunkt des Tänzers sowie der
           maximale Druck des Druckreglers Einfluß auf die Tänzerbewegung.
 
+  blade_rotate_proof_installable:
+    name: "Messer verdrehsicher einbaubar"
+    comment: |
+          Gibt Auskunft darüber, ob die Messerwelle verdrehsicher einbaubar ist.
+
+
+          0: Nein, die Messerwelle ist nicht verdrehsicher einbaubar. Sie kann um 180 Grad
+             versetzt wieder eingebaut werden. Nach dem Senken der Schneideinheit ist eine Referenzfahrt notwendig.
+          1: Ja, die Messerwelle ist verdrehsicher einbaubar.
+             Nach dem Senken der Schneideinheit ist keine Referenzfahrt notwendig.
+
   paper_roll_drive_selection:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
     comment: &COMMON_DRIVE_CONFIG | 

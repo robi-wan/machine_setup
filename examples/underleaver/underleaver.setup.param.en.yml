@@ -185,6 +185,17 @@ en:
           Besides the used algorithm the values for lower and upper loop position and maximum pressure of
           pressure regulator influence dancer motion.
 
+  blade_rotate_proof_installable:
+    name: "Blade rotate-proof installable"
+    comment: |
+          Is the blade rotate-proof installabel?
+
+
+          0: No, blade is not rotate-proof installable. It can be installed with a rotation of 180 degree.
+             After lowering the cutting unit the drives need to find their reference positions.
+          1: Yes, blade is rotate-proof installable.
+             After lowering the cutting unit the drives does not need to find their reference positions.
+
   paper_roll_drive_selection:
     name:  "Paper roll drive - Select/Deselect"
     comment: &COMMON_DRIVE_CONFIG "Unit´s Place: 'Select/Deselect drive'\n

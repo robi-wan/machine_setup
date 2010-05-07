@@ -1,3 +1,7 @@
+# install java http://java.sun.com/javase/downloads/index.jsp
+# install jruby http://jruby.org/download
+# call jruby -S gem install machine_setup
+# call setup_config_gen <this file>
 SetupConfiguration :underleaver, :ul do
 
   setting do
@@ -47,6 +51,7 @@ SetupConfiguration :underleaver, :ul do
     param :decrease_simulated_portions, 24
     param :length_correction_first_sheet_after_insert_sheet, 25
     param :dancer_pressure_algorithm, 26
+    param :blade_rotate_proof_installable, 27
   end
 
   category :drives do
