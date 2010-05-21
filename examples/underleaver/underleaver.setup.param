@@ -52,6 +52,7 @@ SetupConfiguration :underleaver, :ul do
     param :length_correction_first_sheet_after_insert_sheet, 25
     param :dancer_pressure_algorithm, 26
     param :blade_rotate_proof_installable, 27
+    param :blade_velocity_ratio, 28    
   end
 
   category :drives do

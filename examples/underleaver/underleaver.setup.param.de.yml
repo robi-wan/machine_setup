@@ -194,6 +194,22 @@ de:
           1: Ja, die Messerwelle ist verdrehsicher einbaubar.
              Nach dem Senken der Schneideinheit ist keine Referenzfahrt notwendig.
 
+  blade_velocity_ratio:
+    name: "Geschwindigkeitsverhältnis Band-Messer [%]"
+    comment: |
+          Einstellmöglichkeit für das Vehältnis der Geschwindigkeiten zwischen Band und Messer.
+          Angabe wird als Prozent interpretiert, um die sich das Messer beim Schneiden schneller drehen
+          soll als das Band.
+          Werte kleiner 30 werden ignoriert.
+          Nach oben wird sichergestellt, das die maximale Messergeschwindigkeit nicht überschritten wird.
+
+
+          Beispiel: Ein Wert von 30 bedeutet, dass sich das Messer 30 Prozent schneller dreht als das Band.
+          Bei einem ausreichend großem Wert - z.B. 2000 - würde sich das Messer immer mit maximaler Geschwindigkeit drehen.
+
+
+          Standard: 30.
+
   paper_roll_drive_selection:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
     comment: &COMMON_DRIVE_CONFIG | 

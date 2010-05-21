@@ -196,6 +196,23 @@ en:
           1: Yes, blade is rotate-proof installable.
              After lowering the cutting unit the drives does not need to find their reference positions.
 
+  blade_velocity_ratio:
+    name: "Velocity Ratio conveyor vs. blade [%]"
+    comment: |
+          This parameter configures the velocity ratio between conveyor and blade.
+          Value is given in percent.
+          Angabe wird als Prozent interpretiert, um die sich das Messer beim Schneiden schneller drehen
+          soll als das Band.
+          Values smaller than 30 will be ignored.
+          The maximum blade velocity is always respected.
+
+
+          Example: If value is 30, blade's velocity during cut is 30 percent higher than conveyor's velocity.
+          In order to let the blade cut with maximum velocity a large value - like 2000 - is needed.
+
+
+          Default: 30.
+
   paper_roll_drive_selection:
     name:  "Paper roll drive - Select/Deselect"
     comment: &COMMON_DRIVE_CONFIG "Unit´s Place: 'Select/Deselect drive'\n
