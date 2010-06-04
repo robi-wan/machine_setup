@@ -17,6 +17,7 @@ SetupConfiguration :underleaver, :ul do
 
   category :common do
     param :underleaver_config, 1
+    param :config_safety_circuit, 14
     param :distance_photo_sensor_from_start, 9
     param :distance_photo_sensor, 2
     param :distance_blade_to_sheet_drive, 3

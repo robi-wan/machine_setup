@@ -109,6 +109,20 @@ en:
               1: Negative continuously signal - enables by 0V\n
               2: Positiv continuously signal - enables by 12V"
 
+  config_safety_circuit:
+    name: "Configuration of safety circuit"
+    comment: |
+              Configures elements of the safety circuit of the machine.
+
+
+              Configuration of input Emergency-stop
+              0: not configured
+              1: Emergency-stop is installed, Low-Signal means Emergency-stop is pressed
+              2: Emergency-stop is installed, High-Signal means Emergency-stop is pressed
+              3: Input is interpreted as ready signal of main supply - Low-Signal means supply is not ready
+              4: Input is interpreted as ready signal of main supply - High-Signal means supply is not ready
+
+
   source_parameter_working_velocity:
     name:     "Parametersource for conveyor velocity"
     comment:  |
