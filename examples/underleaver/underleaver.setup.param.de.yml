@@ -108,10 +108,10 @@ de:
               Mit Hilfe dieses Parameters lassen sich die Elemente im Sicherheitskreis der Maschine konfigurieren. Es werden nur Meldungen von angewählten Sicherheitskreiselementen ausgegeben.
 
 
-              Konfiguration des Eingangssignals NotAus
+              Konfiguration des Eingangssignals NotHalt
               0: nicht konfiguriert
-              1: eigener Not-Aus ist angebaut, Low-Signal bedeutet Not-Aus ist gedrückt
-              2: eigener Not-Aus ist angebaut, High-Signal bedeutet Not-Aus ist gedrückt
+              1: eigener Not-Halt ist angebaut, Low-Signal bedeutet Not-Halt ist gedrückt
+              2: eigener Not-Halt ist angebaut, High-Signal bedeutet Not-Halt ist gedrückt
               3: Eingang wird als 'Sicherheitskreis bereit' der leitenden Anlage bewertet - Low-Signal bedeutet Anlage nicht bereit
               4: Eingang wird als 'Sicherheitskreis bereit' der leitenden Anlage bewertet - High-Signal bedeutet Anlage nicht bereit
 
