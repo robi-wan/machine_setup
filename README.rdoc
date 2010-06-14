@@ -14,8 +14,6 @@ You can install the gem with
   
   gem install machine_setup
 
-This gem depends on 'i18n'.
-
 == Usage
 
 Describe your setup configuration for a machine (including translations for supported languages) and set the main
