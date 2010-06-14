@@ -6,6 +6,9 @@ de:
   drives:
     name: "Antriebe Underleaver"
 
+  role_configuration:
+    name: "Rollenerkennung"
+
   #parameter
   underleaver_config:
     name:  "Underleaver virtuell=1 / real=0"
@@ -24,19 +27,19 @@ de:
               1xx: Steuerung simuliert alle Antriebe
 
   distance_photo_sensor:
-    name:  "Weg Lichtschranke bis Blattaustritt"
-    comment:  "Abstand der Lichtschranke vom Blattaustritt. [mm]"
+    name:  "Weg Lichtschranke bis Blattaustritt [mm]"
+    comment:  "Abstand der Lichtschranke vom Blattaustritt. Angabe erfolgt in Millimeter."
 
   distance_photo_sensor_from_start:
-    name:   "Weg Bandbeginn bis Lichtschranke"
-    comment:  "Abstand der Lichtschranke vom Bandbeginn. [mm]"
+    name:   "Weg Bandbeginn bis Lichtschranke [mm]"
+    comment:  "Abstand der Lichtschranke vom Bandbeginn. Angabe erfolgt in Millimeter."
 
   distance_blade_to_sheet_drive:
-    name: "Weg Schneide bis Blattantrieb"
+    name: "Weg Schneide bis Blattantrieb [mm]"
     comment: ""
 
   distance_sheet_drive_to_sheet_exit:
-    name:  "Weg Blattantrieb bis Blattaustritt"
+    name:  "Weg Blattantrieb bis Blattaustritt [mm]"
     comment:  ""
 
   time_for_cutting_unit:
@@ -56,13 +59,13 @@ de:
               (Standard: 1)
 
   paper_jam_detection_signal_length:
-    name:  "Signaldauer für Papierstau"
+    name:  "Signaldauer für Papierstau [ms]"
     comment:  "Zeitdauer, ab der ein durchgängiges Signal vom Papierstausensor als Papierstau interpretiert wird.\n
                 Die Angabe erfolgt in Millisekunden, d.h. 5000 entspricht 5 Sekunden.\n
                 Bei Angabe von 0 wird die Zeitdauer programmintern festgelegt."
 
   paper_jam_detection_check_time:
-    name:  "Papierstauüberprüfungszeit nach 'letztem' Produkt"
+    name:  "Papierstauüberprüfungszeit nach 'letztem' Produkt [ms]"
     comment:  "Die Überprüfung, ob ein Papierstau vorliegt, erfolgt bei Beginn der Förderung des nächsten Blattes.
               Kommt nach dem aktuellen Produkt eine Weile kein Produkt mehr, so ermöglicht dieser Parameter die Einstellung
               der Zeitdauer, nach deren Ablauf eine Papierstauüberprüfung vorgenommen wird.\n
@@ -89,7 +92,7 @@ de:
               2: positives Dauersignal - Freigabe bei 12V"
 
   ext_enabling_following_unit_delay:
-    name:  "Konfiguration der Verzögerung NE"
+    name:  "Konfiguration der Verzögerung NE [ms]"
     comment:  "Konfiguration der Verzögerung nach Freigabesignal. [in ms]\n
               \n
               X: Der Wert X bestimmt die Zeit, die der Underleaver wartet nachdem das Freigabesignal empfangen wurde. Erst nach Ablauf dieser Zeit fördert der Underleaver weiter."
@@ -147,7 +150,7 @@ de:
               Standard: 1
   
   factor_activation_point_roll_bracket:
-    name:   "Faktor Aktivierungspunkt Rollenbremse"
+    name:   "Faktor Aktivierungspunkt Rollenbremse [%]"
     comment: |
               Faktor für den Aktivierungspunkt der Rollenbremse.
               
@@ -223,6 +226,53 @@ de:
 
 
           Standard: 30.
+
+  role_diameter_teached_maximum:
+    name: "Größter geteachter Rollendurchmesser [mm]"
+    comment: |
+          Konfiguration für die Erkennung des Rollendurchmessers.
+
+          Dieser Wert gibt den größten Rollendurchmesser an, der beim Einrichten der Ultraschallsensoren verwendet wurde.
+          Die Angabe des Wertes erfolgt in Millimeter.
+
+
+          Achtung: Dieser Wert begrenzt die Erkennung der Rollendurchmesser - größere Rollendurchmesser können nicht erkannt werden.
+
+  role_diameter_teached_minimum:
+    name: "Kleinster geteachter Rollendurchmesser [mm]"
+    comment: |
+          Konfiguration für die Erkennung des Rollendurchmessers.
+
+          Dieser Wert gibt den kleinsten Rollendurchmesser an, der beim Einrichten der Ultraschallsensoren verwendet wurde.
+          Die Angabe des Wertes erfolgt in Millimeter.
+
+
+          Achtung: Dieser Wert begrenzt die Erkennung der Rollendurchmesser - kleinere Rollendurchmesser können nicht erkannt werden.
+
+  role_diameter_message_level:
+    name: "Rollenendemeldung"
+    comment: |
+          Konfiguration für die Erkennung des Rollenendes.
+          Hiermit kann die Anzeige der Rolleendemeldung eingeschaltet werden.
+
+
+          0: Es soll keine Meldung beim Erreichen des Rollenendes angezeigt werden.
+
+          1: Warnung: Es soll eine Meldung bei Erreichen des Rollenendes angezeigt werden.
+             Es wird eine quittierbare Meldung angezeigt, die Maschine läuft jedoch weiter.
+
+          2: Fehler: Es soll eine Meldung bei Erreichen des Rollenendes angezeigt werden.
+             Es wird eine quittierbare Meldung angezeigt, die Maschine stoppt sofort.   
+
+
+  role_diameter_limit:
+    name: "Grenze für Rollenendemeldung [mm]"
+    comment: |
+          Konfiguration für die Erkennung des Rollenendes.
+
+
+          Dieser Wert gibt den Rollendurchmesser an, ab dem ein Rollenende gemeldet werden soll.
+          Die Angabe erfolgt in Millimeter.
 
   paper_roll_drive_selection:
     name:  "Bahnantrieb abgewählt=0/Servo=1/FU=2"
@@ -321,7 +371,7 @@ de:
     comment:  *COMMON_GEAR_OUT
 
   transport_drive_belt_length:
-    name:  "Portionsauflageband Bandlänge"
+    name:  "Portionsauflageband Bandlänge [mm]"
     comment:  "Gesamte Bandlänge des Portionsauflagebandes.\nAngabe erfolgt in Millimeter."
 
   infeed_drive_selection:
@@ -341,7 +391,7 @@ de:
     comment:  *COMMON_GEAR_OUT
 
   infeed_drive_belt_length:
-    name:  "Einlegeband Bandlänge"
+    name:  "Einlegeband Bandlänge [mm]"
     comment:  | 
               Gesamte Bandlänge des Einlegebandes.
               Angabe erfolgt in Millimeter.

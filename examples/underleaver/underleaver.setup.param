@@ -56,6 +56,17 @@ SetupConfiguration :underleaver, :ul do
     param :blade_velocity_ratio, 28    
   end
 
+  category :role_configuration do
+
+    param :role_diameter_teached_maximum, 29
+    param :role_diameter_teached_minimum, 30
+    param :role_diameter_message_level, 31
+    param :role_diameter_limit, 32 do
+      depends_on :role_diameter_message_level
+    end
+
+  end
+
   category :drives do
 
     # paper roll drive

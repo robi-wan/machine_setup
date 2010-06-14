@@ -7,6 +7,9 @@ en:
   drives:
     name: "Drives Underleaver"
 
+  role_configuration:
+    name: "Role Detection"
+
   #parameter
   underleaver_config:
     name:  "Underleaver virtual=1 / real=0"
@@ -22,31 +25,31 @@ en:
               1xx: The controller simulates all drives."
 
   distance_photo_sensor:
-    name:  "Distance of photo sensor to paper exit"
+    name:  "Distance of photo sensor to paper exit [mm]"
     comment:  "Configuration of photo sensor.\n
               \n
                 X: Describes the distance [mm] from photo sensor to the paper exit."
 
   distance_photo_sensor_from_start:
-    name:   "Distance of photo sensor from start"
+    name:   "Distance of photo sensor from start [mm]"
     comment:  "Configuration of photo sensor.\n
               \n
                 X: Describes the distance [mm] to photo sensor from start of transport conveyor."
 
   distance_blade_to_sheet_drive:
-    name:  "Distance of blade"
+    name:  "Distance of blade [mm]"
     comment:  "Configuration of Blade\n
                \n
               X: Describes the distance [mm] from blade to the paper feed drive."
 
   distance_sheet_drive_to_sheet_exit:
-    name:  "Distance of sheet drive"
+    name:  "Distance of sheet drive [mm]"
     comment:  "Configuration of foil drive\n
               \n
               X: Describes the distance [mm] from the paper feed drive to paper exit."
 
   time_for_cutting_unit:
-    name:  "Time of cutting unit"
+    name:  "Time of cutting unit [ms]"
     comment:  "Configuration of cutting unit.\n
               \n
                X: Describes the time [ms] to lift up the cutting unit."
@@ -59,7 +62,7 @@ en:
               1: Select the paper jam monitoring."
 
   paper_jam_detection_signal_length:
-    name:  "Paper jam signal duration"
+    name:  "Paper jam signal duration [ms]"
     comment:  "Configuration of paper jam sensor\n
               \n
               X: Describes the signal duration [ms] that defines a paper jam.\n
@@ -68,7 +71,7 @@ en:
               Value is given in milliseconds."
 
   paper_jam_detection_check_time:
-    name:  "Paper jam check time after 'last' product"
+    name:  "Paper jam check time after 'last' product [ms]"
     comment:  "Configuration of paper jam sensor\n
               \n
               Paper jam checks for the current product are executed at the beginning of the next product.\n
@@ -96,7 +99,7 @@ en:
               2: Positiv continuously signal - enables by 12V"
 
   ext_enabling_following_unit_delay:
-    name:  "Configuration of enable delay"
+    name:  "Configuration of enable delay [ms]"
     comment:  "Configuration of external behavior (downstream)\n
               \n
               X: Describes the time [ms] to wait for reacting to the enabling signal. Not till then the underleaver continuous conveyance."
@@ -152,7 +155,7 @@ en:
 
   
   factor_activation_point_roll_bracket:
-    name:   "Factor activation point rollbracket"
+    name:   "Factor activation point rollbracket [%]"
     comment: |
              Factor for activation point of roll brake.
              
@@ -226,6 +229,52 @@ en:
 
 
           Default: 30.
+
+  role_diameter_teached_maximum:
+    name: "Maximum teached Role Diameter [mm]"
+    comment: |
+          Configuration of role diameter detection.
+
+          This value indicates the largest role diameter, which was used when configuring the ultrasonic sensors.
+          The value is given in millimeters.
+
+
+          Note: This value limits the detection of the role diameter - diameter greater than this value can not be detected.
+
+
+  role_diameter_teached_minimum:
+    name: "Minimum teached Role Diameter [mm]"
+    comment: |
+          Configuration of role diameter detection.
+
+          This value is the smallest role diameter, which was used when configuring the ultrasonic sensors. 
+          The value is given in millimeters.
+
+          Note: This value limits the detection of the role diameter - diameter smaller than this value can not be detected.
+
+  role_diameter_message_level:
+    name: "Role End Message"
+    comment: |
+          Configuration of role end detection.
+          Displaying a message atth end of the role can be switched on.
+
+
+          0: There is no message to be displayed when reaching the role end .
+
+          1: Warning: There will be a message displayed when reaching the role end.
+             You receive a message, the machine continues to run.
+
+          2: Error: There will be a message displayed when reaching the role end.
+             You receive a message, the machine stops immediately.
+
+  role_diameter_limit:
+    name: "Limit for Role End Message [mm]"
+    comment: |
+          Configuration of role end detection.
+
+
+          This value specifies the role diameter which triggers a role end message.
+          The value is given in millimeters.
 
   paper_roll_drive_selection:
     name:  "Paper roll drive - Select/Deselect"
