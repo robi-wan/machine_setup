@@ -256,14 +256,20 @@ de:
           Hiermit kann die Anzeige der Rolleendemeldung eingeschaltet werden.
 
 
-          0: Es soll keine Meldung beim Erreichen des Rollenendes angezeigt werden.
+          Einerstelle: 'Meldung anzeigen'
+          x0: Es soll keine Meldung beim Erreichen des Rollenendes angezeigt werden.
 
-          1: Warnung: Es soll eine Meldung bei Erreichen des Rollenendes angezeigt werden.
-             Es wird eine quittierbare Meldung angezeigt, die Maschine läuft jedoch weiter.
+          x1: Warnung: Es soll eine Meldung bei Erreichen des Rollenendes angezeigt werden.
+              Es wird eine quittierbare Meldung angezeigt, die Maschine läuft jedoch weiter.
 
-          2: Fehler: Es soll eine Meldung bei Erreichen des Rollenendes angezeigt werden.
-             Es wird eine quittierbare Meldung angezeigt, die Maschine stoppt sofort.   
+          x2: Fehler: Es soll eine Meldung bei Erreichen des Rollenendes angezeigt werden.
+              Es wird eine quittierbare Meldung angezeigt, die Maschine stoppt sofort.
 
+
+          Zehnerstelle: 'Freigabe vorgelagerte Einheit'
+          0x: Die Freigabe an die vorgelagerte Einheit wird nicht beeinflußt.
+          1x: Die Freigabe an die vorgelagerte Einheit wird im Meldungsfall weggenommen.
+              Diese Einstellung wird nur wirksam in Kombination mit dem Wert '1' an der Einerstelle.
 
   role_diameter_limit:
     name: "Grenze für Rollenendemeldung [mm]"

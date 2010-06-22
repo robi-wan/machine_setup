@@ -259,13 +259,20 @@ en:
           Displaying a message atth end of the role can be switched on.
 
 
-          0: There is no message to be displayed when reaching the role end .
+          Unit´s Place: 'Display Message Level'
+          x0: There is no message to be displayed when reaching the role end .
 
-          1: Warning: There will be a message displayed when reaching the role end.
-             You receive a message, the machine continues to run.
+          x1: Warning: There will be a message displayed when reaching the role end.
+              You receive a message, the machine continues to run.
 
-          2: Error: There will be a message displayed when reaching the role end.
-             You receive a message, the machine stops immediately.
+          x2: Error: There will be a message displayed when reaching the role end.
+              You receive a message, the machine stops immediately.
+
+
+          Ten's Place: 'Enable previous unit'
+          0x: Enable to previous unit will not be manipulated.
+          1x: When reaching role end enable to previous unit is disabled.
+              This setting works only with value '1' at unit's place.
 
   role_diameter_limit:
     name: "Limit for Role End Message [mm]"
