@@ -78,9 +78,10 @@ module SetupConfiguration::Generator
 
     #
     # Zeilenumbrüche werden mit '§§' dargestellt
+    # \302\247 - oktale Darstellung von §
     #
     def escape(message)
-      message.gsub(/\n\s?/, '§§')
+      message.gsub(/\n\s?/, '§§' )
     end
 
   end
@@ -105,7 +106,7 @@ module SetupConfiguration::Generator
       end
       #TODO compute value for max_number_parameters_per_tab of value maximum_numbers_per_category
       max_number_parameters_per_tab=50
-      [depends, machine_type, number].collect(){ |arr| (arr%(max_number_parameters_per_tab)).collect(){|a| prepare(a)}}
+      [depends, machine_type, number].collect(){ |arr| (arr.in_groups_of(max_number_parameters_per_tab, false)).collect(){|a| prepare(a)}}
     end
 
     :private
