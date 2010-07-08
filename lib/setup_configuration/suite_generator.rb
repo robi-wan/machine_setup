@@ -17,7 +17,7 @@ module SetupConfiguration::Generator
     attr_accessor :output
 
     def categories
-      suite.categories.keys()
+      suite.categories.keys().sort()
     end
 
     # Support templating of member data.
@@ -43,8 +43,8 @@ module SetupConfiguration::Generator
     end
 
 
-    def cat_name(key)
-      name, desc=@translator.translate(key, @lang)
+    def cat_name(cat)
+      name, desc=@translator.translate(cat.name, @lang)
       name
     end
 

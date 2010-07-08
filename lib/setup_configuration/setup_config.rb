@@ -19,10 +19,12 @@ class SetupConfiguration::Suite
   attr_accessor :settings
   attr_accessor :name
   attr_accessor :abbreviation
+  attr_accessor :next_category_number
 
   def initialize
     self.categories= Hash.new { |hash, key| hash[key] = [] }
     self.settings= SetupConfiguration::Setting.new()
+    self.next_category_number = 0
   end
 
   def category(category, &category_params)
@@ -32,16 +34,33 @@ class SetupConfiguration::Suite
       #this code calls instance_eval and delivers the context object
       parameter_factory = SetupConfiguration::ParameterFactory.new()
       parameter_factory.instance_eval(&category_params)
-      categories[category] << parameter_factory.params()
+      cat = category_by_name(category)
+      categories[cat] << parameter_factory.params()
 
       # this .instance_eval call returns the last value of the last executed code (an array from method param in Parameters)
       #categories[category] << SetupConfiguration::Parameters.new().instance_eval(&category_params)
 
       # flatten is needed: Parameters#param returns an array which is inserted in an array...
-      categories[category].flatten!
+      categories[cat].flatten!
     else
       puts "WARNING: Empty category '#{category}' will be ignored. "
     end
+  end
+
+  def category_by_name(name)
+    cat = self.categories.keys.select(){|c| c.name.eql?(name)}.first
+    unless cat then
+      cat = SetupConfiguration::Category.new
+      cat.number = self.next_category_number!
+      cat.name = name
+    end
+    cat
+  end
+
+  def next_category_number!
+    number = next_category_number
+    self.next_category_number+=1
+   number
   end
 
   def setting(&setting_params)
@@ -162,6 +181,24 @@ class SetupConfiguration::Setting
   end
   
 end
+
+class SetupConfiguration::Category
+  include Enumerable
+
+  attr_accessor :number
+  attr_accessor :name
+  attr_accessor :parameter
+
+  def initialize()
+    @parameter = []
+  end
+
+  def <=>(parameter)
+    self.number <=> parameter.number
+  end
+
+end
+
 
 class SetupConfiguration::ParameterFactory
 
