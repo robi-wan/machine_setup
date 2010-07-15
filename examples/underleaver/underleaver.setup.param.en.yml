@@ -218,8 +218,7 @@ en:
     comment: |
           This parameter configures the velocity ratio between conveyor and blade.
           Value is given in percent.
-          Angabe wird als Prozent interpretiert, um die sich das Messer beim Schneiden schneller drehen
-          soll als das Band.
+          Value determines how much faster blade rotates during cut.
           Values smaller than 30 will be ignored.
           The maximum blade velocity is always respected.
 
@@ -234,6 +233,7 @@ en:
     name: "Maximum teached Role Diameter [mm]"
     comment: |
           Configuration of role diameter detection.
+
 
           This value indicates the largest role diameter, which was used when configuring the ultrasonic sensors.
           The value is given in millimeters.
