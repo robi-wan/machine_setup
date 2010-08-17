@@ -53,7 +53,12 @@ SetupConfiguration :underleaver, :ul do
     param :length_correction_first_sheet_after_insert_sheet, 25
     param :dancer_pressure_algorithm, 26
     param :blade_rotate_proof_installable, 27
-    param :blade_velocity_ratio, 28    
+    param :blade_velocity_ratio, 28
+    param :sheet_retraction, 33
+    param :paper_feed_continuous_motion, 34
+    param :paper_feed_velocity_ratio, 35 do
+        depends_on :paper_feed_continuous_motion
+    end
   end
 
   category :role_configuration do

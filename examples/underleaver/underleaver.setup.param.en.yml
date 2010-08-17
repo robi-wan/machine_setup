@@ -229,6 +229,34 @@ en:
 
           Default: 30.
 
+  sheet_retraction:
+    name: "Sheet Retraction"
+    comment: |
+          Retraction of sheet after cut?
+
+
+          0: No, sheet will not be retracted after cut.
+             Better performance, higher chances of paper jams.
+          1: Yes, sheet will be retracted after cut.
+             Lower performance, lower chances of paper jams.
+
+  paper_feed_continuous_motion:
+    name: "Continuous Motion of paper feed"
+    comment: |
+          This parameters determines whether paper feed drive will continuously move or just during a sheet transport.
+
+          0: No, paper feed will only move during sheet transport.
+             If there is no product then paper feed will not move.
+          1: Yes, paper feed continuously moves. If coneyor moves then paper feed will also move.
+
+  paper_feed_velocity_ratio:
+    name: "Velocity Ratio conveyor vs. paper feed [%]"
+    comment: |
+          This parameter configures the velocity ratio between conveyor and paper feed.
+          Value is given in percent.
+          Value determines how much faster paper feed runs.
+          Values between 0 and 30 are valid.
+
   role_diameter_teached_maximum:
     name: "Maximum teached Role Diameter [mm]"
     comment: |

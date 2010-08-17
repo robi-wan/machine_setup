@@ -227,6 +227,37 @@ de:
 
           Standard: 30.
 
+  sheet_retraction:
+    name: "Folienrückzug"
+    comment: |
+          Soll die Folie nach dem Schneiden zurückgezogen werden?
+
+
+          0: Nein, die Folie wird nach dem Schneiden nicht zurückgezogen.
+             Höhere Leistung, höhere Papierstaugefahr.
+          1: Ja, die Folie wird nach dem Schneiden zurückgezogen.
+             Geringere Leistung, geringere Papierstaugefahr.
+
+  paper_feed_continuous_motion:
+    name: "Ständige Bewegung des Blattantriebes"
+    comment: |
+          Soll der Blattantrieb sich ständig drehen?
+
+          0: Nein, der Blattantrieb bewegt sich nur während der Phase der Blattförderung.
+             Kommt keine Portion, bewegt sich der Blattantrieb nicht.
+          1: Ja, der Blattantrieb bewegt sich ständig, d.h. sobald sich das Band bewegt, bewegt sich auch der Blattantrieb.
+
+  paper_feed_velocity_ratio:
+    name: "Geschwindigkeitsverhältnis Band-Blattantrieb [%]"
+    comment: |
+          Einstellmöglichkeit für das Vehältnis der Geschwindigkeiten zwischen Band und Blattantrieb.
+          Angabe wird als Prozent interpretiert, um die sich der Blattantreib schneller drehen
+          soll als das Band.
+          Gültige Werte liegen zwischen 0 und 30.
+
+
+          Beispiel: Ein Wert von 30 bedeutet, dass sich der Blattantrieb 30 Prozent schneller dreht als das Band.
+
   role_diameter_teached_maximum:
     name: "Größter geteachter Rollendurchmesser [mm]"
     comment: |
