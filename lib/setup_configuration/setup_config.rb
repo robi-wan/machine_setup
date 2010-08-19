@@ -34,6 +34,7 @@ module SetupConfiguration
         parameter_factory = ParameterFactory.new()
         parameter_factory.instance_eval(&category_params)
         cat = category_by_name(category)
+        cat.parameter_refs = parameter_factory.param_refs().flatten
         categories[cat] << parameter_factory.params()
 
         # this .instance_eval call returns the last value of the last executed code (an array from method param in Parameters)
@@ -130,6 +131,25 @@ module SetupConfiguration
       end
     end
 
+    #TODO problem param refs are not inserted at point of definition...
+    def assign_param_refs
+      self.categories.each_key() do |cat|
+
+          cat.parameter_refs.each() do |ref|
+            param = self.find_param(ref.key)
+            if param
+              ref.assign(param)
+              self.categories[cat] << ref
+            else
+              throw RuntimeError.new("ERROR: reference to unknown parameter with key '#{p.key}'")
+            end
+
+          end
+      end
+
+      @parameters = nil
+    end
+
   end
 
 
@@ -187,6 +207,7 @@ module SetupConfiguration
     attr_accessor :number
     attr_accessor :name
     attr_accessor :parameter
+    attr_accessor :parameter_refs
 
     def initialize()
       @parameter = []
@@ -202,9 +223,11 @@ module SetupConfiguration
   class ParameterFactory
 
     attr_accessor :params
+    attr_accessor :param_refs
 
     def initialize
       self.params= []
+      self.param_refs= []
     end
 
     def param(parameter, number, &parameter_def)
@@ -213,6 +236,11 @@ module SetupConfiguration
       p = Parameter.new(parameter, number)
       p.instance_eval(&parameter_def) if parameter_def
       params << p
+    end
+
+    def param_ref(parameter)
+      p = ParameterReference.new(parameter)
+      param_refs << p
     end
 
   end
@@ -247,6 +275,40 @@ module SetupConfiguration
       self.number <=> parameter.number
     end
 
+  end
+
+  class ParameterReference
+    include Enumerable
+
+    attr_reader :key
+
+    def initialize(key)
+      @key = key
+    end
+
+    def assign(parameter)
+      @param = parameter
+    end
+
+    def number
+      #TODO get number of referenced parameter
+      @param.number
+    end
+
+    def machine_type
+      @param.machine_type
+      #TODO get machine type of referenced parameter
+    end
+
+    def dependency
+      #TODO get dependency of referenced parameter
+      @param.dependency
+    end
+
+    def <=>(parameter)
+      self.number <=> parameter.number
+    end
+    
   end
 
   class MachineType

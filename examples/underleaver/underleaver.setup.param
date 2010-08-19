@@ -16,6 +16,10 @@ SetupConfiguration :underleaver, :ul do
   end
 
   category :common do
+
+    param_ref :role_diameter_teached_maximum
+    param_ref :role_diameter_teached_minimum
+
     param :underleaver_config, 1
     param :config_safety_circuit, 14
     param :distance_photo_sensor_from_start, 9
