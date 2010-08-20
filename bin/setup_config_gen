@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 begin
+  trace = ARGV.delete("--trace")
   param_def=ARGV[0]
 
   raise RuntimeError.new("Missing argument: file with parameter definition") if param_def.nil?
@@ -33,9 +34,8 @@ begin
 
   puts("#{File.basename(__FILE__)} completed.")
 rescue Exception => e
-  #puts("Error, program will exit => #{e}!")
   puts(e.message)
-  #puts(e.backtrace().join("\n"))
+  puts(e.backtrace().join("\n")) if trace
   exit(1)
 
 end
