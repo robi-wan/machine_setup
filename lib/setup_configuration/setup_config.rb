@@ -28,13 +28,11 @@ module SetupConfiguration
 
     def category(category, &category_params)
       if category_params then
-  #      puts "executes category in Suite: #{category}"
 
         #this code calls instance_eval and delivers the context object
         parameter_factory = ParameterFactory.new()
         parameter_factory.instance_eval(&category_params)
         cat = category_by_name(category)
-        cat.parameter_refs = parameter_factory.param_refs().flatten
         categories[cat] << parameter_factory.params()
 
         # this .instance_eval call returns the last value of the last executed code (an array from method param in Parameters)
@@ -116,39 +114,37 @@ module SetupConfiguration
         puts "WARNING: parameter number 404 is reserved for machine type. you are using it for '#{p.key}'." if p.number.eql?(404)
         throw RuntimeError.new("ERROR: parameter number '#{p.number}' not supported. Number must be in range #{valid_param_numbers}.") unless valid_param_numbers.member?(p.number)
 
-        if keys.include? p.key
-          throw RuntimeError.new("ERROR: parameter key '#{p.key}' defined more than once")
-        else
-          keys << p.key
-        end
-
-
-        if numbers.include? p.number
-          throw RuntimeError.new("ERROR: parameter number '#{p.number}' defined more than once")
-        else
-          numbers << p.number
-        end
-      end
-    end
-
-    #TODO problem param refs are not inserted at point of definition...
-    def assign_param_refs
-      self.categories.each_key() do |cat|
-
-          cat.parameter_refs.each() do |ref|
-            param = self.find_param(ref.key)
-            if param
-              ref.assign(param)
-              self.categories[cat] << ref
-            else
-              throw RuntimeError.new("ERROR: reference to unknown parameter with key '#{p.key}'")
-            end
-
+        if p.param?
+          if keys.include? p.key
+            raise RuntimeError.new("ERROR: parameter key '#{p.key}' defined more than once")
+          else
+            keys << p.key
           end
-      end
 
+
+          if numbers.include? p.number
+            raise RuntimeError.new("ERROR: parameter number '#{p.number}' defined more than once")
+          else
+            numbers << p.number
+          end
+        else
+          assign_param_ref(p)
+        end#p.param?
+
+      end
+      #force fresh sort of parameters
       @parameters = nil
-    end
+    end#validate_params
+
+    def assign_param_ref(ref)
+        param = self.parameters().select(){|p| p.key.eql?(ref.key) && p.param?}.first
+
+        if param
+          ref.assign(param)
+        else
+          raise RuntimeError.new("ERROR: reference to unknown parameter with key '#{ref.key}'")
+        end
+    end#assign_param_ref
 
   end
 
@@ -207,7 +203,6 @@ module SetupConfiguration
     attr_accessor :number
     attr_accessor :name
     attr_accessor :parameter
-    attr_accessor :parameter_refs
 
     def initialize()
       @parameter = []
@@ -223,15 +218,12 @@ module SetupConfiguration
   class ParameterFactory
 
     attr_accessor :params
-    attr_accessor :param_refs
 
     def initialize
       self.params= []
-      self.param_refs= []
     end
 
     def param(parameter, number, &parameter_def)
-  #    puts "executed param in Parameters: #{parameter}"
       # evaluate given block in Parameter context and return new parameter
       p = Parameter.new(parameter, number)
       p.instance_eval(&parameter_def) if parameter_def
@@ -240,7 +232,7 @@ module SetupConfiguration
 
     def param_ref(parameter)
       p = ParameterReference.new(parameter)
-      param_refs << p
+      params << p
     end
 
   end
@@ -275,6 +267,10 @@ module SetupConfiguration
       self.number <=> parameter.number
     end
 
+    def param?
+      true
+    end
+
   end
 
   class ParameterReference
@@ -284,31 +280,37 @@ module SetupConfiguration
 
     def initialize(key)
       @key = key
+      @param=nil
     end
 
     def assign(parameter)
       @param = parameter
     end
 
+    def assigned?
+      @param
+    end
+
     def number
-      #TODO get number of referenced parameter
-      @param.number
+      assigned? ? @param.number : 1
     end
 
     def machine_type
-      @param.machine_type
-      #TODO get machine type of referenced parameter
+      assigned? ? @param.machine_type : 0
     end
 
     def dependency
-      #TODO get dependency of referenced parameter
-      @param.dependency
+      assigned? ? @param.dependency : :none
     end
 
     def <=>(parameter)
       self.number <=> parameter.number
     end
-    
+
+    def param?
+      false
+    end
+
   end
 
   class MachineType

@@ -9,8 +9,6 @@ def SetupConfiguration(name, abbreviation=name, &block)
   suite.abbreviation=abbreviation
   suite.instance_eval(&block)
   suite.validate_params()
-  #TODO add method for handling param_refs
-  suite.assign_param_refs()
 rescue
   raise
 end

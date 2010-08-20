@@ -202,7 +202,8 @@ class SetupConfiguration::SetupCodeBinding < SetupConfiguration::Generator::Temp
   end
 
   def parameters
-    suite.parameters
+    #TODO use set or something similar
+    suite.parameters.select(){|p| p.param? }
   end
 
   #
