@@ -1,0 +1,81 @@
+# install java http://java.sun.com/javase/downloads/index.jsp
+# install jruby http://jruby.org/download
+# call jruby -S gem install machine_setup
+# call setup_config_gen <this file>
+
+SetupConfiguration :ssm, :ssm do
+
+  setting do
+    min 0..0
+    max 0..0
+    balance_min 700..729
+    balance_max 730..759
+    machine_type :all_machines, 0, 0..999
+    machine_type :ssm_one, 1, 1000..1999
+    machine_type :ssm_two, 2, 2000..2999
+  end
+
+  category :common do
+    param :machine_config, 1
+    param :drive_blade_reference_point, 2
+    param :drive_linear_axis_reference_point, 3
+    param :sensor_height, 4
+    param :sensor_x_distance_to_grinding_point, 5
+    param :grinding_point_height, 6
+  end
+  
+  category :drives do
+
+    param :blade_drive_selection, 310
+    param :blade_drive_distance_revolution, 311 do
+      depends_on :blade_drive_selection
+    end
+    param :blade_drive_gear_in, 312 do
+      depends_on :blade_drive_selection
+    end
+    param :blade_drive_gear_out, 313 do
+      depends_on :blade_drive_selection
+    end
+#    param :blade_drive_length, 314 do
+#      depends_on :blade_drive_selection
+#    end
+    param :blade_drive_motortype, 315 do
+      depends_on :blade_drive_selection
+    end
+
+    param :linear_axis_drive_selection, 320
+    param :linear_axis_drive_distance_revolution, 321 do
+      depends_on :linear_axis_drive_selection
+    end
+    param :linear_axis_drive_gear_in, 322 do
+      depends_on :linear_axis_drive_selection
+    end
+    param :linear_axis_drive_gear_out, 323 do
+      depends_on :linear_axis_drive_selection
+    end
+    param :linear_axis_drive_length, 324 do
+      depends_on :linear_axis_drive_selection
+    end
+    param :linear_axis_drive_motortype, 325 do
+      depends_on :linear_axis_drive_selection
+    end
+
+    param :grinding_angle_drive_selection, 330
+    param :grinding_angle_drive_distance_revolution, 331 do
+      depends_on :grinding_angle_drive_selection
+    end
+    param :grinding_angle_drive_gear_in, 332 do
+      depends_on :grinding_angle_drive_selection
+    end
+    param :grinding_angle_drive_gear_out, 333 do
+      depends_on :grinding_angle_drive_selection
+    end
+    param :grinding_angle_drive_length, 334 do
+      depends_on :grinding_angle_drive_selection
+    end
+    param :grinding_angle_drive_motortype, 335 do
+      depends_on :grinding_angle_drive_selection
+    end
+  end
+
+end

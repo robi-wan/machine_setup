@@ -1,0 +1,148 @@
+de:
+
+  common:
+    name:       "Allgemeines"
+
+  drives:
+    name:       "Antriebe SSM"
+
+  machine_config:
+    name:       "Maschine virtuell=1 / real=0"
+    comment:    |
+              Einerstelle:
+              xx0: Steuerung mit realen Achsen und Schutzhauben
+              xx1: Steuerung simuliert alle nicht angewählten Achsen und Schutzhauben
+              xx2: Touch baut keine Verbindung zur Steuerung auf
+
+
+              Zehnerstelle:
+              x0x: CanBus einschalten
+              x1x: CanBus ausschalten
+
+
+              Hunderterstelle:
+              1xx: Steuerung simuliert alle Antriebe (auch bei Anwahl)
+
+  grinding_point_height:
+    name:       "Höhe des Schleifpunktes [mm]"
+    comment:    |
+            Höhe der Schleifscheibe über der 'Nullinie' - horitontale Linie durch den Messerdrehpunkt.
+            Angabe erfolgt in Zehntelmillimeter.
+
+
+            Bsp: Die Angabe 400 wird als 40 Millimeter interpretiert.
+
+  drive_blade_reference_point:
+    name:       "Messer Referenzpunkt [°]"
+    comment:    "Einstellung des Referenz-Initiators für die Messerachse"
+
+  drive_linear_axis_reference_point:
+    name:       "Linearachse Referenzpunkt [mm]"
+    comment:    |
+              Abstand des Schleifpunktes vom Nullpunkt (Mittelpunkt des Messers)
+
+              SSM 100 : 590mm (Stand 1.Juli 2010)
+
+              SSM 101 : 629mm (Stand 03.08.2010)
+
+  sensor_height:
+    name:       "Sensor-Höhe [mm]"
+    comment:    "Höhe des Kontur-Sensors.§§In welcher Höhe ist der Sensor montiert (gemessen wird von der horizontalen Mittellinie)§§§§Angabe erfolgt in Zehntelmillimeter.§§§§Bsp: Die Angabe 1900 wird als 190 Millimeter interpretiert."
+
+  sensor_x_distance_to_grinding_point:
+    name:       "Sensor-Linksposition [mm]"
+    comment:    |
+              Relative Sensorpositon von Nullposition (Schleifpunkt) nach links in ausgefahrenem Zustand.
+              Angabe erfolgt in Zehntelmillimeter.
+
+              Bsp: Die Angabe 1550 wird als 155 Millimeter interpretiert.
+
+  blade_drive_selection:
+    name:       "Messerantrieb abgewählt=0/Servo=1/FU=2"
+    comment:    &COMMON_DRIVE_CONFIG |
+            An-/Abwahl der Achse
+
+
+            0: Achse im System nicht vorhanden, wird vom System  simuliert.
+            1: Achse ist im Antriebssystem als Servoantrieb vorhanden.
+            2: Achse ist im Antriebssystem als Frequenzumrichterantrieb vorhanden.
+
+  blade_drive_distance_revolution:
+    name:       "Messerantrieb Weg/U [mm]"
+    comment:    &COMMON_DRIVE_DISTANCE_REVOLUTION "Weg pro Wellenumdrehung in Millimeter"
+
+  blade_drive_gear_in:
+    name:       "Messerantrieb Getriebefaktor Zähler"
+    comment:    &COMMON_GEAR_IN "Anzahl der Getriebezähne auf Motorseite; angebaute Getriebe berücksichtigen."
+
+  blade_drive_gear_out:
+    name:       "Messerantrieb Getriebefaktor Nenner"
+    comment:    &COMMON_GEAR_OUT "Anzahl der Getriebezähne auf Antriebswellenseite; angebaute Getriebe berücksichtigen."
+
+  blade_drive_length:
+    name:       "Messerantrieb Länge [mm]"
+    comment:    &COMMON_DRIVE_LENGTH "Gesamtlänge oder Verfahrbereich des Antriebs in Millimeter."
+
+  blade_drive_motortype:
+    name:       "Messerantrieb Motortyp"
+    comment:    &COMMON_DRIVE_MOTORTYPE |
+            Einerstelle:
+            x0: Getriebemotor Nord, 0,37kW
+            x1: Getriebemotor Nord, 0,75kW
+            x2: Getriebemotor Lenze 063C32
+            x3: Getriebemotor Lenze 047C22
+            x4: Getriebemotor Lenze 063C22
+
+
+            Zehnerstelle:
+            0x: PTC inaktiv
+            1x: PTC aktiv
+
+  linear_axis_drive_selection:
+    name:       "Linearachse abgewählt=0/Servo=1/FU=2"
+    comment:    *COMMON_DRIVE_CONFIG
+
+  linear_axis_drive_distance_revolution:
+    name:       "Linearachse Weg/U [mm]"
+    comment:    *COMMON_DRIVE_DISTANCE_REVOLUTION
+
+  linear_axis_drive_gear_in:
+    name:       "Linearachse Getriebefaktor Zähler"
+    comment:    *COMMON_GEAR_IN
+
+  linear_axis_drive_gear_out:
+    name:       "Linearachse Getriebefaktor Nenner"
+    comment:    *COMMON_GEAR_OUT
+
+  linear_axis_drive_length:
+    name:       "Linearachse Länge [mm]"
+    comment:    *COMMON_DRIVE_LENGTH
+
+  linear_axis_drive_motortype:
+    name:       "Linearachse Motortyp"
+    comment:    *COMMON_DRIVE_MOTORTYPE
+
+  grinding_angle_drive_selection:
+    name:       "Schleifwinkelachse abgewählt=0/Servo=1/FU=2"
+    comment:    *COMMON_DRIVE_CONFIG
+
+  grinding_angle_drive_distance_revolution:
+    name:       "Schleifwinkelachse Weg/U [mm]"
+    comment:    *COMMON_DRIVE_DISTANCE_REVOLUTION
+
+  grinding_angle_drive_gear_in:
+    name:       "Schleifwinkelachse Getriebefaktor Zähler"
+    comment:    *COMMON_GEAR_IN
+
+  grinding_angle_drive_gear_out:
+    name:       "Schleifwinkelachse Getriebefaktor Nenner"
+    comment:    *COMMON_GEAR_OUT
+
+  grinding_angle_drive_length:
+    name:       "Schleifwinkelachse Länge [mm]"
+    comment:    *COMMON_DRIVE_LENGTH
+
+  grinding_angle_drive_motortype:
+    name:       "Schleifwinkelachse Motortyp"
+    comment:    *COMMON_DRIVE_MOTORTYPE
+
