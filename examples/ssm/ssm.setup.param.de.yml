@@ -10,18 +10,23 @@ de:
     name:       "Maschine virtuell=1 / real=0"
     comment:    |
               Einerstelle:
-              xx0: Steuerung mit realen Achsen und Schutzhauben
-              xx1: Steuerung simuliert alle nicht angewählten Achsen und Schutzhauben
-              xx2: Touch baut keine Verbindung zur Steuerung auf
+              xxx0: Steuerung mit realen Achsen und Schutzhauben
+              xxx1: Steuerung simuliert alle nicht angewählten Achsen und Schutzhauben
+              xxx2: Touch baut keine Verbindung zur Steuerung auf
 
 
               Zehnerstelle:
-              x0x: CanBus einschalten
-              x1x: CanBus ausschalten
+              xx0x: CanBus einschalten
+              xx1x: CanBus ausschalten
 
 
               Hunderterstelle:
-              1xx: Steuerung simuliert alle Antriebe (auch bei Anwahl)
+              x1xx: Steuerung simuliert alle Antriebe (auch bei Anwahl)
+
+
+              Tausenderstelle:
+              0xxx: realer Sicherheitskreis
+              1xxx: virtueller Sicherheitskreis
 
   grinding_point_height:
     name:       "Höhe des Schleifpunktes [mm]"

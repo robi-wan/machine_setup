@@ -24,6 +24,10 @@ en:
               1xx: The controller simulates all drives.
 
 
+              Thousand's Place:
+              0xxx: real Safety Circuit
+              1xxx: virtual Safety Circuit
+
   grinding_point_height:
     name:       "Height of Grinding Point [mm]"
     comment:    "Height of Grinding Point gemessen von der horizontalen Mittelpunkt-Linie [mm]"
