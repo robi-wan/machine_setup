@@ -4,6 +4,20 @@
 
 - check erb templates with mri ruby and jruby (erb.rb)
 
-- check erubis
-
 - rubygems usage: http://gist.github.com/54177
+
+- use categories from setupconfiguration in legacy part
+  (it is the same class)
+
+- replace class abc::df end through
+  module abc
+    class df end
+  end
+
+- param_ref
+  - error handling with undefined param key?
+
+- param_ref support/usage in legacy part
+
+- add options --trace for stack trace (in case of error)
+ - done: setup_config_gen

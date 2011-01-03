@@ -17,6 +17,7 @@ module SetupConfiguration::Generator
     attr_accessor :output
 
     def categories
+      #TODO maybe cache these values for better performance...?
       suite.categories.keys().sort()
     end
 
