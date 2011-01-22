@@ -1,26 +1,8 @@
 require 'rubygems'
+require 'bundler'
 require 'rake'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "machine_setup"
-    gem.executables = %W{setup_config_gen setup_init_dsl setup_analyze_dat}
-    gem.default_executable = gem.executables.first 
-    gem.summary = %Q{Generating configuration for machine setup parameters.}
-    gem.description = %Q{Helps generating configuration files for machine setup parameters.}
-    gem.email = "robi-wan@suyu.de"
-    gem.homepage = "http://github.com/robi-wan/machine_setup"
-    gem.authors = ["robi-wan"]
-    gem.add_runtime_dependency "i18n", ">= 0.3.3"
-    gem.add_runtime_dependency "ini", ">= 0.1.1"
-    gem.add_runtime_dependency "erubis", ">= 2.6.5"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
-end
+Bundler::GemHelper.install_tasks
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
