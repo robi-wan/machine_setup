@@ -12,9 +12,10 @@ begin
     gem.email = "robi-wan@suyu.de"
     gem.homepage = "http://github.com/robi-wan/machine_setup"
     gem.authors = ["robi-wan"]
-    gem.add_runtime_dependency "i18n", ">= 0.3.3"
-    gem.add_runtime_dependency "ini", ">= 0.1.1"
-    gem.add_runtime_dependency "erubis", ">= 2.6.5"
+    gem.add_runtime_dependency "i18n", "~> 0.5"
+    gem.add_runtime_dependency "inifile", "~> 0.3"
+    gem.add_runtime_dependency "erubis", "~> 2.6"
+    gem.add_development_dependency "shoulda"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
