@@ -1,4 +1,4 @@
-# encoding: utf-8
+# encoding: windows-1252
 module SetupConfiguration
 
   module Legacy

@@ -1,4 +1,4 @@
-# encoding: utf-8
+# encoding: windows-1252
 
 module SetupConfiguration::Generator
   @output_path=""
@@ -79,7 +79,7 @@ module SetupConfiguration::Generator
 
     #
     # Zeilenumbrüche werden mit '§§' dargestellt
-    # \302\247 - oktale Darstellung von §
+    # \302\247 - oktale Darstellung von § (Paragraphenzeichen)
     #
     def escape(message)
       message.gsub(/\n\s?/, '§§' )
