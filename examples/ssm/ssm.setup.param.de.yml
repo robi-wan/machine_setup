@@ -13,7 +13,7 @@ de:
               xxx0: Steuerung mit realen Achsen und Schutzhauben
               xxx1: Steuerung simuliert alle nicht angewählten Achsen und Schutzhauben
               xxx2: Touch baut keine Verbindung zur Steuerung auf
-
+              
 
               Zehnerstelle:
               xx0x: CanBus einschalten
@@ -31,46 +31,63 @@ de:
   grinding_point_height:
     name:       "Höhe des Schleifpunktes [mm]"
     comment:    |
-            Höhe der Schleifscheibe über der 'Nullinie' - horitontale Linie durch den Messerdrehpunkt.
-            Angabe erfolgt in Zehntelmillimeter.
+                Höhe der Schleifscheibe über der 'Nullinie' - horitontale Linie durch den Messerdrehpunkt.
+                Angabe erfolgt in Zehntelmillimeter.
 
 
-            Bsp: Die Angabe 400 wird als 40 Millimeter interpretiert.
+                Bsp: Die Angabe 400 wird als 40 Millimeter interpretiert.
+
+  reference_angle_grinding_drive:
+    name:       "Referenzwinkel Schleifwinkelmotor [°]"
+    comment:    |
+                Der Winkel, bei dem der Schleifwinkelmotor seine Referenz erhält. Momentan wird der Schleifwinkelmotor
+                durch eine Fahrt auf Block referenziert. Da es hierbei Fertigungstoleranzen geben kann, muss der dabei
+                angefahrene Winkel hier eingestellt werden.
+                Angabe erfolgt in Zehntelgrad.
+
+
+                Bsp: Die Angabe 100 wird als 10 Grad interpretiert.
 
   drive_blade_reference_point:
     name:       "Messer Referenzpunkt [°]"
-    comment:    "Einstellung des Referenz-Initiators für die Messerachse"
+    comment:    |
+                Einstellung des Referenz-Initiators für die Messerachse.
+                Mit Hilfe des Parameters können unterschiedliche Referenz-Initiator-Positionen ausgeglichen werden.
+                Ziel ist es, einen Wert einzustellen, der dafür sorgt, dass nach der Referenzfahrt der 'Halbmond' auf der rechten Seite ist und die Messeraufnahmeschrauben horizontal ausgerichtet sind.
 
   drive_linear_axis_reference_point:
     name:       "Linearachse Referenzpunkt [mm]"
     comment:    |
-              Abstand des Schleifpunktes vom Nullpunkt (Mittelpunkt des Messers)
-
-              SSM 100 : 590mm (Stand 1.Juli 2010)
-
-              SSM 101 : 629mm (Stand 03.08.2010)
+                Maximalabstand des Schleifpunktes vom Nullpunkt (Mittelpunkt des Messers), wenn Schlitten auf den entferntesten Anschlag gefahren ist.
 
   sensor_height:
     name:       "Sensor-Höhe [mm]"
-    comment:    "Höhe des Kontur-Sensors.§§In welcher Höhe ist der Sensor montiert (gemessen wird von der horizontalen Mittellinie)§§§§Angabe erfolgt in Zehntelmillimeter.§§§§Bsp: Die Angabe 1900 wird als 190 Millimeter interpretiert."
+    comment:    |
+                Höhe des Messerabtastsensors.
+                In welcher Höhe ist der Sensor montiert (gemessen wird von der horizontalen Mittellinie).
+
+
+                Angabe erfolgt in Zehntelmillimeter.
+                Bsp: Die Angabe 1900 wird als 190 Millimeter interpretiert.
 
   sensor_x_distance_to_grinding_point:
     name:       "Sensor-Linksposition [mm]"
     comment:    |
-              Relative Sensorpositon von Nullposition (Schleifpunkt) nach links in ausgefahrenem Zustand.
-              Angabe erfolgt in Zehntelmillimeter.
+                Positon des Messerabtastsensors relativ zur Nullposition (Schleifpunkt) nach links in ausgefahrenem Zustand.
 
-              Bsp: Die Angabe 1550 wird als 155 Millimeter interpretiert.
+                
+                Angabe erfolgt in Zehntelmillimeter.
+                Bsp: Die Angabe 1550 wird als 155 Millimeter interpretiert.
 
   blade_drive_selection:
     name:       "Messerantrieb abgewählt=0/Servo=1/FU=2"
     comment:    &COMMON_DRIVE_CONFIG |
-            An-/Abwahl der Achse
+                An-/Abwahl der Achse
 
 
-            0: Achse im System nicht vorhanden, wird vom System  simuliert.
-            1: Achse ist im Antriebssystem als Servoantrieb vorhanden.
-            2: Achse ist im Antriebssystem als Frequenzumrichterantrieb vorhanden.
+                0: Achse im System nicht vorhanden, wird vom System simuliert.
+                1: Achse ist im Antriebssystem als Servoantrieb vorhanden.
+                2: Achse ist im Antriebssystem als Frequenzumrichterantrieb vorhanden.
 
   blade_drive_distance_revolution:
     name:       "Messerantrieb Weg/U [mm]"
@@ -91,17 +108,17 @@ de:
   blade_drive_motortype:
     name:       "Messerantrieb Motortyp"
     comment:    &COMMON_DRIVE_MOTORTYPE |
-            Einerstelle:
-            x0: Getriebemotor Nord, 0,37kW
-            x1: Getriebemotor Nord, 0,75kW
-            x2: Getriebemotor Lenze 063C32
-            x3: Getriebemotor Lenze 047C22
-            x4: Getriebemotor Lenze 063C22
+                Einerstelle:
+                x0: Getriebemotor Nord, 0,37kW
+                x1: Getriebemotor Nord, 0,75kW
+                x2: Getriebemotor Lenze 063C32
+                x3: Getriebemotor Lenze 047C22
+                x4: Getriebemotor Lenze 063C22
 
 
-            Zehnerstelle:
-            0x: PTC inaktiv
-            1x: PTC aktiv
+                Zehnerstelle:
+                0x: PTC inaktiv
+                1x: PTC aktiv
 
   linear_axis_drive_selection:
     name:       "Linearachse abgewählt=0/Servo=1/FU=2"
@@ -151,3 +168,12 @@ de:
     name:       "Schleifwinkelachse Motortyp"
     comment:    *COMMON_DRIVE_MOTORTYPE
 
+  grinding_disc_drive_motortype:
+    name:       "Schleifscheibe Motortyp"
+    comment:     &DISC_DRIVE_MOTORTYPE |
+                 0: Dunker
+                 1: Papst
+
+  sharpening_disc_drive_motortype:
+    name:       "Abziehscheibe Motortyp"
+    comment:     *DISC_DRIVE_MOTORTYPE

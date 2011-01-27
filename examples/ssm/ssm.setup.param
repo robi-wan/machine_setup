@@ -22,6 +22,7 @@ SetupConfiguration :ssm, :ssm do
     param :sensor_height, 4
     param :sensor_x_distance_to_grinding_point, 5
     param :grinding_point_height, 6
+    param :reference_angle_grinding_drive, 7
   end
   
   category :drives do
@@ -76,6 +77,9 @@ SetupConfiguration :ssm, :ssm do
     param :grinding_angle_drive_motortype, 335 do
       depends_on :grinding_angle_drive_selection
     end
+
+    param :grinding_disc_drive_motortype, 345
+    param :sharpening_disc_drive_motortype, 355
   end
 
 end

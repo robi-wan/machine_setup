@@ -9,18 +9,18 @@ en:
   machine_config:
     name:       "Machine virtual=1 / real=0"
     comment:    |
-              Unit´s Place:
+              Unit's Place:
               xx0: Controller with real drives and covers
               xx1: Controller simulates all selected drives and covers
               xx2: Webertouch does not connect to Controller
 
 
-              Ten´s Place:
+              Ten's Place:
               x0x: CanBus on
               x1x: CanBus off
 
 
-              Hundred´s Place:
+              Hundred's Place:
               1xx: The controller simulates all drives.
 
 
@@ -30,23 +30,42 @@ en:
 
   grinding_point_height:
     name:       "Height of Grinding Point [mm]"
-    comment:    "Height of Grinding Point gemessen von der horizontalen Mittelpunkt-Linie [mm]"
+    comment:    "Height of Grinding Point above horizontal central point (pivot point of blade drive) line [mm]"
 
   drive_blade_reference_point:
     name:       "Blade Drive Reference Point [°]"
-    comment:    "Einstellung des Referenz-Initiators für die Messerachse§§§§"
+    comment:    |
+                Setting for reference initiator of blade drive.
+                This setting is for compensating different reference initiator positions.
+                You have to adjust this setting until the correct position of blade drive is reached.
+                Correct position means: half-moon is on the right hand side and blade holding fixture screws are horizontally alined.
 
   drive_linear_axis_reference_point:
     name:       "Linear Axis Reference Point [mm]"
-    comment:    "vom Mittelpunkt des Messers nach rechts gemessen§§SSM 100 : 590mm (Stand 1.Juli 2010)§§SSM 101 :"
+    comment:    "Maximum distance of Grinding Point to central point (pivot point of blade drive) when Linear Axis is as far away as possible from central point."
 
   sensor_height:
     name:       "Sensorheight [mm]"
-    comment:    "Height des Kontur-Sensors [mm]§§In welcher Height ist der Sensor montiert (gemessen wird von der horizontalen Mittellinie)"
+    comment:    |
+                Height of Sensor [mm]
+                Height of Sensor above horizontal central point (pivot point of blade drive) line.
 
   sensor_x_distance_to_grinding_point:
     name:       "Sensor Distance to Grinding Point [mm]"
-    comment:    "relative Sensorpositon von Nullposition nach links in ausgefahrenem Zustand [mm]§§§§"
+    comment:    |
+                Positon of Blade Scanning Sensor relative to Grinding Point in extended state.
+
+
+                Value is given in tenth of millimeter
+                Example: Value 1550 will be used as 155 millimeters.
+
+  reference_angle_grinding_drive:
+    name:       "Reference Angle Grinding Angle Drive [°]"
+    comment:    |
+                Value is given in tenth of degree.
+
+
+                Example: Value 100 will be used as 10 degree.
 
   blade_drive_selection:
     name:       "Blade Drive - Select/Deselect"
@@ -74,12 +93,15 @@ en:
 
   blade_drive_length:
     name:       "Blade Drive - Length [mm]"
-    comment:    "Gesamtlänge oder Verfahrbereich des Antriebs in mm."
+    comment:    &COMMON_DRIVE_LENGTH "Length or Traversing Range of Drive [in mm]."
 
   blade_drive_motortype:
     name:       "Blade Drive - Motortype"
     comment:     &COMMON_DRIVE_MOTORTYPE |
-            Unit´s Place:
+            Select type of Drive
+
+
+            Unit's Place:
             x0: Nord, 0,37kW
             x1: Nord, 0,75kW
             x2: Lenze 063C32
@@ -87,7 +109,7 @@ en:
             x4: Lenze 063C22
 
 
-            Ten´s Place:
+            Ten's Place:
             0x: without PTC
             1x: with PTC
 
@@ -109,7 +131,7 @@ en:
 
   linear_axis_drive_length:
     name:       "Linear Axis - Length [mm]"
-    comment:    &COMMON_DRIVE_LENGTH "Length or Traversing Range of Drive in Millimeter."
+    comment:    *COMMON_DRIVE_LENGTH
 
   linear_axis_drive_motortype:
     name:       "Linear Axis - Motortype"
@@ -133,9 +155,21 @@ en:
 
   grinding_angle_drive_length:
     name:       "Grinding Angle Axis - Length [mm]"
-    comment:    "Gesamtlänge oder Verfahrbereich des Antriebs in mm."
+    comment:    *COMMON_DRIVE_LENGTH
 
   grinding_angle_drive_motortype:
     name:       "Grinding Angle Axis - Motortype"
     comment:    *COMMON_DRIVE_MOTORTYPE
 
+  grinding_disc_drive_motortype:
+    name:       "Grinding Disc - Motortype"
+    comment:     &DISC_DRIVE_MOTORTYPE |
+                 Select type of Drive
+    
+    
+                 0: Dunker
+                 1: Papst
+
+  sharpening_disc_drive_motortype:
+    name:       "Sharpening Disc - Motortype"
+    comment:     *DISC_DRIVE_MOTORTYPE
