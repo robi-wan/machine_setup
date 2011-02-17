@@ -36,15 +36,15 @@ de:
 
   distance_blade_to_sheet_drive:
     name: "Weg Schneide bis Blattantrieb [mm]"
-    comment: ""
+    comment: "Konfiguriert den Abstand [mm] des Messers vom Blattantrieb."
 
   distance_sheet_drive_to_sheet_exit:
     name:  "Weg Blattantrieb bis Blattaustritt [mm]"
-    comment:  ""
+    comment:  "Konfiguriert den Abstand [mm] des Blattantriebes vom Blattaustritt."
 
   time_for_cutting_unit:
     name:  "Zeit in der die Schneideeinrichtung oben sein muss [ms]"
-    comment:  ""
+    comment:  "Konfiguriert die Zeit [ms], in der die Schneideinrichtung bei automatischen Hebevorgängen an der oberen Endposition angekommen sein muß."
 
   paper_jam_detection_active:
     name:  "Papierstauüberwachung"
@@ -349,7 +349,7 @@ de:
 
   paper_roll_drive_distance_revolution:
     name:  "Bahnantrieb Weg/Umdrehung [mm]"
-    comment:  ""
+    comment: &COMMON_DISTANCE_REVOLUTION "Länge des zurückgelegten Weges während einer Umdrehung [mm]"
 
   paper_roll_drive_gear_in:
     name:  "Bahnantrieb Getriebefaktor Zähler"
@@ -365,7 +365,7 @@ de:
 
   blade_drive_diameter:
     name:  "Messerwelle Durchmesser [mm]"
-    comment:  ""
+    comment:  "Durchmesser der Messerwelle [mm]"
 
   blade_drive_gear_in:
     name:  "Messerwelle Getriebefaktor Zähler"
@@ -381,7 +381,7 @@ de:
 
   paper_feed_drive_distance_revolution:
     name:  "Blattantrieb Weg/Umdrehung [mm]"
-    comment:  ""
+    comment:  *COMMON_DISTANCE_REVOLUTION
 
   paper_feed_drive_gear_in:
     name:  "Blattantrieb Getriebefaktor Zähler"
@@ -397,7 +397,7 @@ de:
 
   transport_drive_distance_revolution:
     name:  "Portionsauflageband Weg/Umdrehung [mm]"
-    comment:  ""
+    comment:  *COMMON_DISTANCE_REVOLUTION
 
   transport_drive_gear_in:
     name:  "Portionsauflageband Getriebefaktor Zähler"
@@ -417,7 +417,7 @@ de:
 
   infeed_drive_distance_revolution:
     name:  "Einlegeband Weg/Umdrehung [mm]"
-    comment:  ""
+    comment:  *COMMON_DISTANCE_REVOLUTION
 
   infeed_drive_gear_in:
     name:  "Einlegeband Getriebefaktor Zähler"
