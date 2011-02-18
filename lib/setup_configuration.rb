@@ -1,8 +1,5 @@
 # encoding: utf-8
 
-module SetupConfiguration
-end
-
 def SetupConfiguration(name, abbreviation=name, &block)
   suite=SetupConfiguration::Suite.instance
   suite.name=name
