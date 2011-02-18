@@ -33,9 +33,15 @@ begin
   generator.generate()
 
   puts("#{File.basename(__FILE__)} completed.")
-rescue Exception => e
-  puts(e.message)
-  puts(e.backtrace().join("\n")) if trace
+rescue Exception => ex
+  $stderr.puts("#{File.basename(__FILE__)} aborted!")
+  $stderr.puts(ex.message)
+  if trace
+    $stderr.puts(ex.backtrace().join("\n"))
+  else
+    $stderr.puts "(See full trace by running with --trace)"
+  end
+
   exit(1)
 
 end

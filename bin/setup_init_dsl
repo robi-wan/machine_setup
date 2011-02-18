@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 begin
+  trace = ARGV.delete("--trace")
   legacy_data_folder=ARGV[0]
   machine_name=ARGV[1]
   machine_abbreviation=ARGV[2]
@@ -18,10 +19,15 @@ begin
   importer.output
 
   puts("#{File.basename(__FILE__)} completed.")
-rescue Exception => e
-  #puts("Error, program will exit => #{e}!")
-  puts(e.message)
-  #puts(e.backtrace().join("\n"))
+rescue Exception => ex
+  $stderr.puts("#{File.basename(__FILE__)} aborted!")
+  $stderr.puts(ex.message)
+  if trace
+    $stderr.puts(ex.backtrace().join("\n"))
+  else
+    $stderr.puts "(See full trace by running with --trace)"
+  end
+
   exit(1)
 
 end
