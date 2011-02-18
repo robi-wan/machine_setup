@@ -130,7 +130,7 @@ module SetupConfiguration
                 #check for multiple defined parameters (in different categories)
                 #warn and skip
                 if param_by_number(param_number) then
-                  puts("WARNING: parameter '#{ param_key(param_number)}' with number '#{param_number}' multiple defined. Duplicate found in category '#{category_name(cat_number)}' will be skipped.")
+                  $stderr.puts("WARNING: parameter '#{ param_key(param_number)}' with number '#{param_number}' multiple defined. Duplicate found in category '#{category_name(cat_number)}' will be skipped.")
                 else
                   parameter = Parameter.new(param_number)
                   parameter.depends_on(deps[index])

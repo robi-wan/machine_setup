@@ -27,6 +27,9 @@ module SetupConfiguration::Translation
 
   class Translator
 
+    NAME = :name.freeze
+    COMMENT = :comment.freeze
+
     # Adds a file with translations.
     def self.i18n_load_path(path)
       I18n.load_path << path
@@ -34,8 +37,8 @@ module SetupConfiguration::Translation
 
     # Returns name and description for the given parameter in the given language.
     def translate(key, language)
-      name=I18n.translate(:name, :scope => key,  :default => key.to_s , :locale => language)
-      description=I18n.translate(:comment, :scope => key,  :default => "", :locale => language)
+      name=I18n.translate( NAME, :scope => key,  :default => key.to_s , :locale => language)
+      description=I18n.translate( COMMENT, :scope => key,  :default => "", :locale => language)
       [name, description]
     end
 

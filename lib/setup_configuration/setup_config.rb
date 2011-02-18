@@ -41,7 +41,7 @@ module SetupConfiguration
         # flatten is needed: Parameters#param returns an array which is inserted in an array...
         categories[cat].flatten!
       else
-        puts "WARNING: Empty category '#{category}' will be ignored. "
+        $stderr.puts "WARNING: Empty category '#{category}' will be ignored. "
       end
     end
 
@@ -111,7 +111,7 @@ module SetupConfiguration
 
       self.parameters().each() do |p|
 
-        puts "WARNING: parameter number 404 is reserved for machine type. you are using it for '#{p.key}'." if p.number.eql?(404)
+        $stderr.puts "WARNING: parameter number 404 is reserved for machine type. you are using it for '#{p.key}'." if p.number.eql?(404)
         throw RuntimeError.new("ERROR: parameter number '#{p.number}' not supported. Number must be in range #{valid_param_numbers}.") unless valid_param_numbers.member?(p.number)
 
         if p.param?

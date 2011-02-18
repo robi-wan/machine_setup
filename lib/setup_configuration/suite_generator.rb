@@ -26,6 +26,10 @@ module SetupConfiguration::Generator
       binding
     end
 
+    def find_param_by_number(number)
+      self.suite.find_param_by_number(number)
+    end
+
   end
 
   class ParameterTemplateBinding < TemplateBinding
@@ -46,22 +50,27 @@ module SetupConfiguration::Generator
 
     def cat_name(cat)
       name, desc=@translator.translate(cat.name, @lang)
+      $stderr.puts("WARNING: missing translation for key #{@lang}.#{cat.name}.#{SetupConfiguration::Translation::Translator::NAME}") if name.eql?(cat.name.to_s)
       name
     end
 
     def name(number)
       p_name= translate(number) { |name, desc| name }
+      if find_param_by_number(number) && p_name.eql?(find_param_by_number(number).key.to_s)
+        $stderr.puts("WARNING: missing translation for key #{@lang}.#{find_param_by_number(number).key.to_s}.#{SetupConfiguration::Translation::Translator::NAME}")
+      end
       p_name.empty? ? "placeholder for mps3.exe" : p_name
     end
 
     def description(number)
       translate(number) do |name, desc|
+        $stderr.puts("WARNING: missing translation for key #{@lang}.#{find_param_by_number(number).key.to_s}.#{SetupConfiguration::Translation::Translator::COMMENT}") if desc.empty?
         escape(desc)
       end
     end
 
     def translate(number, &extractor)
-      p=self.suite.find_param_by_number(number)
+      p=find_param_by_number(number)
       if p
         key=p.key
         translation = @translator.translate(key, @lang)
@@ -125,7 +134,7 @@ module SetupConfiguration::Generator
         if param
           param.number
         else
-          puts "ERROR: parameter with key '#{key}' not found."
+          $stderr.puts "ERROR: parameter with key '#{key}' not found."
           # depends on no other parameter
           -1
         end
@@ -172,7 +181,7 @@ module SetupConfiguration::Generator
     if File.file?(template)
       File.read(template)
     else
-      puts "WARNING: Template file #{template} expected but not found"
+      $stderr.puts "WARNING: Template file #{template} expected but not found"
     end
   end
 
@@ -181,7 +190,7 @@ module SetupConfiguration::Generator
     if File.file?(template)
       File.read(template)
     else
-      puts "WARNING: Template file #{template} expected but not found"
+      $stderr.puts "WARNING: Template file #{template} expected but not found"
     end
   end
 
@@ -248,7 +257,7 @@ class SetupConfiguration::SetupCodeGenerator
         f << rhtml.result(setup_code.get_binding)
       end
     else
-      puts "WARNING: No template found. Generation of #{setup_code.output} aborted."
+      $stderr.puts "WARNING: No template found. Generation of #{setup_code.output} aborted."
     end
 
 
@@ -261,7 +270,7 @@ class SetupConfiguration::SetupCodeGenerator
     if File.file?(template)
       File.read(template)
     else
-      puts "WARNING: Template file #{template} expected but not found"
+      $stderr.puts "WARNING: Template file #{template} expected but not found"
     end
   end
 
@@ -298,7 +307,8 @@ class SetupConfiguration::SuiteGenerator
     # extras:
     # -every PARAMETER key needs a value!
     # -use Windows line terminators CRLF - \r\n
-    # - do not use [] - output is an INI-file
+    # - do not use []
+    #- output is an INI-file
     parameter_bindings().each() do |bind|
       bind.suite=self.suite
       template = parameter_template(bind.lang_name())
@@ -309,7 +319,7 @@ class SetupConfiguration::SuiteGenerator
           f << rhtml.result(bind.get_binding)
         end
       else
-        puts "WARNING: No template found. Generation of #{bind.output} aborted."
+        $stderr.puts "WARNING: No template found. Generation of #{bind.output} aborted."
       end
     end
 
@@ -323,7 +333,7 @@ class SetupConfiguration::SuiteGenerator
         f << rhtml.result(bind.get_binding)
       end
     else
-      puts "WARNING: No template found. Generation of #{bind.output} aborted."
+      $stderr.puts "WARNING: No template found. Generation of #{bind.output} aborted."
     end
 
     SetupConfiguration::SetupCodeGenerator.new.generate(self.suite, output_path)
