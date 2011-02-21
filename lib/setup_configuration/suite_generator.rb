@@ -11,6 +11,19 @@ module SetupConfiguration::Generator
     @output_path=out
   end
 
+  def output(bind, template)
+    if template then
+      rhtml = Erubis::Eruby.new(template)
+
+      File.open(File.join(output_path, bind.output), "w") do |f|
+        f << rhtml.result(bind.get_binding)
+      end
+    else
+      $stderr.puts "WARNING: No template found. Generation of #{bind.output} aborted."
+    end
+  end
+
+
   class TemplateBinding
 
     attr_accessor :suite
@@ -177,21 +190,11 @@ module SetupConfiguration::Generator
   end
 
   def parameter_template(lang)
-    template=File.join(File.dirname(__FILE__), "templates", "#{lang.to_s}.lng.erb")
-    if File.file?(template)
-      File.read(template)
-    else
-      $stderr.puts "WARNING: Template file #{template} expected but not found"
-    end
+    find_template("#{lang.to_s}.lng.erb")
   end
 
   def mps_template()
-    template=File.join(File.dirname(__FILE__), "templates", "mps3.ini.erb")
-    if File.file?(template)
-      File.read(template)
-    else
-      $stderr.puts "WARNING: Template file #{template} expected but not found"
-    end
+    find_template("mps3.ini.erb")
   end
 
   def mps_binding()
@@ -200,6 +203,14 @@ module SetupConfiguration::Generator
     mps
   end
 
+  def find_template(name)
+    template=File.join(File.dirname(__FILE__), "templates", name)
+    if File.file?(template)
+      File.read(template)
+    else
+      $stderr.puts "WARNING: Template file #{template} expected but not found"
+    end
+  end
 
 end
 
@@ -244,34 +255,20 @@ class SetupConfiguration::SetupCodeBinding < SetupConfiguration::Generator::Temp
 end
 
 class SetupConfiguration::SetupCodeGenerator
-  
+  include SetupConfiguration::Generator
+
   def generate(suite, output_path)
     setup_code=SetupConfiguration::SetupCodeBinding.new
     setup_code.output="LOGCODE#{suite.name.to_s.upcase}SETUP.EXP"
     setup_code.suite=suite
-
-    if template then
-      rhtml = Erubis::Eruby.new( template )
-
-      File.open(File.join(output_path, setup_code.output), "w") do |f|
-        f << rhtml.result(setup_code.get_binding)
-      end
-    else
-      $stderr.puts "WARNING: No template found. Generation of #{setup_code.output} aborted."
-    end
-
-
+    self.output_path=output_path
+    output(setup_code, template)
   end
 
   :private
 
   def template
-    template=File.join(File.dirname(__FILE__), "templates", "logcodesetup.exp.erb")
-    if File.file?(template)
-      File.read(template)
-    else
-      $stderr.puts "WARNING: Template file #{template} expected but not found"
-    end
+    find_template("logcodesetup.exp.erb")
   end
 
 end
@@ -297,11 +294,8 @@ class SetupConfiguration::SuiteGenerator
 
     description_bindings().each() do |bind|
       bind.suite=self.suite
-      rhtml = Erubis::Eruby.new(description_template)
 
-      File.open(File.join(output_path, bind.output), "w") do |f|
-        f << rhtml.result(bind.get_binding)
-      end
+      output(bind, description_template)
     end
 
     # extras:
@@ -312,31 +306,16 @@ class SetupConfiguration::SuiteGenerator
     parameter_bindings().each() do |bind|
       bind.suite=self.suite
       template = parameter_template(bind.lang_name())
-      if template then
-        rhtml = Erubis::Eruby.new(template)
-
-        File.open(File.join(output_path, bind.output), "w") do |f|
-          f << rhtml.result(bind.get_binding)
-        end
-      else
-        $stderr.puts "WARNING: No template found. Generation of #{bind.output} aborted."
-      end
+      output(bind, template)
     end
 
     bind=mps_binding()
     bind.suite=self.suite
     mps_template=mps_template()
-    if mps_template then
-      rhtml = Erubis::Eruby.new(mps_template)
-
-      File.open(File.join(output_path, bind.output), "w") do |f|
-        f << rhtml.result(bind.get_binding)
-      end
-    else
-      $stderr.puts "WARNING: No template found. Generation of #{bind.output} aborted."
-    end
+    output(bind, mps_template)
 
     SetupConfiguration::SetupCodeGenerator.new.generate(self.suite, output_path)
   end
+
 end
 
