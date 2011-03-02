@@ -1,321 +1,50 @@
 # encoding: windows-1252
 
-module SetupConfiguration::Generator
-  @output_path=""
+module SetupConfiguration
 
-  def output_path
-    @output_path
-  end
-
-  def output_path=(out)
-    @output_path=out
-  end
-
-  def output(bind, template)
-    if template then
-      rhtml = Erubis::Eruby.new(template)
-
-      File.open(File.join(output_path, bind.output), "w") do |f|
-        f << rhtml.result(bind.get_binding)
-      end
-    else
-      $stderr.puts "WARNING: No template found. Generation of #{bind.output} aborted."
-    end
-  end
-
-
-  class TemplateBinding
+  class SuiteGenerator
+    include Generator
 
     attr_accessor :suite
-    attr_accessor :output
+    attr_accessor :do_not_run
 
-    def categories
-      #TODO maybe cache these values for better performance...?
-      suite.categories.keys().sort()
+    def initialize
+      self.do_not_run = false
+      self.suite = Suite.instance
     end
 
-    # Support templating of member data.
-    def get_binding
-      binding
+    def self.do_not_run
+      self.do_not_run=true
     end
 
-    def find_param_by_number(number)
-      self.suite.find_param_by_number(number)
-    end
+    def generate
+      return "no output" if self.do_not_run
 
-  end
+      description_bindings().each() do |bind|
+        bind.suite=self.suite
 
-  class ParameterTemplateBinding < TemplateBinding
-    attr_accessor :lang
-    attr_accessor :parameter_range
-
-    def initialize(lang, range, output)
-      @lang=lang
-      @parameter_range=range
-      @output=output
-      @translator = SetupConfiguration::Translation::Translator.new()
-    end
-
-    def lang_name
-      SetupConfiguration::Translation.language_name(lang)
-    end
-
-
-    def cat_name(cat)
-      name, desc=@translator.translate(cat.name, @lang)
-      $stderr.puts("WARNING: missing translation for key #{@lang}.#{cat.name}.#{SetupConfiguration::Translation::Translator::NAME}") if name.eql?(cat.name.to_s)
-      name
-    end
-
-    def name(number)
-      p_name= translate(number) { |name, desc| name }
-      if find_param_by_number(number) && p_name.eql?(find_param_by_number(number).key.to_s)
-        $stderr.puts("WARNING: missing translation for key #{@lang}.#{find_param_by_number(number).key.to_s}.#{SetupConfiguration::Translation::Translator::NAME}")
+        output(bind, description_template)
       end
-      p_name.empty? ? "placeholder for mps3.exe" : p_name
-    end
 
-    def description(number)
-      translate(number) do |name, desc|
-        $stderr.puts("WARNING: missing translation for key #{@lang}.#{find_param_by_number(number).key.to_s}.#{SetupConfiguration::Translation::Translator::COMMENT}") if desc.empty?
-        escape(desc)
+      # extras:
+      # -every PARAMETER key needs a value!
+      # -use Windows line terminators CRLF - \r\n
+      # - do not use []
+      #- output is an INI-file
+      parameter_bindings().each() do |bind|
+        bind.suite=self.suite
+        template = parameter_template(bind.lang_name())
+        output(bind, template)
       end
-    end
 
-    def translate(number, &extractor)
-      p=find_param_by_number(number)
-      if p
-        key=p.key
-        translation = @translator.translate(key, @lang)
-        if extractor
-          extractor.call( *translation )
-        else
-          translation
-        end
-      else
-        ""
-      end
-    end
-
-    private
-
-    #
-    # Zeilenumbrüche werden mit '§§' dargestellt
-    # \302\247 - oktale Darstellung von § (Paragraphenzeichen)
-    #
-    def escape(message)
-      message.gsub(/\n\s?/, '§§' )
-    end
-
-  end
-
-  class MPSTemplateBinding < TemplateBinding
-
-    def languages
-      SetupConfiguration::Translation.language_names.values
-    end
-
-    def settings
-      self.suite.settings
-    end
-
-    def param_infos(category_key)
-      parameters=suite.categories[category_key]
-      depends, machine_type, number=[], [], []
-      parameters.each() do |param|
-        machine_type << param.machine_type
-        number << param.number
-        depends << depends_on(param.dependency)
-      end
-      #TODO compute value for max_number_parameters_per_tab of value maximum_numbers_per_category
-      max_number_parameters_per_tab=50
-      [depends, machine_type, number].collect(){ |arr| (arr.in_groups_of(max_number_parameters_per_tab, false)).collect(){|a| prepare(a)}}
-    end
-
-    :private
-
-    def prepare(array)
-      array.join(',')
-    end
-
-    def depends_on(key)
-
-      if :none.eql?(key) then
-        -1
-      else
-        param=suite.find_param(key)
-        if param
-          param.number
-        else
-          $stderr.puts "ERROR: parameter with key '#{key}' not found."
-          # depends on no other parameter
-          -1
-        end
-      end
-    end
-
-  end
-
-#           [:de, "deutsch", (0..199), "deutsch1.lng"],
-#          [:de, "deutsch", (200..599), "deutsch2.lng"],
-#          [:de, "deutsch", (600..1299), "deutsch3.lng"],
-#          [:en, "english", (0..199), "english1.lng"],
-#          [:en, "english", (200..599), "english2.lng"],
-#          [:en, "english", (600..1299), "english3.lng"],
-  def description_bindings()
-    SetupConfiguration::Translation.languages().collect() do |lang|
-      SetupConfiguration.description_ranges().collect() do |range|
-        # constructs the output file names
-        out= "#{SetupConfiguration::Translation.language_name(lang)}#{SetupConfiguration.description_ranges().index(range)+1}.lng"
-        ParameterTemplateBinding.new(lang, range, out)
-      end
-    end.flatten()
-  end
-
-  def description_template
-    %q{
-    [<%= lang_name.upcase %>]
-    <% parameter_range.each do |number| %>
-    HILFEPARAM<%= number %>=<%= description(number) %>
-    <% end %>
-  }.gsub(/^\s*/, '')
-  end
-
-  def parameter_bindings()
-    SetupConfiguration::Translation.languages().collect() do |lang|
-      # constructs the output file names
-      out= "#{SetupConfiguration::Translation.language_name(lang)}.lng"
-      ParameterTemplateBinding.new(lang, SetupConfiguration.parameter_range(), out)
-    end
-  end
-
-  def parameter_template(lang)
-    find_template("#{lang.to_s}.lng.erb")
-  end
-
-  def mps_template()
-    find_template("mps3.ini.erb")
-  end
-
-  def mps_binding()
-    mps=MPSTemplateBinding.new
-    mps.output="mps3.ini"
-    mps
-  end
-
-  def find_template(name)
-    template=File.join(File.dirname(__FILE__), "templates", name)
-    if File.file?(template)
-      File.read(template)
-    else
-      $stderr.puts "WARNING: Template file #{template} expected but not found"
-    end
-  end
-
-end
-
-
-
-class SetupConfiguration::SetupCodeBinding < SetupConfiguration::Generator::TemplateBinding
-
-  def initialize
-    super
-  end
-
-  def parameters
-    #TODO use set or something similar
-    suite.parameters.select(){|p| p.param? }
-  end
-
-  #
-  # Offset for setup parameter numbers. This offset is added to a parameter number when evaluated in controller.
-  #
-  def parameter_offset
-    1300
-  end
-
-  def key(symbol)
-    s=symbol.to_s
-    delimiter='_'
-    s.split(delimiter).collect(){|splitter| splitter.capitalize}.join(delimiter).ljust(longest_key_length)
-  end
-
-  :private
-
-  def longest_key_length
-    # find the length of the longest word
-    unless @longest
-      longest = parameters.inject(0) do |memo, param|
-        memo >= param.key.to_s.length ? memo : param.key.to_s.length
-      end
-      @longest=longest + 5
-    end
-    @longest
-  end
-end
-
-class SetupConfiguration::SetupCodeGenerator
-  include SetupConfiguration::Generator
-
-  def generate(suite, output_path)
-    setup_code=SetupConfiguration::SetupCodeBinding.new
-    setup_code.output="LOGCODE#{suite.name.to_s.upcase}SETUP.EXP"
-    setup_code.suite=suite
-    self.output_path=output_path
-    output(setup_code, template)
-  end
-
-  :private
-
-  def template
-    find_template("logcodesetup.exp.erb")
-  end
-
-end
-
-
-class SetupConfiguration::SuiteGenerator
-  include SetupConfiguration::Generator
-
-  attr_accessor :suite
-  attr_accessor :do_not_run
-
-  def initialize
-    self.do_not_run = false
-    self.suite = SetupConfiguration::Suite.instance
-  end
-
-  def self.do_not_run
-    self.do_not_run=true
-  end
-
-  def generate
-    return "no output" if self.do_not_run
-
-    description_bindings().each() do |bind|
+      bind=mps_binding()
       bind.suite=self.suite
+      mps_template=mps_template()
+      output(bind, mps_template)
 
-      output(bind, description_template)
+      SetupCodeGenerator.new.generate(self.suite, output_path)
     end
 
-    # extras:
-    # -every PARAMETER key needs a value!
-    # -use Windows line terminators CRLF - \r\n
-    # - do not use []
-    #- output is an INI-file
-    parameter_bindings().each() do |bind|
-      bind.suite=self.suite
-      template = parameter_template(bind.lang_name())
-      output(bind, template)
-    end
-
-    bind=mps_binding()
-    bind.suite=self.suite
-    mps_template=mps_template()
-    output(bind, mps_template)
-
-    SetupConfiguration::SetupCodeGenerator.new.generate(self.suite, output_path)
   end
 
 end
-

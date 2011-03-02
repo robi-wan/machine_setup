@@ -45,7 +45,7 @@ module SetupConfiguration
         input = File.read(template)
         eruby = Erubis::Eruby.new(input)
         
-        File.open(File.join(output_path, "#{@name}.#{SetupConfiguration::Translation::FILE_EXTENSION}" ), "w") do |f|
+        File.open(File.join(output_path, "#{@name}.#{Translation::FILE_EXTENSION}" ), "w") do |f|
           f << eruby.result(binding())
         end
 

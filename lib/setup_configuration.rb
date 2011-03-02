@@ -17,6 +17,12 @@ require 'fileutils'
 require 'i18n'
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/core_ext')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/parameter_machinetype_bridge')
+require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/generator_module')
+require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/template_binding')
+require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/parameter_template_binding')
+require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/mps_template_binding')
+require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/setup_code_generator')
+require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/setup_code_binding')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/setup_config')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/suite_generator')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/translation')

@@ -26,7 +26,7 @@ begin
     if File.file?(trans_file)
       SetupConfiguration::Translation::Translator.i18n_load_path(trans_file)
     else
-      puts "WARNING: expected file with translations '#{trans_file}' not found."
+      $stderr.puts "WARNING: expected file with translations '#{trans_file}' not found."
     end
   end
 

@@ -180,6 +180,7 @@ module SetupConfiguration
       @balance_maximum=range
     end
 
+    #TODO remove range argument
     def machine_type(name, number, range)
       machine_type = MachineType.new(name, number, range)
       @machine_types << machine_type
@@ -228,6 +229,7 @@ module SetupConfiguration
       p = Parameter.new(parameter, number)
       p.instance_eval(&parameter_def) if parameter_def
       params << p
+      p
     end
 
     def param_ref(parameter)
@@ -235,6 +237,34 @@ module SetupConfiguration
       params << p
     end
 
+
+    #
+    # Additional block is allowed, it may contain call for_machine_type and depends_on.
+    # This additional information is applied only to generated parameter
+    # <drive>_selection.
+    # The additional for_machine_type is also applied to other generated parameters.
+    #
+    def drive(drive, number, &parameter_def)
+
+      key = symbol(drive, "drive")
+      drive_selection = symbol(key, "selection")
+
+      drive_param=param(drive_selection, number)
+      drive_param.instance_eval(&parameter_def) if parameter_def
+
+      properties=[%w(distance revolution), %w( gear in ), %w( gear out ), "length", "motortype" ]
+      properties.each_with_index do |prop, index|
+        parameter = param(symbol(key, *prop), number + index + 1) { depends_on drive_selection }
+        parameter.for_machine_type(drive_param.machine_type)
+      end
+
+    end
+
+    :private
+
+    def symbol(*strings)
+      strings.join('_').to_sym
+    end
   end
 
   class Parameter
@@ -316,6 +346,8 @@ module SetupConfiguration
   class MachineType
     include Enumerable
 
+    RANGES = [0..999, 1000..1999, 2000..2499, 2500..2999, 3000..3999, 4000..4999, 5000..5999, 6000..6999].freeze
+
     attr_reader :name
     attr_reader :range
     attr_reader :sequence_number
@@ -323,8 +355,9 @@ module SetupConfiguration
 
     def initialize(name, sequence_number, range)
       @name=name
-      @range=range
+      raise RuntimeError.new("ERROR: More than #{RANGES.length} different machine types are not supported: [name=#{name}] [number=#{sequence_number}]") if sequence_number >= RANGES.length
       @sequence_number=sequence_number
+      @range=RANGES[@sequence_number]
       if @sequence_number <= 0
         @binary_number=0
       else
