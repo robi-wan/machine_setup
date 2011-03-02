@@ -79,6 +79,15 @@ de:
                 Angabe erfolgt in Zehntelmillimeter.
                 Bsp: Die Angabe 1550 wird als 155 Millimeter interpretiert.
 
+  grinding_angle_drive_home_mode:
+    name:       "Referenzmodus des Schleifwinkelmotors"
+    comment:    |
+                Konfiguriert die Art der Referenzierung für den Schleifwinkelmotor.
+
+
+                0: Der Motor referenziert durch Fahrt auf Anschlag.
+                1: Der Motor erhält seine Position durch Teachen (nur wirksam bei MultiTurn)
+
   blade_drive_selection:
     name:       "Messerantrieb abgewählt=0/Servo=1/FU=2"
     comment:    &COMMON_DRIVE_CONFIG |

@@ -67,6 +67,17 @@ en:
 
                 Example: Value 100 will be used as 10 degree.
 
+  grinding_angle_drive_home_mode:
+    name:       "Reference mode of Grinding Angle Drive"
+    comment:    |
+                Configure the used mode for referencing the angle grinding drive.
+                This is especially useful if this drive has a MultiTurn-Encoder.
+
+
+                0: Move drive until torque reached
+                1: Teach drive position (only effective with multiturn drive)
+
+
   blade_drive_selection:
     name:       "Blade Drive - Select/Deselect"
     comment:    &COMMON_DRIVE_CONFIG |

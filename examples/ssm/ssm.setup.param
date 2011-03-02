@@ -23,6 +23,7 @@ SetupConfiguration :ssm, :ssm do
     param :sensor_x_distance_to_grinding_point, 5
     param :grinding_point_height, 6
     param :reference_angle_grinding_drive, 7
+    param :grinding_angle_drive_home_mode, 8
   end
   
   category :drives do
@@ -44,39 +45,9 @@ SetupConfiguration :ssm, :ssm do
       depends_on :blade_drive_selection
     end
 
-    param :linear_axis_drive_selection, 320
-    param :linear_axis_drive_distance_revolution, 321 do
-      depends_on :linear_axis_drive_selection
-    end
-    param :linear_axis_drive_gear_in, 322 do
-      depends_on :linear_axis_drive_selection
-    end
-    param :linear_axis_drive_gear_out, 323 do
-      depends_on :linear_axis_drive_selection
-    end
-    param :linear_axis_drive_length, 324 do
-      depends_on :linear_axis_drive_selection
-    end
-    param :linear_axis_drive_motortype, 325 do
-      depends_on :linear_axis_drive_selection
-    end
+    drive :linear_axis, 320
 
-    param :grinding_angle_drive_selection, 330
-    param :grinding_angle_drive_distance_revolution, 331 do
-      depends_on :grinding_angle_drive_selection
-    end
-    param :grinding_angle_drive_gear_in, 332 do
-      depends_on :grinding_angle_drive_selection
-    end
-    param :grinding_angle_drive_gear_out, 333 do
-      depends_on :grinding_angle_drive_selection
-    end
-    param :grinding_angle_drive_length, 334 do
-      depends_on :grinding_angle_drive_selection
-    end
-    param :grinding_angle_drive_motortype, 335 do
-      depends_on :grinding_angle_drive_selection
-    end
+    drive :grinding_angle, 330
 
     param :grinding_disc_drive_motortype, 345
     param :sharpening_disc_drive_motortype, 355
