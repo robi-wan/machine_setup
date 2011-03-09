@@ -1,7 +1,8 @@
-# install java http://java.sun.com/javase/downloads/index.jsp
-# install jruby http://jruby.org/download
-# call jruby -S gem install machine_setup
+# install ruby (1.8.x) http://rubyinstaller.org/ 
+#     or jruby http://jruby.org/
+# call (j)ruby -S gem install machine_setup
 # call setup_config_gen <this file>
+
 SetupConfiguration :underleaver, :ul do
 
   setting do
