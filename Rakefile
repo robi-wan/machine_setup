@@ -6,15 +6,14 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "machine_setup"
     gem.executables = %W{setup_config_gen setup_init_dsl setup_analyze_dat}
-    gem.default_executable = gem.executables.first 
     gem.summary = %Q{Generating configuration for machine setup parameters.}
     gem.description = %Q{Helps generating configuration files for machine setup parameters.}
     gem.email = "robi-wan@suyu.de"
     gem.homepage = "http://github.com/robi-wan/machine_setup"
     gem.authors = ["robi-wan"]
     gem.add_runtime_dependency "i18n", "~> 0.5"
-    gem.add_runtime_dependency "inifile", "~> 0.3"
-    gem.add_runtime_dependency "erubis", "~> 2.6"
+    gem.add_runtime_dependency "inifile", "~> 0.4"
+    gem.add_runtime_dependency "erubis", "~> 2.7"
     gem.add_development_dependency "shoulda"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
