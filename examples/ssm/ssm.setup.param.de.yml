@@ -40,9 +40,9 @@ de:
   reference_angle_grinding_drive:
     name:       "Referenzwinkel Schleifwinkelmotor [°]"
     comment:    |
-                Der Winkel, bei dem der Schleifwinkelmotor seine Referenz erhält. Momentan wird der Schleifwinkelmotor
-                durch eine Fahrt auf Block referenziert. Da es hierbei Fertigungstoleranzen geben kann, muss der dabei
+                Der Winkel, bei dem der Schleifwinkelmotor seine Referenz erhält. Der Schleifwinkelmotor kann durch eine Fahrt auf Block referenzieren. Da es hierbei Fertigungstoleranzen geben kann, muss der dabei
                 angefahrene Winkel hier eingestellt werden.
+                Bei Referenzierung muss dieser Parameter auf den Winkel des Referenzkörpers eingestellt werden.
                 Angabe erfolgt in Zehntelgrad.
 
 
@@ -87,6 +87,13 @@ de:
 
                 0: Der Motor referenziert durch Fahrt auf Anschlag.
                 1: Der Motor erhält seine Position durch Teachen (nur wirksam bei MultiTurn)
+
+
+                Achtung: Bei Wechsel des Referenzmodus auch den Parameter 'Referenzwinkel Schleifwinkelmotor' anpassen.
+
+  tooth_area:
+    name:     "Schleifwinkelbereich mit Zähnen"
+    comment:  "Auswahl des Schleifwinkelbereiches, der Zähne enthält. Schleifscheibe wird abgehoben."
 
   blade_drive_selection:
     name:       "Messerantrieb abgewählt=0/Servo=1/FU=2"

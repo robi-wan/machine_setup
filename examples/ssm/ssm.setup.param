@@ -24,6 +24,7 @@ SetupConfiguration :ssm, :ssm do
     param :grinding_point_height, 6
     param :reference_angle_grinding_drive, 7
     param :grinding_angle_drive_home_mode, 8
+    param :tooth_area, 9
   end
   
   category :drives do

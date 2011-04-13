@@ -76,7 +76,13 @@ en:
 
                 0: Move drive until torque reached
                 1: Teach drive position (only effective with multiturn drive)
+                
 
+                Attention: When changing reference mode do not forget to adjust parameter 'Reference Angle Grinding Angle Drive'.
+
+  tooth_area:
+    name:     "Grinding Angle Area with Teeth"
+    comment:  "Grinding disc will lift off from blade at configured grinding area."
 
   blade_drive_selection:
     name:       "Blade Drive - Select/Deselect"
