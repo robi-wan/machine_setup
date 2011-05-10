@@ -91,9 +91,25 @@ de:
 
                 Achtung: Bei Wechsel des Referenzmodus auch den Parameter 'Referenzwinkel Schleifwinkelmotor' anpassen.
 
+  grinding_angle_difference:
+    name:       "Abweichung Schleifwinkel"
+    comment:    |
+                Technologisch bedingt kann es Abweichung zwischen eingestelltem und tatsächlichem Schleifwinkel geben.
+                Über diesen Parameter kann diese Abweichung ausgeglichen werden.
+                Die Angabe erfolgt in Grad. Die Angabe erfolgt mit einer Nachkommastelle. Der eingetragene Wert gibt die
+                gemessene Abweichung an. Es sind Angaben zwischen -5,0 und +5,0 möglich.
+
+
+                Beispiel: Eingestellt im Programm ist ein Schleifwinkel von 22 Grad.
+                Gemessen wurde ein tatsächlicher Schleifwinkel von 22,8 Grad. Die einzutragende Abweichung beträgt
+                in diesem Fall 0,8 Grad, also ein 8.
+
+
+                Beispiel 2: Eine Abweichung von -2,3 Grad wird eingetragen als -23.
+
   tooth_area:
-    name:     "Schleifwinkelbereich mit Zähnen"
-    comment:  "Auswahl des Schleifwinkelbereiches, der Zähne enthält. Schleifscheibe wird abgehoben."
+    name:       "Schleifwinkelbereich mit Zähnen"
+    comment:    "Auswahl des Schleifwinkelbereiches, der Zähne enthält. Schleifscheibe wird abgehoben."
 
   blade_drive_selection:
     name:       "Messerantrieb abgewählt=0/Servo=1/FU=2"

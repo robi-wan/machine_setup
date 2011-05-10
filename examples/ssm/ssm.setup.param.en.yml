@@ -80,6 +80,21 @@ en:
 
                 Attention: When changing reference mode do not forget to adjust parameter 'Reference Angle Grinding Angle Drive'.
 
+  grinding_angle_difference:
+    name:       "Difference Grinding Angle"
+    comment:    |
+                Configure the difference between given grinding angle and actual grinding angle measured at blade.
+                Value is given in tenth of degree. Given value stands for measured difference.
+                The range of valid values starts at -5.0 and ends at +5.0.
+
+
+                Example: Programme parameter for grinding angle is 22 degree.
+                Measured grinding angle is 22.8 degree. The difference of the grinding angle is therefore 0.8 degree.
+                The value of this setup parameter has to be 8.
+
+                
+                Example 2: A difference of -2,3 degree has to be entered as -23.
+
   tooth_area:
     name:     "Grinding Angle Area with Teeth"
     comment:  "Grinding disc will lift off from blade at configured grinding area."
