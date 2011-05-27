@@ -181,7 +181,7 @@ module SetupConfiguration
     end
 
     #TODO remove range argument
-    def machine_type(name, number, range)
+    def machine_type(name, number, range=nil)
       machine_type = MachineType.new(name, number, range)
       @machine_types << machine_type
       # generates a method with given machine type name in a module
@@ -353,10 +353,11 @@ module SetupConfiguration
     attr_reader :sequence_number
     attr_reader :binary_number
 
-    def initialize(name, sequence_number, range)
+    def initialize(name, sequence_number, range = nil)
       @name=name
       raise RuntimeError.new("ERROR: More than #{RANGES.length} different machine types are not supported: [name=#{name}] [number=#{sequence_number}]") if sequence_number >= RANGES.length
       @sequence_number=sequence_number
+      $stderr.puts "DEPRECATION WARNING: Range '#{range}' for machine type '#{name.to_s}' is deprecated as it seems the used ranges are fixed. It can be removed. In a future version this parameter will be unsupported." if range
       @range=RANGES[@sequence_number]
       if @sequence_number <= 0
         @binary_number=0
