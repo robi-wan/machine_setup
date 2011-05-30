@@ -258,6 +258,17 @@ de:
 
           Beispiel: Ein Wert von 30 bedeutet, dass sich der Blattantrieb 30 Prozent schneller dreht als das Band.
 
+  portion_edge_detection:
+    name: "Portion: ausgewertete Kante"
+    comment: |
+          Welche Kante der Portion soll zur Blattpositionierung verwendet werden?
+          Nützlich bei mehreren Spuren.
+
+
+          0: Vorderkante
+          1: Mitte der Portion (gemessene Portionslänge und eingestellte Blattlänge werden für Auswertung ebenfalls verwendet)
+          2: Hinterkante (gemessene Portionslänge und eingestellte Blattlänge werden für Auswertung ebenfalls verwendet)
+
   role_diameter_teached_maximum:
     name: "Größter geteachter Rollendurchmesser [mm]"
     comment: |

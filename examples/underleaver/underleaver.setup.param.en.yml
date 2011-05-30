@@ -257,6 +257,17 @@ en:
           Value determines how much faster paper feed runs.
           Values between 0 and 30 are valid.
 
+  portion_edge_detection:
+    name: "Portion: detected edge"
+    comment: |
+          This parameter configures the edge which is used to determine the sheet position.
+          Useful only with multiple tracks.
+
+
+          0: Leading edge
+          1: Center of portion (measured portion length and sheet length are also used in computation)
+          2: Trailing edge (measured portion length and sheet length are also used in computation)
+
   role_diameter_teached_maximum:
     name: "Maximum teached Role Diameter [mm]"
     comment: |

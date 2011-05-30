@@ -61,6 +61,9 @@ SetupConfiguration :underleaver, :ul do
     param :paper_feed_velocity_ratio, 35 do
         depends_on :paper_feed_continuous_motion
     end
+
+    param :portion_edge_detection, 36
+
   end
 
   category :role_configuration do
