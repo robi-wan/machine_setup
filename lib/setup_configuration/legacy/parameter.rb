@@ -19,6 +19,10 @@ module SetupConfiguration
         @machine_type != 0
       end
 
+      def param?
+        true
+      end
+
     end
     
   end

@@ -13,6 +13,7 @@ SetupConfiguration :<%= @name.to_sym %>, :<%= @abbreviation.to_sym %> do
   <% for cat in @categories.sort %>
   category :<%= cat.name %> do
     <% for param in cat.parameter %>
+    <% if param.param? %>
     param :<%= param.key %>, <%= param.number %><% if param.extended? %> do
     <% if param.dep? %>
       depends_on :<%= param.dependency %>
@@ -23,6 +24,9 @@ SetupConfiguration :<%= @name.to_sym %>, :<%= @abbreviation.to_sym %> do
     end
     <% else %>
     
+    <% end %>
+    <% else %>
+    param_ref :<%= param.key %>
     <% end %>
     <% end %>
   end

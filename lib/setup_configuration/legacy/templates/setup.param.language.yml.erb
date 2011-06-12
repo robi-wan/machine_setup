@@ -5,9 +5,11 @@
     name:       "<%= category_name(cat.number) %>"
 
     <% for param in cat.parameter %>
+  <% if param.param? %>
   <%= param.key %>:
     name:       "<%= parameter_name(param.number) %>"
     comment:    "<%= parameter_description(param.number) %>"
 
     <% end %>
+  <% end %>
   <% end %>

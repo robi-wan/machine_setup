@@ -120,7 +120,9 @@ module SetupConfiguration
                 #check for multiple defined parameters (in different categories)
                 #warn and skip
                 if param_by_number(param_number) then
-                  $stderr.puts("WARNING: parameter '#{ param_key(param_number)}' with number '#{param_number}' multiple defined. Duplicate found in category '#{category_name(cat_number)}' will be skipped.")
+                  $stderr.puts("WARNING: parameter '#{ param_key(param_number)}' with number '#{param_number}' multiple defined. Duplicate found in category '#{category_name(cat_number)}'.")
+                  parameter = ParameterReference.new( param_key(param_number) )
+                  cat.parameter << parameter
                 else
                   parameter = Parameter.new(param_number)
                   parameter.depends_on(deps[index])
@@ -136,8 +138,10 @@ module SetupConfiguration
 
         # replace parameter numbers with parameter keys
         parameters.each() do |param|
-          p = param_by_number(param.dependency)
-          param.depends_on(p ? p.key : :none)
+          if param.param? then
+            p = param_by_number(param.dependency)
+            param.depends_on(p ? p.key : :none)
+          end
         end
 
         #get categorie names
