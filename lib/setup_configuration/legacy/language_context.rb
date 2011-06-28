@@ -11,7 +11,7 @@ module SetupConfiguration
         @lang=lang
         @helper=helper
         @lang_abbr= SetupConfiguration::Translation.language_abbreviation(lang)
-        @output = SetupConfiguration::Translation.translation_files(name).select(){|file| file.include?(@lang_abbr.to_s)}.first
+        @output = SetupConfiguration::Translation.translation_file(name, @lang_abbr)
       end
 
       def category_name(cat)

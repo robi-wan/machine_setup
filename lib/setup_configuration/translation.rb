@@ -6,8 +6,12 @@ module SetupConfiguration
 
     FILE_EXTENSION="setup.param".freeze
 
+    def self.translation_file(config_name, lang)
+      "#{config_name}.#{FILE_EXTENSION}.#{lang}.yml"
+    end
+
     def self.translation_files(config_name)
-      languages.collect { |lang| "#{config_name}.#{FILE_EXTENSION}.#{lang}.yml" }
+      languages.collect { |lang| translation_file(config_name, lang) }
     end
 
     # Returns all supported setup languages.
