@@ -346,7 +346,7 @@ module SetupConfiguration
   class MachineType
     include Enumerable
 
-    RANGES = [0..999, 1000..1999, 2000..2499, 2500..2999, 3000..3999, 4000..4999, 5000..5999, 6000..6999].freeze
+    RANGES = [0..999, 1000..1999, 2000..2999, 3000..3999, 4000..4999, 5000..5999, 6000..6999, 7000..7999].freeze
 
     attr_reader :name
     attr_reader :range
@@ -357,8 +357,7 @@ module SetupConfiguration
       @name=name
       raise RuntimeError.new("ERROR: More than #{RANGES.length} different machine types are not supported: [name=#{name}] [number=#{sequence_number}]") if sequence_number >= RANGES.length
       @sequence_number=sequence_number
-      $stderr.puts "DEPRECATION WARNING: Range '#{range}' for machine type '#{name.to_s}' is deprecated as it seems the used ranges are fixed. It can be removed. In a future version this parameter will be unsupported." if range
-      @range=RANGES[@sequence_number]
+      @range = range ? range : RANGES[@sequence_number]
       if @sequence_number <= 0
         @binary_number=0
       else

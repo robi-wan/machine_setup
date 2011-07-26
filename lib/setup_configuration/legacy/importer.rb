@@ -81,8 +81,20 @@ module SetupConfiguration
         machine_type_regexp=/BEGIN_TYP(\d\d?)/
         machine_types.each do |k,v|
           number=k.scan(machine_type_regexp).flatten.first.to_i
-          @settings.machine_type("machine_type_#{number}".to_sym, number)
+          @settings.machine_type("machine_type_#{number}".to_sym, number, v.to_i)
         end
+
+        #calculate ranges for machine types
+        @settings.machine_types.each_with_index do |mt, index|
+          ending=mt.range + 999
+          if @settings.machine_types[index + 1]
+            ending = @settings.machine_types[index + 1].range - 1
+          end
+          # this is really ugly
+          mt.instance_variable_set( :@range, Range.new(mt.range, ending))
+        end
+
+
 
         # languages
         lang = @mps3['SPRACHE']
