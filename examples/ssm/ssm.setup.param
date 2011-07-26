@@ -10,9 +10,9 @@ SetupConfiguration :ssm, :ssm do
     max 0..0
     balance_min 700..729
     balance_max 730..759
-    machine_type :all_machines, 0, 0..999
-    machine_type :ssm_one, 1, 1000..1999
-    machine_type :ssm_two, 2, 2000..2999
+    machine_type :all_machines, 0
+    machine_type :ssm_one, 1
+    machine_type :ssm_two, 2
   end
 
   category :common do
