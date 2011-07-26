@@ -11,7 +11,7 @@ begin
     gem.email = "robi-wan@suyu.de"
     gem.homepage = "http://github.com/robi-wan/machine_setup"
     gem.authors = ["robi-wan"]
-    gem.add_runtime_dependency "i18n", "~> 0.5"
+    gem.add_runtime_dependency "i18n", "~> 0.6"
     gem.add_runtime_dependency "inifile", "~> 0.4"
     gem.add_runtime_dependency "erubis", "~> 2.7"
     gem.add_development_dependency "shoulda"
