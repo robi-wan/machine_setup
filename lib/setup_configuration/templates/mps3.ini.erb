@@ -24,8 +24,6 @@ END_WAAG_MAX=<%= settings.balance_maximum.last %>
 BEGIN_TYP<%= machine_type.sequence_number %>=<%= machine_type.range.first %>
 <% end %>
 
-;(0..16)
-;generate param names as comment
 [PARAMANZEIGE]
 <%  categories.each_with_index do |category, index| %>
     <% dependencies, machine_types, parameters = param_infos(category) %>
