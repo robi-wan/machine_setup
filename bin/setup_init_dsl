@@ -10,6 +10,7 @@ begin
   raise RuntimeError.new("Wrong argument: directory '#{legacy_data_folder}' with legacy definition not found") unless File.directory?(legacy_data_folder)
 
   raise RuntimeError.new("Missing argument: machine name") unless machine_name
+  raise RuntimeError.new("Missing argument: machine abbreviation") unless machine_abbreviation
 
 
   $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
