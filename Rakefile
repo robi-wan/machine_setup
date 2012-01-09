@@ -1,4 +1,4 @@
-require 'rubygems'
+#require 'rubygems'
 require 'rake'
 
 begin
@@ -8,7 +8,7 @@ begin
     gem.executables = %W{setup_config_gen setup_init_dsl setup_analyze_dat}
     gem.summary = %Q{Generating configuration for machine setup parameters.}
     gem.description = %Q{Helps generating configuration files for machine setup parameters.}
-    gem.email = "robi-wan@suyu.de"
+    gem.email = "robi-wan@suy"+'u.de'
     gem.homepage = "http://github.com/robi-wan/machine_setup"
     gem.authors = ["robi-wan"]
     gem.add_runtime_dependency "i18n", "~> 0.6"
