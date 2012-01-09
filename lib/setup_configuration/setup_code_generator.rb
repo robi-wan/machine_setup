@@ -13,7 +13,7 @@ module SetupConfiguration
       output(setup_code, template)
     end
 
-    :private
+    private
 
     def template
       find_template("logcodesetup.exp.erb")

@@ -252,7 +252,7 @@ module SetupConfiguration
       drive_param=param(drive_selection, number)
       drive_param.instance_eval(&parameter_def) if parameter_def
 
-      properties=[%w(distance revolution), %w( gear in ), %w( gear out ), "length", "motortype" ]
+      properties=[%w(distance revolution), %w(gear in), %w(gear out), "length", "motortype"]
       properties.each_with_index do |prop, index|
         parameter = param(symbol(key, *prop), number + index + 1) { depends_on drive_selection }
         parameter.for_machine_type(drive_param.machine_type)
@@ -260,7 +260,7 @@ module SetupConfiguration
 
     end
 
-    :private
+    private
 
     def symbol(*strings)
       strings.join('_').to_sym

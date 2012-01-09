@@ -236,7 +236,7 @@ module SetupConfiguration
       end
 
       def category_by_number(number)
-        cat = self.categories.select(){|cat| cat.number.eql?(number)}.first
+        cat = self.categories.select(){|c| c.number.eql?(number)}.first
         unless cat then
           cat = Category.new
           cat.number = number

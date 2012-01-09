@@ -31,7 +31,7 @@ module SetupConfiguration
         [depends, machine_type, number].collect() { |arr| (arr.in_groups_of(max_number_parameters_per_tab, false)).collect() { |a| prepare(a) } }
       end
 
-      :private
+      private
 
       def prepare(array)
         array.join(',')
