@@ -15,6 +15,7 @@ require 'singleton'
 require 'erubis'
 require 'fileutils'
 require 'i18n'
+require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/encoding')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/core_ext')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/parameter_machinetype_bridge')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/generator_module')

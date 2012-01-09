@@ -1,4 +1,4 @@
-# encoding: utf-8
+# encoding: UTF-8
 
 module SetupConfiguration
 
@@ -31,13 +31,14 @@ module SetupConfiguration
       language_defs.values.sort
     end
 
-    :private
+    private
     
     def self.language_defs()
       {:de => "deutsch", :en => "english"}
     end
 
     class Translator
+      include SetupConfiguration::Encoder
 
       NAME = :name.freeze
       COMMENT = :comment.freeze
@@ -51,6 +52,8 @@ module SetupConfiguration
       def translate(key, language)
         name=I18n.translate(NAME, :scope => key, :default => key.to_s, :locale => language)
         description=I18n.translate(COMMENT, :scope => key, :default => "", :locale => language)
+        name = force_encoding(name)
+        description = force_encoding(description)
         [name, description]
       end
 

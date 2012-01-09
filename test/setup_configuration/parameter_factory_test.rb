@@ -11,17 +11,25 @@ module SetupConfiguration
       end
 
       should "define a method 'drive'" do
-        assert_not_nil @creator.public_methods.delete("drive")
+        contain_method("drive")
       end
 
       should "define a method 'param'" do
-        assert_not_nil @creator.public_methods.delete("param")
+        contain_method("param")
       end
 
       should "define a method 'param_ref'" do
-        assert_not_nil @creator.public_methods.delete("param_ref")
+        contain_method("param_ref")
       end
 
     end
+
+    :private
+
+    def contain_method(name)
+      # Ruby 1.8.7 delivers string, Ruby 1.9.2 delivers symbols in public_methods array
+      assert_equal 1, @creator.public_methods.select(){|m| m.to_s.eql?(name)}.length
+    end
+    
   end
 end
