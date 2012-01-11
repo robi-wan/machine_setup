@@ -346,23 +346,22 @@ module SetupConfiguration
   class MachineType
     include Enumerable
 
-    RANGES = [0..999, 1000..1999, 2000..2999, 3000..3999, 4000..4999, 5000..5999, 6000..6999, 7000..7999].freeze
+    RANGES = [1000..1999, 2000..2999, 3000..3999, 4000..4999, 5000..5999, 6000..6999, 7000..7999, 8000..8999].freeze
 
     attr_reader :name
     attr_reader :range
     attr_reader :sequence_number
+    attr_reader :sequence_number_coded
     attr_reader :binary_number
 
     def initialize(name, sequence_number, range = nil)
       @name=name
-      raise RuntimeError.new("ERROR: More than #{RANGES.length} different machine types are not supported: [name=#{name}] [number=#{sequence_number}]") if sequence_number >= RANGES.length
+      raise RuntimeError.new("ERROR: Number for machine type must be greater than 0: [name=#{name}] [number=#{sequence_number}]") if sequence_number <= 0
+      raise RuntimeError.new("ERROR: More than #{RANGES.length} different machine types are not supported: [name=#{name}] [number=#{sequence_number}]") if sequence_number > RANGES.length
       @sequence_number=sequence_number
-      @range = range ? range : RANGES[@sequence_number]
-      if @sequence_number <= 0
-        @binary_number=0
-      else
-        @binary_number=2**(@sequence_number-1)
-      end
+      @sequence_number_coded = @sequence_number - 1
+      @range = range ? range : RANGES[@sequence_number_coded]
+      @binary_number=2**@sequence_number_coded
     end
 
     def <=>(machine_type)

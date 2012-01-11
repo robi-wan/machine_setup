@@ -21,7 +21,7 @@ END_WAAG_MAX=<%= settings.balance_maximum.last %>
 
 [MASCHINENTYP]
 <% settings.machine_types.each do |machine_type| %>
-BEGIN_TYP<%= machine_type.sequence_number %>=<%= machine_type.range.first %>
+BEGIN_TYP<%= machine_type.sequence_number_coded %>=<%= machine_type.range.first %>
 <% end %>
 
 [PARAMANZEIGE]
