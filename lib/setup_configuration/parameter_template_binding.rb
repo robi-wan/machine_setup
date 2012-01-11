@@ -36,7 +36,11 @@ module SetupConfiguration
 
       def description(number)
         translate(number) do |name, desc|
-          $stderr.puts("WARNING: missing translation for key #{@lang}.#{find_param_by_number(number).key.to_s}.#{Translation::Translator::COMMENT}") if desc.empty?
+          begin
+            $stderr.puts("WARNING: missing translation for key #{@lang}.#{find_param_by_number(number).key.to_s}.#{Translation::Translator::COMMENT}") if desc.empty?
+          rescue
+            raise RuntimeError.new("ERROR: reading translation failed '#{desc.inspect()}'")
+          end
           escape(desc)
         end
       end
