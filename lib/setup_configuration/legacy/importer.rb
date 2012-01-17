@@ -80,7 +80,8 @@ module SetupConfiguration
         machine_types = @mps3['MASCHINENTYP']
         machine_type_regexp=/BEGIN_TYP(\d\d?)/
         machine_types.each do |k,v|
-          number=k.scan(machine_type_regexp).flatten.first.to_i
+          number = k.scan(machine_type_regexp).flatten.first.to_i
+          number = number + 1
           @settings.machine_type("machine_type_#{number}".to_sym, number, v.to_i)
         end
 
