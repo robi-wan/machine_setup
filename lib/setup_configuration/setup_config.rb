@@ -244,7 +244,7 @@ module SetupConfiguration
     # <drive>_selection.
     # The additional for_machine_type is also applied to other generated parameters.
     #
-    def drive(drive, number, &parameter_def)
+    def drive(drive, number, added_props=[], &parameter_def)
 
       key = symbol(drive, "drive")
       drive_selection = symbol(key, "selection")
@@ -253,6 +253,7 @@ module SetupConfiguration
       drive_param.instance_eval(&parameter_def) if parameter_def
 
       properties=[%w(distance revolution), %w(gear in), %w(gear out), "length", "motortype"]
+      properties += added_props if added_props
       properties.each_with_index do |prop, index|
         parameter = param(symbol(key, *prop), number + index + 1) { depends_on drive_selection }
         parameter.for_machine_type(drive_param.machine_type)
