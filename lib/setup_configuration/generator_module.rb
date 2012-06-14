@@ -12,7 +12,7 @@ module SetupConfiguration
     end
 
     def output(bind, template)
-      if template then
+      if template
         rhtml = Erubis::Eruby.new(template)
 
         File.open(File.join(output_path, bind.output), "w") do |f|

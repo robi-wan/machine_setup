@@ -45,7 +45,7 @@ module SetupConfiguration
         input = File.read(template)
         eruby = Erubis::Eruby.new(input)
         
-        File.open(File.join(output_path, "#{@name}.#{Translation::FILE_EXTENSION}" ), "w") do |f|
+        File.open(File.join(output_path, "#@name.#{Translation::FILE_EXTENSION}" ), "w") do |f|
           f << eruby.result(binding())
         end
 
@@ -132,7 +132,7 @@ module SetupConfiguration
 
                 #check for multiple defined parameters (in different categories)
                 #warn and skip
-                if param_by_number(param_number) then
+                if param_by_number(param_number)
                   $stderr.puts("WARNING: parameter '#{ param_key(param_number)}' with number '#{param_number}' multiple defined. Duplicate found in category '#{category_name(cat_number)}'.")
                   parameter = ParameterReference.new( param_key(param_number) )
                   cat.parameter << parameter
@@ -151,7 +151,7 @@ module SetupConfiguration
 
         # replace parameter numbers with parameter keys
         parameters.each() do |param|
-          if param.param? then
+          if param.param?
             p = param_by_number(param.dependency)
             param.depends_on(p ? p.key : :none)
           end
@@ -238,7 +238,7 @@ module SetupConfiguration
 
       def category_by_number(number)
         cat = self.categories.select(){|c| c.number.eql?(number)}.first
-        unless cat then
+        unless cat
           cat = Category.new
           cat.number = number
           self.categories << cat

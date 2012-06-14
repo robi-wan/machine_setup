@@ -27,7 +27,7 @@ module SetupConfiguration
     end
 
     def category(category, &category_params)
-      if category_params then
+      if category_params
 
         #this code calls instance_eval and delivers the context object
         parameter_factory = ParameterFactory.new()
@@ -47,7 +47,7 @@ module SetupConfiguration
 
     def category_by_name(name)
       cat = self.categories.keys.select(){|c| c.name.eql?(name)}.first
-      unless cat then
+      unless cat
         cat = Category.new
         cat.number = self.next_category_number!
         cat.name = name
