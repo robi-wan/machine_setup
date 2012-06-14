@@ -4,6 +4,7 @@ module SetupConfiguration
 
     def initialize
       super
+      @longest = nil
     end
 
     def parameters
