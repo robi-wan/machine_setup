@@ -52,6 +52,8 @@ module SetupConfiguration
       def translate(key, language)
         name=I18n.translate(NAME, :scope => key, :default => key.to_s, :locale => language)
         description=I18n.translate(COMMENT, :scope => key, :default => "", :locale => language)
+        # if an empty string is found as translation use key as name (not empty string)
+        name = key.to_s if name.strip.empty?
         name = force_encoding(name)
         description = force_encoding(description)
         [name, description]
