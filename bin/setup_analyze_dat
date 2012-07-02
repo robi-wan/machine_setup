@@ -1,7 +1,13 @@
 #!/usr/bin/env ruby
-
+# this script analyzes a setup.dat and prints the values of the setup parameters
+# actually setup.dat is a saved binary array.
+#
+# usage: setup_analyze_dat <path_to_setup.dat> [setup_parameter_id(,setup_parameter_id ...)]
+#
 require 'pp'
 
+setup_file_name=ARGV[0]
+raise RuntimeError.new("Missing argument: 'setup.dat' file with parameter values") if setup_file_name.nil?
 setup_file_name=ARGV[0].gsub(/\\/,"/")
 setup_ids= ARGV[1].nil? ? [] : ARGV[1].split(',').collect(){|id| id.to_i}
 #puts setup_file_name
