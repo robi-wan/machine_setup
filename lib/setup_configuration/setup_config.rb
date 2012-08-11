@@ -277,12 +277,7 @@ module SetupConfiguration
       OPTIONS
     end
 
-    def opt_value(opt)
-      number(opt)
-    end
-
     # TODO check for maximum and raise error
-    # Gets the option keys to the given number.
     def compute_options(number)
       value(number)
     end
@@ -298,12 +293,7 @@ module SetupConfiguration
       ROLES
     end
 
-    def role_value(r)
-      number(r)
-    end
-
     # TODO check for maximum and raise error
-    # Gets the role keys to the given number.
     def compute_roles(number)
       value(number)
     end
@@ -347,7 +337,7 @@ module SetupConfiguration
       # use @options as initial value: multiple calls to has_options are possible and result value is chained
       # (and not reset if using '0' as explicit initial value)
       @options = opt.uniq.inject(@options) do |sum, o|
-        sum + @option.opt_value(o)
+        sum + @option.number(o)
       end
     end
 
@@ -355,7 +345,7 @@ module SetupConfiguration
       # use @roles as initial value: multiple calls to enabled_for_role are possible and result value is chained
       # (and not reset if using '0' as explicit initial value)
       @roles = roles.uniq.inject(@roles) do |sum, r|
-        sum + @role.role_value(r)
+        sum + @role.number(r)
       end
     end
 

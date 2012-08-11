@@ -16,13 +16,13 @@ class RoleTest < Test::Unit::TestCase
   end
 
   def test_numeric_values
-    assert_equal 1, @r.role_value(:foreman)
-    assert_equal 2, @r.role_value(:service)
-    assert_equal 4, @r.role_value(:application_engineer)
-    assert_equal 8, @r.role_value(:test_bay)
-    assert_equal 16, @r.role_value(:developer)
+    assert_equal 1, @r.number(:foreman)
+    assert_equal 2, @r.number(:service)
+    assert_equal 4, @r.number(:application_engineer)
+    assert_equal 8, @r.number(:test_bay)
+    assert_equal 16, @r.number(:developer)
     assert_raise ArgumentError do
-      @r.role_value(:lari_fari_ga_ga)
+      @r.number(:lari_fari_ga_ga)
     end
   end
 

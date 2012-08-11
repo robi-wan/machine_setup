@@ -16,10 +16,10 @@ class SoftwareOptionsTest < Test::Unit::TestCase
   end
 
   def test_numeric_values
-    assert_equal(@options.opt_value(:do_not_copy), 1)
-    assert_equal(@options.opt_value(:needs_licence), 2)
+    assert_equal(@options.number(:do_not_copy), 1)
+    assert_equal(@options.number(:needs_licence), 2)
     assert_raise ArgumentError do
-      @options.opt_value(:lari_fari_ga_ga)
+      @options.number(:lari_fari_ga_ga)
     end
   end
 
