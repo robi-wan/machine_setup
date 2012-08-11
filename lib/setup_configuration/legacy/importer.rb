@@ -50,15 +50,13 @@ module SetupConfiguration
       end
 
 
-      include SetupConfiguration::SoftwareOptions
       def render_options(binary)
-        options = compute_options(binary)
+        options = SetupConfiguration::SoftwareOptions.new.compute_options(binary)
         render_symbols(options)
       end
 
-      include SetupConfiguration::Roles
       def render_roles(binary)
-        roles = compute_roles(binary)
+        roles = SetupConfiguration::Roles.new.compute_roles(binary)
         render_symbols(roles)
       end
 

@@ -24,6 +24,7 @@ require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/paramete
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/mps_template_binding')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/setup_code_generator')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/setup_code_binding')
+require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/binary_coded_values')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/setup_config')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/suite_generator')
 require File.expand_path(File.dirname(__FILE__) + '/setup_configuration/translation')

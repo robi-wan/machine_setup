@@ -268,66 +268,44 @@ module SetupConfiguration
     end
   end
 
-  module SoftwareOptions
+  class SoftwareOptions
+    include BinaryCodedValues
 
     OPTIONS = {:do_not_copy => 1, :needs_licence => 2}
 
+    def values
+      OPTIONS
+    end
+
     def opt_value(opt)
-      if OPTIONS.has_key?(opt)
-        OPTIONS[opt]
-      else
-        values = ""
-        PP.pp(OPTIONS.keys, values)
-        raise ArgumentError.new("'#{opt}' is not a valid option. Valid values: #{values}")
-      end
+      number(opt)
     end
 
     # TODO check for maximum and raise error
     # Gets the option keys to the given number.
     def compute_options(number)
-      # 60.to_s(2).chars.to_a.reverse.each_with_index { |s,i| puts s; puts i}
-      result=[]
-      unless number.eql?(0) then
-        Fixnum.induced_from(number).to_s(2).chars.to_a.reverse.each_with_index do |value, index|
-          if value.eql?("1")
-            option = OPTIONS.index(2**index)
-            result << option if option
-          end
-        end
-      end
-      result
+      value(number)
     end
 
   end
 
-  module Roles
+  class Roles
+    include BinaryCodedValues
 
     ROLES = {:foreman => 1, :service => 2, :application_engineer => 4, :test_bay => 8, :developer => 16}
 
+    def values
+      ROLES
+    end
+
     def role_value(r)
-      if ROLES.has_key?(r)
-        ROLES[r]
-      else
-        values = ""
-        PP.pp(ROLES.keys, values)
-        raise ArgumentError.new("'#{r}' is not a valid option. Valid values: #{values}")
-      end
+      number(r)
     end
 
     # TODO check for maximum and raise error
     # Gets the role keys to the given number.
     def compute_roles(number)
-      # 60.to_s(2).chars.to_a.reverse.each_with_index { |s,i| puts s; puts i}
-      result=[]
-      unless number.eql?(0) then
-        Fixnum.induced_from(number).to_s(2).chars.to_a.reverse.each_with_index do |value, index|
-          if value.eql?("1")
-            role = ROLES.index(2**index)
-            result << role if role
-          end
-        end
-      end
-      result
+      value(number)
     end
 
 
@@ -336,8 +314,6 @@ module SetupConfiguration
   class Parameter
     include Enumerable
     include ParameterMachineTypeBridge
-    include SoftwareOptions
-    include Roles
 
     attr_accessor :key
     attr_accessor :number
@@ -355,6 +331,8 @@ module SetupConfiguration
       @roles=0
       @key= name
       @number=number
+      @role = Roles.new
+      @option = SoftwareOptions.new
     end
 
     def depends_on(dependency)
@@ -366,10 +344,10 @@ module SetupConfiguration
     end
 
     def has_options(*opt)
-      # use @options as initial value: multiple calls to enabled_for_role are possible and result value is chained
+      # use @options as initial value: multiple calls to has_options are possible and result value is chained
       # (and not reset if using '0' as explicit initial value)
       @options = opt.uniq.inject(@options) do |sum, o|
-        sum + opt_value(o)
+        sum + @option.opt_value(o)
       end
     end
 
@@ -377,7 +355,7 @@ module SetupConfiguration
       # use @roles as initial value: multiple calls to enabled_for_role are possible and result value is chained
       # (and not reset if using '0' as explicit initial value)
       @roles = roles.uniq.inject(@roles) do |sum, r|
-        sum + role_value(r)
+        sum + @role.role_value(r)
       end
     end
 
