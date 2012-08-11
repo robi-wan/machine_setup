@@ -20,15 +20,17 @@ module SetupConfiguration
 
       def param_infos(category_key)
         parameters=suite.categories[category_key]
-        depends, machine_type, number=[], [], []
+        depends, machine_type, number, options, roles=[], [], [], [], []
         parameters.each() do |param|
           machine_type << param.machine_type
           number << param.number
           depends << depends_on(param.dependency)
+          options << param.options
+          roles << param.roles
         end
         #TODO compute value for max_number_parameters_per_tab of value maximum_numbers_per_category
         max_number_parameters_per_tab=50
-        [depends, machine_type, number].collect() { |arr| (arr.in_groups_of(max_number_parameters_per_tab, false)).collect() { |a| prepare(a) } }
+        [depends, machine_type, number, options, roles].collect() { |arr| (arr.in_groups_of(max_number_parameters_per_tab, false)).collect() { |a| prepare(a) } }
       end
 
       private

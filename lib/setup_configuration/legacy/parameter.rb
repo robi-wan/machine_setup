@@ -3,12 +3,9 @@ module SetupConfiguration
   module Legacy
 
     class Parameter < SetupConfiguration::Parameter
-      def initialize(number)
-        @number=number
-      end
 
       def extended?
-        dep? || type?
+        dep? || type? || roles? || options?
       end
 
       def dep?
@@ -17,6 +14,22 @@ module SetupConfiguration
 
       def type?
         @machine_type != 0
+      end
+
+      def roles?
+        @roles != 0
+      end
+
+      def roles=(r)
+        @roles = r
+      end
+
+      def options?
+        @options != 0
+      end
+
+      def options=(o)
+        @options = o
       end
 
       def param?

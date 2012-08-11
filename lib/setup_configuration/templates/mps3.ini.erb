@@ -26,13 +26,19 @@ BEGIN_TYP<%= machine_type.sequence_number_coded %>=<%= machine_type.range.first 
 
 [PARAMANZEIGE]
 <%  categories.each_with_index do |category, index| %>
-    <% dependencies, machine_types, parameters = param_infos(category) %>
+    <% dependencies, machine_types, parameters, options, roles = param_infos(category) %>
+4CF<%= index%>a=<%= roles[0] %>
+3CF<%= index%>a=<%= options[0] %>
 2CF<%= index%>a=<%= dependencies[0] %>
 1CF<%= index%>a=<%= machine_types[0] %>
 TAB<%= index%>a=<%= parameters[0] %>
+4CF<%= index%>b=<%= roles[1] %>
+3CF<%= index%>b=<%= options[1] %>
 2CF<%= index%>b=<%= dependencies[1] %>
 1CF<%= index%>b=<%= machine_types[1] %>
 TAB<%= index%>b=<%= parameters[1] %>
+4CF<%= index%>c=<%= roles[2] %>
+3CF<%= index%>c=<%= options[2] %>
 2CF<%= index%>c=<%= dependencies[2] %>
 1CF<%= index%>c=<%= machine_types[2] %>
 TAB<%= index%>c=<%= parameters[2] %>

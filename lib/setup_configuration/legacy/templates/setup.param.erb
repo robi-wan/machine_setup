@@ -21,6 +21,12 @@ SetupConfiguration :<%= @name.to_sym %>, :<%= @abbreviation.to_sym %> do
     <% if param.type? %>
       for_machine_type <%= compute_machine_types(param.machine_type) %>
     <% end %>
+    <% if param.options? %>
+      has_options <%= render_options(param.options) %>
+    <% end %>
+    <% if param.roles? %>
+      enabled_for_role <%= render_roles(param.roles) %>
+    <% end %>
     end
     <% else %>
     

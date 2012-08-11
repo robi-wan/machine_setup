@@ -5,8 +5,6 @@ module SetupConfiguration
 
     class Importer
 
-      INI_LINE_SPLIT_PATTERN=','
-
       attr_reader :categories
 
       def initialize(folder, name, abbreviation)
@@ -49,6 +47,23 @@ module SetupConfiguration
           f << eruby.result(binding())
         end
 
+      end
+
+
+      include SetupConfiguration::SoftwareOptions
+      def render_options(binary)
+        options = compute_options(binary)
+        render_symbols(options)
+      end
+
+      include SetupConfiguration::Roles
+      def render_roles(binary)
+        roles = compute_roles(binary)
+        render_symbols(roles)
+      end
+
+      def render_symbols(symbols)
+        symbols.collect(){|s| ":#{s}"}.join(", ")
       end
 
       def compute_machine_types(binary)
@@ -116,38 +131,8 @@ module SetupConfiguration
 
       #todo preserve original parameter order
       def init_params()
-        params = @mps3['PARAMANZEIGE']
-        params.each do |key, value|
-          cat_regexp = /TAB((\d\d?)([abc]))/
-          if key =~ cat_regexp then
-            unless value.empty?
-              cat_level=key.scan(cat_regexp).flatten[0]
-              cat_number=key.scan(cat_regexp).flatten[1].to_i
-
-              deps = param_dependencies(params, "#{cat_level}")
-              types = machine_types(params, "#{cat_level}")
-
-              cat = category_by_number(cat_number)
-              value.split(INI_LINE_SPLIT_PATTERN).each_with_index do |param_number, index|
-
-                #check for multiple defined parameters (in different categories)
-                #warn and skip
-                if param_by_number(param_number)
-                  $stderr.puts("WARNING: parameter '#{ param_key(param_number)}' with number '#{param_number}' multiple defined. Duplicate found in category '#{category_name(cat_number)}'.")
-                  parameter = ParameterReference.new( param_key(param_number) )
-                  cat.parameter << parameter
-                else
-                  parameter = Parameter.new(param_number)
-                  parameter.depends_on(deps[index])
-                  parameter.for_machine_type(types[index].to_i)
-                  parameter.key = param_key(param_number)
-                  cat.parameter << parameter
-                end
-              end
-              
-            end
-          end
-        end
+        extractor = ParameterExtractor.new(@mps3['PARAMANZEIGE'], self)
+        extractor.extract()
 
         # replace parameter numbers with parameter keys
         parameters.each() do |param|
@@ -157,7 +142,7 @@ module SetupConfiguration
           end
         end
 
-        #get categorie names
+        #get category names
         self.categories.each do |cat|
           cat.name = category_name(cat.number)
         end
@@ -246,15 +231,7 @@ module SetupConfiguration
         cat
       end
 
-      # key = 2CF#{level}
-      def param_dependencies(params, level)
-        params["2CF#{level}"].split(INI_LINE_SPLIT_PATTERN)
-      end
-      
-      # key = 1CF#{level}
-      def machine_types(params, level)
-        params["1CF#{level}"].split(INI_LINE_SPLIT_PATTERN)
-      end
+
 
     end
 
