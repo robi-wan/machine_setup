@@ -25,8 +25,8 @@ module SetupConfiguration
         number.to_s(2).chars.to_a.reverse.each_with_index do |value, index|
           if value.eql?("1")
             # invert hash with values to get meaningful value (key) for given binary coded value
-            role = values.invert[2**index]
-            result << role if role
+            r = values.invert[2**index]
+            result << r if r
           end
         end
       end
