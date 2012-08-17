@@ -22,9 +22,10 @@ module SetupConfiguration
       # 60.to_s(2).chars.to_a.reverse.each_with_index { |s,i| puts s; puts i}
       result=[]
       unless number.eql?(0) then
-        Fixnum.induced_from(number).to_s(2).chars.to_a.reverse.each_with_index do |value, index|
+        number.to_s(2).chars.to_a.reverse.each_with_index do |value, index|
           if value.eql?("1")
-            role = values.index(2**index)
+            # invert hash with values to get meaningful value (key) for given binary coded value
+            role = values.invert[2**index]
             result << role if role
           end
         end
