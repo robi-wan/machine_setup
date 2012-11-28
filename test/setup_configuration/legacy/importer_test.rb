@@ -6,8 +6,8 @@ class ImporterTest < Test::Unit::TestCase
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
-    @mps3_v1 = IniFile.new(File.join(File.dirname(__FILE__),'data/v1/mps3.ini'))
-    @mps3_v2 = IniFile.new(File.join(File.dirname(__FILE__),'data/v2/mps3.ini'))
+    @mps3_v1 = IniFile.load(File.join(File.dirname(__FILE__),'data/v1/mps3.ini'))
+    @mps3_v2 = IniFile.load(File.join(File.dirname(__FILE__),'data/v2/mps3.ini'))
   end
 
   # Called after every test method runs. Can be used to tear
