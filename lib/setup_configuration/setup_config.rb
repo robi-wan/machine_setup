@@ -19,11 +19,13 @@ module SetupConfiguration
     attr_accessor :name
     attr_accessor :abbreviation
     attr_accessor :next_category_number
+    attr_reader   :maximum_numbers_per_category
 
     def initialize
       self.categories= Hash.new { |hash, key| hash[key] = [] }
       self.settings= Setting.new()
       self.next_category_number = 0
+      @maximum_numbers_per_category = 150
     end
 
     def category(category, &category_params)
@@ -101,7 +103,7 @@ module SetupConfiguration
     def validate_params()
 
       categories.each() do |key, value|
-        throw RuntimeError.new("ERROR: category '#{key}' contains more than 150 parameters. Reduce parameter count.") if value.size >150
+        throw RuntimeError.new("ERROR: category '#{key}' contains more than #{maximum_numbers_per_category} parameters. Reduce parameter count.") if value.size >maximum_numbers_per_category
       end
 
       keys=[]
