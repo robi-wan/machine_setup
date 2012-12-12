@@ -76,11 +76,6 @@ module SetupConfiguration
                   bundle.each() do |member|
                     member[index] << member[index+1].shift
                   end
-                  #depends[index] << depends[index+1].shift
-                  #machine_type[index] << machine_type[index+1].shift
-                  #number[index] << number[index+1].shift
-                  #options[index] << options[index+1].shift
-                  #roles[index] << roles[index+1].shift
                 else
                   break
                 end
