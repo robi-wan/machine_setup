@@ -48,7 +48,7 @@ module SetupConfiguration
     end
 
     def category_by_name(name)
-      cat = self.categories.keys.select(){|c| c.name.eql?(name)}.first
+      cat = self.categories.keys.detect(){|c| c.name.eql?(name)}
       unless cat
         cat = Category.new
         cat.number = self.next_category_number!
@@ -86,7 +86,7 @@ module SetupConfiguration
     # If there is no such parameter the method returns nil.
     #
     def find_param_by_key(key)
-      self.parameters().select(){|p| p.key.eql?(key)}.first
+      self.parameters().detect(){|p| p.key.eql?(key)}
     end
 
     #
@@ -94,7 +94,7 @@ module SetupConfiguration
     # If there is no such parameter the method returns nil.
     #
     def find_param_by_number(number)
-      self.parameters().select(){|p| p.number.eql?(number)}.first
+      self.parameters().detect(){|p| p.number.eql?(number)}
     end
 
     #
@@ -139,7 +139,7 @@ module SetupConfiguration
     end#validate_params
 
     def assign_param_ref(ref)
-        param = self.parameters().select(){|p| p.key.eql?(ref.key) && p.param?}.first
+        param = self.parameters().detect(){|p| p.key.eql?(ref.key) && p.param?}
 
         if param
           ref.assign(param)

@@ -80,7 +80,7 @@ module SetupConfiguration
       end
 
       def machine_type_by_number(number)
-        @settings.machine_types.select() {|mt| mt.sequence_number.eql?(number)}.first
+        @settings.machine_types.detect() {|mt| mt.sequence_number.eql?(number)}
       end
 
       def init_settings()
@@ -216,11 +216,11 @@ module SetupConfiguration
       end
 
       def param_by_number(number)
-        self.parameters().select(){|p| p.number.eql?(number)}.first
+        self.parameters().detect(){|p| p.number.eql?(number)}
       end
 
       def category_by_number(number)
-        cat = self.categories.select(){|c| c.number.eql?(number)}.first
+        cat = self.categories.detect(){|c| c.number.eql?(number)}
         unless cat
           cat = Category.new
           cat.number = number
