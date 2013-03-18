@@ -4,7 +4,7 @@ module SetupConfiguration
 
   module Translation
 
-    FILE_EXTENSION="setup.param".freeze
+    FILE_EXTENSION='setup.param'.freeze
 
     def self.translation_file(config_name, lang)
       "#{config_name}.#{FILE_EXTENSION}.#{lang}.yml"
@@ -34,7 +34,7 @@ module SetupConfiguration
     private
     
     def self.language_defs()
-      {:de => "deutsch", :en => "english"}
+      {:de => 'deutsch', :en => 'english'}
     end
 
     class Translator

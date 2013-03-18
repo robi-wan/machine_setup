@@ -23,7 +23,7 @@ module SetupConfiguration
       result=[]
       unless number.eql?(0) then
         number.to_s(2).chars.to_a.reverse.each_with_index do |value, index|
-          if value.eql?("1")
+          if value.eql?('1')
             # invert hash with values to get meaningful value (key) for given binary coded value
             r = values.invert[2**index]
             result << r if r
@@ -34,7 +34,7 @@ module SetupConfiguration
     end
 
     def pretty
-      s = ""
+      s = ''
       PP.pp(values.keys, s)
       s
     end

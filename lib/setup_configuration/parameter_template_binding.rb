@@ -22,7 +22,7 @@ module SetupConfiguration
 
       def cat_name(cat)
         name, desc=@translator.translate(cat.name, @lang)
-        $stderr.puts("WARNING: missing translation for key #@lang.#{cat.name}.#{Translation::Translator::NAME}") if name.eql?(cat.name.to_s)
+        $stderr.puts("WARNING: missing translation for key #{@lang}.#{cat.name}.#{Translation::Translator::NAME}") if name.eql?(cat.name.to_s)
         name
       end
 
@@ -30,15 +30,15 @@ module SetupConfiguration
         p_name= translate(number) { |name, desc| name }
         param = find_param_by_number(number)
         if param && p_name.eql?(param.key.to_s)
-          $stderr.puts("WARNING: missing translation for key #@lang.#{param.key.to_s}.#{Translation::Translator::NAME}")
+          $stderr.puts("WARNING: missing translation for key #{@lang}.#{param.key.to_s}.#{Translation::Translator::NAME}")
         end
-        p_name.empty? ? "placeholder for mps3.exe" : p_name
+        p_name.empty? ? 'placeholder for mps3.exe' : p_name
       end
 
       def description(number)
         translate(number) do |name, desc|
           begin
-            $stderr.puts("WARNING: missing translation for key #@lang.#{find_param_by_number(number).key.to_s}.#{Translation::Translator::COMMENT}") if desc.empty?
+            $stderr.puts("WARNING: missing translation for key #{@lang}.#{find_param_by_number(number).key.to_s}.#{Translation::Translator::COMMENT}") if desc.empty?
           rescue
             raise RuntimeError.new("ERROR: reading translation failed '#{desc.inspect()}'")
           end
@@ -57,7 +57,7 @@ module SetupConfiguration
             translation
           end
         else
-          ""
+          ''
         end
       end
 

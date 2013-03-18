@@ -1,7 +1,7 @@
 module SetupConfiguration
 
   module Generator
-    @output_path=""
+    @output_path=''
 
     def output_path
       @output_path
@@ -15,7 +15,7 @@ module SetupConfiguration
       if template
         rhtml = Erubis::Eruby.new(template)
 
-        File.open(File.join(output_path, bind.output), "w") do |f|
+        File.open(File.join(output_path, bind.output), 'w') do |f|
           f << rhtml.result(bind.get_binding)
         end
       else
@@ -29,7 +29,7 @@ module SetupConfiguration
     #          [:en, "english", (0..199), "english1.lng"],
     #          [:en, "english", (200..599), "english2.lng"],
     #          [:en, "english", (600..1299), "english3.lng"],
-    def description_bindings()
+    def description_bindings
       Translation.languages().collect() do |lang|
         SetupConfiguration.description_ranges().collect() do |range|
           # constructs the output file names
@@ -48,7 +48,7 @@ module SetupConfiguration
     }.gsub(/^\s*/, '')
     end
 
-    def parameter_bindings()
+    def parameter_bindings
       Translation.languages().collect() do |lang|
         # constructs the output file names
         out= "#{Translation.language_name(lang)}.lng"
@@ -60,18 +60,18 @@ module SetupConfiguration
       find_template("#{lang.to_s}.lng.erb")
     end
 
-    def mps_template()
-      find_template("mps3.ini.erb")
+    def mps_template
+      find_template('mps3.ini.erb')
     end
 
-    def mps_binding()
+    def mps_binding
       MPSTemplateBinding.new do |mps|
-        mps.output="mps3.ini"
+        mps.output='mps3.ini'
       end
     end
 
     def find_template(name)
-      template=File.join(File.dirname(__FILE__), "templates", name)
+      template=File.join(File.dirname(__FILE__), 'templates', name)
       if File.file?(template)
         File.read(template)
       else

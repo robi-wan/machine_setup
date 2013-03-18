@@ -68,7 +68,7 @@ module SetupConfiguration
     end
 
     # Gets all known parameters.
-    def parameters()
+    def parameters
       # cache parameters so sorting is necessary only once - this saves a lot of time...
       @parameters ||= categories.values.flatten.sort
     end
@@ -100,7 +100,7 @@ module SetupConfiguration
     #
     # Validates the uniqueness of parameter keys and numbers.
     #
-    def validate_params()
+    def validate_params
 
       categories.each() do |key, value|
         throw RuntimeError.new("ERROR: category '#{key}' contains more than #{maximum_numbers_per_category} parameters. Reduce parameter count.") if value.size >maximum_numbers_per_category
@@ -207,7 +207,7 @@ module SetupConfiguration
     attr_accessor :name
     attr_accessor :parameter
 
-    def initialize()
+    def initialize
       @parameter = []
     end
 
@@ -248,13 +248,13 @@ module SetupConfiguration
     #
     def drive(drive, number, added_props=[], &parameter_def)
 
-      key = symbol(drive, "drive")
-      drive_selection = symbol(key, "selection")
+      key = symbol(drive, 'drive')
+      drive_selection = symbol(key, 'selection')
 
       drive_param=param(drive_selection, number)
       drive_param.instance_eval(&parameter_def) if parameter_def
 
-      properties=[%w(distance revolution), %w(gear in), %w(gear out), "length", "motortype"]
+      properties=[%w(distance revolution), %w(gear in), %w(gear out), 'length', 'motortype']
       properties += added_props if added_props
       properties.each_with_index do |prop, index|
         parameter = param(symbol(key, *prop), number + index + 1) { depends_on drive_selection }

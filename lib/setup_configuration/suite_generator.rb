@@ -18,7 +18,7 @@ module SetupConfiguration
     end
 
     def generate
-      return "no output" if self.do_not_run
+      return 'no output' if self.do_not_run
 
       description_bindings().each() do |bind|
         bind.suite=self.suite

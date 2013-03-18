@@ -16,7 +16,7 @@ module SetupConfiguration
     private
 
     def template
-      find_template("logcodesetup.exp.erb")
+      find_template('logcodesetup.exp.erb')
     end
 
   end

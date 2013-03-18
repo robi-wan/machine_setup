@@ -28,22 +28,22 @@ module SetupConfiguration
       def output_language(output_path, lang)
         context = LanguageContext.new(@name, lang, self)
 
-        template=File.join(File.dirname(__FILE__), "templates", "setup.param.language.yml.erb")
+        template=File.join(File.dirname(__FILE__), 'templates', 'setup.param.language.yml.erb')
         input = File.read(template)
         eruby = Erubis::Eruby.new(input)
         
-        File.open(File.join(output_path, context.output ), "w") do |f|
+        File.open(File.join(output_path, context.output ), 'w') do |f|
           f << eruby.evaluate(context)
         end
 
       end
 
       def output_param(output_path)
-        template=File.join(File.dirname(__FILE__), "templates", "setup.param.erb")
+        template=File.join(File.dirname(__FILE__), 'templates', 'setup.param.erb')
         input = File.read(template)
         eruby = Erubis::Eruby.new(input)
         
-        File.open(File.join(output_path, "#@name.#{Translation::FILE_EXTENSION}" ), "w") do |f|
+        File.open(File.join(output_path, "#{@name}.#{Translation::FILE_EXTENSION}" ), 'w') do |f|
           f << eruby.result(binding())
         end
 
@@ -61,7 +61,7 @@ module SetupConfiguration
       end
 
       def render_symbols(symbols)
-        symbols.collect(){|s| ":#{s}"}.join(", ")
+        symbols.collect(){|s| ":#{s}"}.join(', ')
       end
 
       def compute_machine_types(binary)
@@ -71,19 +71,19 @@ module SetupConfiguration
           result << machine_type_by_number(binary).name
         else
           Fixnum.induced_from(binary).to_s(2).chars.to_a.reverse.each_with_index do |value, index|
-            if value.eql?("1")
+            if value.eql?('1')
               result << machine_type_by_number(index+1).name
             end
           end
         end
-        result.join(" + ")
+        result.join(' + ')
       end
 
       def machine_type_by_number(number)
         @settings.machine_types.detect() {|mt| mt.sequence_number.eql?(number)}
       end
 
-      def init_settings()
+      def init_settings
         @settings.min(Range.new(sv('BEGIN_MIN'), sv('END_MIN')))
         @settings.max(Range.new(sv('BEGIN_MAX'), sv('END_MAX')))
         @settings.balance_min(Range.new(sv('BEGIN_WAAG_MIN'), sv('END_WAAG_MIN')))
@@ -128,7 +128,7 @@ module SetupConfiguration
 
 
       #todo preserve original parameter order
-      def init_params()
+      def init_params
         extractor = ParameterExtractor.new(@mps3['PARAMANZEIGE'], self)
         extractor.extract()
 
@@ -201,14 +201,14 @@ module SetupConfiguration
           file_number= index + 1 if range.include?(param_number.to_i)
         end
 
-        filename = lang.downcase << file_number.to_s << ".lng"
+        filename = lang.downcase << file_number.to_s << '.lng'
         key_ini= @ini_files[filename]
         desc=key_ini[lang.upcase]["HILFEPARAM#{param_number}"]
         escape_param_description(desc)
       end
 
       def escape_param_description(description)
-        description unless description.eql?("not used")
+        description unless description.eql?('not used')
       end
 
       def parameters

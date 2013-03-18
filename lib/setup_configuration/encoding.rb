@@ -11,7 +11,7 @@ module SetupConfiguration
     end
 
     def self.default_encoding
-      "windows-1252"
+      'windows-1252'
     end
 
     def self.encoding
