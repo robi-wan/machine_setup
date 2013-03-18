@@ -28,8 +28,9 @@ module SetupConfiguration
 
       def name(number)
         p_name= translate(number) { |name, desc| name }
-        if find_param_by_number(number) && p_name.eql?(find_param_by_number(number).key.to_s)
-          $stderr.puts("WARNING: missing translation for key #@lang.#{find_param_by_number(number).key.to_s}.#{Translation::Translator::NAME}")
+        param = find_param_by_number(number)
+        if param && p_name.eql?(param.key.to_s)
+          $stderr.puts("WARNING: missing translation for key #@lang.#{param.key.to_s}.#{Translation::Translator::NAME}")
         end
         p_name.empty? ? "placeholder for mps3.exe" : p_name
       end
