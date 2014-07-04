@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
 begin
-  trace = ARGV.delete("--trace")
+  trace = ARGV.delete('--trace')
   param_def=ARGV[0]
 
-  raise RuntimeError.new("Missing argument: file with parameter definition") if param_def.nil?
+  raise RuntimeError.new('Missing argument: file with parameter definition') if param_def.nil?
   raise RuntimeError.new("Wrong argument: file '#{param_def}' with parameter definition not found") unless File.file?(param_def)
 
   $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
@@ -17,11 +17,11 @@ begin
   suite=SetupConfiguration::Suite.instance
 
 #set output path
-  generator = SetupConfiguration::SuiteGenerator.new()
+  generator = SetupConfiguration::SuiteGenerator.new
   generator.output_path=File.dirname(param_def)
 
 # load files with translations
-  SetupConfiguration::Translation.translation_files(suite.name).each() do |t|
+  SetupConfiguration::Translation.translation_files(suite.name).each do |t|
     trans_file=File.join(File.dirname(param_def), t)
     if File.file?(trans_file)
       SetupConfiguration::Translation::Translator.i18n_load_path(trans_file)
@@ -30,16 +30,16 @@ begin
     end
   end
 
-  generator.generate()
+  generator.generate
 
   puts("#{File.basename(__FILE__)} completed.")
 rescue Exception => ex
   $stderr.puts("#{File.basename(__FILE__)} aborted!")
   $stderr.puts(ex.message)
   if trace
-    $stderr.puts(ex.backtrace().join("\n"))
+    $stderr.puts(ex.backtrace.join("\n"))
   else
-    $stderr.puts "(See full trace by running with --trace)"
+    $stderr.puts '(See full trace by running with --trace)'
   end
 
   exit(1)

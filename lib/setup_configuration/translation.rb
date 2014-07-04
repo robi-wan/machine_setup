@@ -15,25 +15,25 @@ module SetupConfiguration
     end
 
     # Returns all supported setup languages.
-    def self.languages()
-      language_defs().keys()
+    def self.languages
+      language_defs.keys
     end
 
     def self.language_name(lang)
-      language_defs()[lang]
+      language_defs[lang]
     end
 
     def self.language_abbreviation(lang_name)
-      language_defs.invert()[lang_name.downcase]
+      language_defs.invert[lang_name.downcase]
     end
 
-    def self.language_names()
+    def self.language_names
       language_defs.values.sort
     end
 
     private
     
-    def self.language_defs()
+    def self.language_defs
       {:de => 'deutsch', :en => 'english'}
     end
 
@@ -43,6 +43,10 @@ module SetupConfiguration
       NAME = :name.freeze
       COMMENT = :comment.freeze
       EMPTY = ''
+
+      if I18n.respond_to?(:enforce_available_locales)
+        I18n.enforce_available_locales = true
+      end
 
       # Adds a file with translations.
       def self.i18n_load_path(path)
